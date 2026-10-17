@@ -1,0 +1,56 @@
+# ==============================================================================
+# AMINSA AUTONOMOUS CREATOR ECOSYSTEM — GITIGNORE SPECIFICATION
+# ==============================================================================
+
+# 1. Confidential Secrets, Tokens & Environment Variables
+.env
+.env.*
+!.env.example
+*.token
+*session*.json
+client_secrets.json
+accounts_config_local.json
+secrets/
+
+# 2. Browser Profiles & Third-Party Cloned Tools
+config/chrome_user_data/
+tools/
+
+# 3. Python Caches & Build Files
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+*.tmp
+.pytest_cache/
+scratch/
+scratch_test/
+
+# 4. Heavy Video Outputs & Media Temporary Renders (Prevents GitHub 100MB limit)
+exports/reels/*
+exports/films_10min/*
+exports/epics_1hr/*
+exports/temp/*
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.wav
+*.mp3
+
+# 5. Root Diagnostics & Temporary UI Screenshots
+/*.png
+/*.jpg
+/*.xml
+/*.uia
+/*.html
+!aminsa-images/**
+!aminsa-360-day-bases-face-images/**
+
+# 6. Local Databases & Volatile Caches
+*.db
+*.sqlite
+*.sqlite3
+reports/*.log
+
+# Note: aminsa-images/ and aminsa-360-day-bases-face-images/ ARE TRACKED

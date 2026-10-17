@@ -1,0 +1,146 @@
+{
+  "project": "Md Sadique Amin Autonomous AI Influencer",
+  "version": "2.0.0",
+  "hardware_profile": {
+    "host_os": "Windows 11 x64",
+    "host_ram": "16 GB Unified",
+    "host_gpu": "AMD Radeon Integrated Graphics",
+    "mobile_target": "OPPO A78 5G (Android 15)",
+    "mobile_serial": "WS9X6LLJXW7H7TFQ"
+  },
+  "mobile_applications": [
+    {
+      "name": "YouTube Create",
+      "developer": "Google LLC",
+      "license": "100% Free (Zero Watermark)",
+      "platform": "Android (Google Play Store)",
+      "package_name": "com.google.android.apps.youtube.creator",
+      "role": "Direct Shorts creation, automatic subtitles/captions, royalty-free audio, noise cleanup, 1-tap export to YouTube Shorts & Instagram Reels",
+      "status": "CONFIGURED_IN_PIPELINE"
+    },
+    {
+      "name": "VN Video Editor",
+      "developer": "VlogNow Video Editor",
+      "license": "Free Tier (No Watermark)",
+      "platform": "Android (Google Play Store)",
+      "package_name": "com.frontrow.vlog",
+      "role": "Multi-track timeline, 4K 60FPS vertical export, green screen chroma key, curve speed ramping, B-roll layering",
+      "status": "CONFIGURED_IN_PIPELINE"
+    },
+    {
+      "name": "CapCut",
+      "developer": "Bytedance",
+      "license": "Free Base",
+      "platform": "Android (APK / Play Store)",
+      "package_name": "com.lemon.lvoverseas",
+      "role": "Viral trend templates, 3D zoom, body/face aesthetic effects, auto-subtitles",
+      "status": "CONFIGURED_IN_PIPELINE"
+    },
+    {
+      "name": "Termux",
+      "developer": "Termux Open Source Community",
+      "license": "Open Source (GPLv3)",
+      "platform": "Android (F-Droid / GitHub)",
+      "package_name": "com.termux",
+      "role": "24/7 standalone background worker, Python runtime, FFmpeg, wake-lock daemon, automated scheduler",
+      "status": "CONFIGURED_IN_PIPELINE"
+    },
+    {
+      "name": "Termux:API",
+      "developer": "Termux Open Source Community",
+      "license": "Open Source (GPLv3)",
+      "platform": "Android (F-Droid / GitHub)",
+      "package_name": "com.termux.api",
+      "role": "Native Android hardware access: notifications, clipboard, camera, battery, storage",
+      "status": "CONFIGURED_IN_PIPELINE"
+    },
+    {
+      "name": "Syncthing Android",
+      "developer": "Syncthing Community",
+      "license": "Open Source (MPL 2.0)",
+      "platform": "Android (F-Droid / Play Store)",
+      "package_name": "com.nutomic.syncthingandroid",
+      "role": "Zero-cable continuous P2P sync between Laptop exports/ folder and Phone DCIM/Md Sadique Amin/ gallery",
+      "status": "CONFIGURED_IN_PIPELINE"
+    },
+    {
+      "name": "Shizuku",
+      "developer": "RikkaApps",
+      "license": "Open Source (Apache 2.0)",
+      "platform": "Android (GitHub / Play Store)",
+      "package_name": "moe.shizuku.privileged.api",
+      "role": "Provides elevated ADB privileges to Termux directly on device without PC connection",
+      "status": "CONFIGURED_IN_PIPELINE"
+    }
+  ],
+  "laptop_tools_and_daemons": [
+    {
+      "name": "Ollama Local Engine",
+      "port": 11435,
+      "type": "Local LLM Server",
+      "models": ["qwen2.5:7b-instruct", "qwen2.5:0.5b", "deepseek-r1:7b", "nomic-embed-text"],
+      "role": "Cognitive scripting, trend synthesis, prompt generation, offline reasoning",
+      "status": "ACTIVE_VERIFIED"
+    },
+    {
+      "name": "MSA Token Optimizer Router",
+      "port": 20130,
+      "type": "Master Smart Router",
+      "role": "Circuit breaker fallback, sub-10ms cache, unified OpenAI API endpoint",
+      "status": "ACTIVE_VERIFIED"
+    },
+    {
+      "name": "OmniRoute AI Gateway",
+      "port": 20128,
+      "type": "Universal Router",
+      "models_count": 723,
+      "role": "Multi-model catalog search, model switching, quota protection",
+      "status": "ACTIVE_VERIFIED"
+    },
+    {
+      "name": "Microsoft Edge-TTS Engine",
+      "runtime": "Python 3.14 (edge_tts 7.2.8)",
+      "voice": "hi-IN-SwaraNeural / en-IN-NeerjaExpressiveNeural",
+      "frequency_target": "224 Hz center",
+      "role": "Zero-cost sweet neural speech synthesis (< 1.5s latency)",
+      "status": "INSTALLED_VERIFIED"
+    },
+    {
+      "name": "FFmpeg Engine",
+      "binary": "imageio_ffmpeg v7.1",
+      "role": "Vertical 1080x1920 9:16 reel rendering, audio mastering, Ken Burns zoom motion",
+      "status": "INSTALLED_VERIFIED"
+    },
+    {
+      "name": "ONNXRuntime Engine",
+      "version": "1.30.0",
+      "role": "CPU-accelerated facial landmark and biometric embedding inference",
+      "status": "INSTALLED_VERIFIED"
+    },
+    {
+      "name": "PyTorch & Transformers",
+      "torch_version": "2.12.1+cpu",
+      "transformers_version": "5.12.1",
+      "role": "Local deep learning pipeline & model tensor execution",
+      "status": "INSTALLED_VERIFIED"
+    },
+    {
+      "name": "OpenManus & Prime Agent",
+      "version": "v0.2.0 / v0.9.5",
+      "role": "Multi-agent autonomous planning and file system execution",
+      "status": "INTEGRATED_ACTIVE"
+    },
+    {
+      "name": "Playwright Automation",
+      "role": "Headless and CDP browser automation for social media platforms",
+      "status": "INSTALLED_VERIFIED"
+    },
+    {
+      "name": "Excel Telemetry Ledger",
+      "library": "openpyxl 3.1.5",
+      "file": "reports/daily_performance.xlsx",
+      "role": "24-hour continuous execution audit, latency, and platform tracking",
+      "status": "INSTALLED_VERIFIED"
+    }
+  ]
+}

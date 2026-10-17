@@ -1,0 +1,26 @@
+{
+  "engine_mode": "hybrid_neural",
+  "cloud_provider": "liveportrait_hf",
+  "api_endpoints": {
+    "liveportrait_hf": "https://api-inference.huggingface.co/models/KwaiVGI/LivePortrait",
+    "hedra_character": "https://api.hedra.com/v1/characters",
+    "replicate_sadtalker": "https://api.replicate.com/v1/predictions"
+  },
+  "api_keys": {
+    "huggingface_token": "",
+    "hedra_api_key": "",
+    "replicate_api_token": ""
+  },
+  "default_face_asset": "D:\\current using file\\1 social media automation handler file\\md_sadique_amin-images\\md_sadique_amin_4k_clean_selfie_balcony_master.jpg",
+  "render_parameters": {
+    "fps": 30,
+    "resolution": [
+      1080,
+      1920
+    ],
+    "aspect_ratio": "9:16",
+    "eye_blink_interval_sec": 3.2,
+    "head_nod_intensity": 0.45,
+    "lip_sync_smoothness": 0.85
+  }
+}

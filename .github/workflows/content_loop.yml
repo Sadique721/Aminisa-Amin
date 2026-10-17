@@ -1,0 +1,48 @@
+﻿name: Autonomous Content Loop (Plan B)
+
+on:
+  schedule:
+    # Runs every 3 hours automatically
+    - cron: '0 */3 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  produce-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install System Dependencies (FFmpeg)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Install Python Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install edge-tts requests google-api-python-client google-auth-oauthlib google-auth pillow
+
+      - name: Restore YouTube OAuth Secret
+        run: |
+          mkdir -p engines/youtube_shorts_pipeline/secrets
+          echo "${{ secrets.YOUTUBE_TOKEN_JSON }}" > engines/youtube_shorts_pipeline/secrets/youtube_token.json
+
+      - name: Run Trend Discovery & Video Assembly
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          LLM_PROVIDER: "gemini"
+        run: |
+          python engines/aminsa_autonomous_content_loop.py --once
+
+      - name: Generate 24h Summary Report
+        run: |
+          python engines/analytics_reporter.py

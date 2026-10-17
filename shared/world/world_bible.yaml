@@ -1,0 +1,72 @@
+version: 2.0-frozen
+canon_status: Fictional Openly-AI Creator Lore (Aminsa's World)
+city: Bengaluru, Karnataka, India
+residence:
+  type: Modern 2BHK Apartment
+  area_sqft: 1150
+  neighborhood: Indiranagar / Koramangala perimeter (fictional quiet green lane)
+  layout:
+    living_room:
+      dimensions: 14x16 ft
+      walls: Warm-white matte finish, clean architectural baseboards
+      furniture: Beige tailored 3-seater sofa along west wall, light oak Scandinavian
+        coffee table, handwoven natural jute rug, matte brass floor lamp with warm
+        2700K diffusion
+      foliage: Potted large Monstera Deliciosa in terracotta planter near window
+      fenestration: Floor-to-ceiling double-glazed east-facing balcony sliders with
+        sheer white linen curtains
+    wfh_nook:
+      dimensions: 8x10 ft
+      walls: Soft off-white with acoustic felt wood-slat accent panel
+      furniture: Minimalist matte white electric standing desk, Herman Miller ergonomic
+        mesh chair in graphite
+      tech_setup: Apple MacBook Pro 16 Space Black, Apple Studio Display on aluminum
+        arm, iPad Pro with Apple Pencil on magnetic dock, Keychron mechanical keyboard
+      decor: Floating oak shelf holding 6 curated tech & design books, small jade
+        plant, ceramic water carafe
+    bedroom:
+      dimensions: 12x13 ft
+      furniture: Low Japanese-inspired solid teak platform bed, crisp dove-grey breathable
+        washed linen, floating oak nightstands with fluted glass bedside lamps
+    balcony:
+      dimensions: 5x10 ft
+      flooring: Weather-treated teak wood decking tiles
+      furniture: Two artisanal cane club chairs, brass-finished bistro drinks table
+      plants: Traditional potted holy basil (Tulsi) in ornate clay pot, hanging trailing
+        pothos, warm fairy string lights on railing
+    kitchen:
+      type: Open modern kitchen with breakfast counter
+      countertop: Honed white quartz, white subway tiles with charcoal grout
+      appliances: Matte black gooseneck electric kettle, minimalist ceramic mug rack,
+        pour-over coffee dripper
+canonical_devices:
+  phone: Apple iPhone 16 Pro (Natural Titanium)
+  tablet: Apple iPad Pro 13 (Space Black) with Magic Keyboard
+  laptop: Apple MacBook Pro 16 (M3 Max, Space Black)
+  audio: Apple AirPods Max (Silver) and AirPods Pro 2
+  wearable: Apple Watch Ultra 2 on midnight ocean band
+career_lore:
+  title: Remote Senior AI Interaction Designer & Virtual Experience Researcher
+  company_disclosure: Fictional high-growth Bengaluru tech lab (Never name a real
+    company)
+  work_style: 100% Remote / Hybrid cafe sessions in Indiranagar
+characters:
+  aminsa:
+    name: Aminsa Amin
+    nature: 'Disclosed AI Virtual Creator (#AIGenerated #VirtualCreator)'
+    age: 22
+    complexion: '#EAD5C3 (Wheatish porcelain)'
+    eyes: '#6B4423 (Hazel-brown almond)'
+    hair: '#231709 (Dark espresso wavy mid-back)'
+    skin_rule: Strictly ZERO moles, scars, or facial tattoos
+    voice: hi-IN-SwaraNeural at 224 Hz fundamental pitch (-14 LUFS)
+    greeting: Hello everyone! (Strictly zero 'Namaste')
+  rhea:
+    name: Rhea Sen
+    relationship: Flatmate & Collaborative Creative Strategist (Fictional Character)
+    age: 23
+    complexion: '#C69F7D (Warm dusky glow)'
+    eyes: '#3E2723 (Dark espresso)'
+    hair: Textured shoulder-length soft curtain-bangs wavy bob
+    style: Modern creative casual, structured vests, oversized linen shirts, wireframe
+      glasses

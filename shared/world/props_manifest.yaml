@@ -1,0 +1,74 @@
+version: 2.0-frozen
+enforcement: STRICT_WHITELIST_ONLY (Nothing outside this manifest may appear in home
+  scenes)
+props:
+- id: PROP-01
+  name: MacBook Pro 16
+  finish: Space Black
+  category: Tech
+  default_location: WFH Nook
+- id: PROP-02
+  name: Studio Display 27
+  finish: Silver aluminum with tilt stand
+  category: Tech
+  default_location: WFH Nook
+- id: PROP-03
+  name: iPad Pro 13
+  finish: Space Black with White Pencil
+  category: Tech
+  default_location: WFH / Coffee table
+- id: PROP-04
+  name: AirPods Max
+  finish: Silver with white canopy
+  category: Audio
+  default_location: Desk / Around neck
+- id: PROP-05
+  name: Apple Watch Ultra 2
+  finish: Natural Titanium, midnight band
+  category: Wearable
+  default_location: Left wrist
+- id: PROP-06
+  name: Beige 3-Seater Sofa
+  finish: Textured warm-beige linen weave
+  category: Furniture
+  default_location: Living Room west wall
+- id: PROP-07
+  name: Oak Coffee Table
+  finish: Natural light solid oak, round edge
+  category: Furniture
+  default_location: Living Room center
+- id: PROP-08
+  name: Jute Area Rug
+  finish: Braided natural unbleached jute 8x10
+  category: Furnishing
+  default_location: Living Room under sofa
+- id: PROP-09
+  name: Monstera Deliciosa
+  finish: Mature 4-foot indoor plant in terracotta pot
+  category: Foliage
+  default_location: Living Room east window
+- id: PROP-10
+  name: Herman Miller Mesh Chair
+  finish: Graphite matte frame, lumbar pad
+  category: Furniture
+  default_location: WFH Nook
+- id: PROP-11
+  name: Tulsi Plant in Clay Pot
+  finish: Traditional sacred basil, terracotta planter
+  category: Foliage
+  default_location: Balcony center-east
+- id: PROP-12
+  name: Cane Balcony Chairs
+  finish: Natural honey rattan with cream cushions
+  category: Furniture
+  default_location: Balcony
+- id: PROP-13
+  name: Gooseneck Electric Kettle
+  finish: Matte powder-coated charcoal black
+  category: Kitchenware
+  default_location: Kitchen counter
+- id: PROP-14
+  name: Artisanal Ceramic Mug
+  finish: Handmade speckled oatmeal glaze with Aminsa logo
+  category: Drinkware
+  default_location: Coffee table / Desk

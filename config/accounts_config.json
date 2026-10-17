@@ -1,0 +1,51 @@
+{
+  "system_info": {
+    "version": "1.0.0",
+    "project": "Aminsa Autonomous AI Virtual Creator Ecosystem",
+    "master_email": "mdsadiqueamin721721@gmail.com",
+    "created_at": "2026-09-24",
+    "master_password": "ENV_PROTECTED_SEE_DOT_ENV",
+    "master_username": "aminsa.official"
+  },
+  "persona_profile": {
+    "name": "Aminsa Amin",
+    "niche": "AI, Fashion, Global Culture, Tech Lifestyle",
+    "primary_language": "Hindi / English (Hinglish)",
+    "voice_frequency_target": "224 Hz",
+    "default_image_benchmark": "aminsa-images/01_aminsa_clean_portrait_kurta.jpg"
+  },
+  "meta_channels": {
+    "meta_business_suite_id": "61594814066987",
+    "instagram_accounts": [
+      {
+        "id": "ig_aminsa_official",
+        "username": "aminsa.official",
+        "password": "AminsaAI@Creator2026!",
+        "target": "Instagram Reels & Feed"
+      }
+    ],
+    "facebook_pages": [
+      {
+        "id": "fb_aminsa_official",
+        "name": "Aminsa",
+        "page_id": "61594814066987",
+        "target": "Facebook Page Reels & Posts"
+      }
+    ],
+    "threads_accounts": [
+      {
+        "id": "threads_aminsa_official",
+        "username": "aminsa.official",
+        "password": "AminsaAI@Creator2026!",
+        "target": "Threads Feed"
+      }
+    ]
+  },
+  "youtube_channels": [
+    {
+      "id": "yt_md_sadique_amin_shorts",
+      "channel_name": "Md Sadique Amin Global",
+      "client_secrets_file": "client_secrets.json"
+    }
+  ]
+}
