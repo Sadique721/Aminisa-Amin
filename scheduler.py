@@ -152,6 +152,9 @@ def main():
     )
     print("[+] Scheduled Daily 00:00 Master Face & Catalog Generator (Asia/Kolkata)")
 
+    # Run immediate catch-up hook on startup if today's face/catalog is missing
+    run_daily_face_and_excel_initialization()
+
     print("\n[READY] Scheduler initialized with 8 daily cron events. Listening...")
     try:
         scheduler.start()

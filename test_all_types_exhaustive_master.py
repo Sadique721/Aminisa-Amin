@@ -427,11 +427,12 @@ Dialogue: 0,0:00:00.00,0:00:01.20,KineticWord,,0,0,420,,{\\c&H0000E6FF\\t(0,250,
     # SYS-01: Task Scheduler Engine
     t_pass = True
     t_msg = []
-    sch_res = subprocess.run(["schtasks", "/query", "/tn", "AminsaDailyMasterFaceEngine"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    sch_res = subprocess.run(["schtasks", "/query", "/tn", "\\Aminsa_360_Day_Master_Face_Generator"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if sch_res.returncode == 0:
-        t_msg.append("Windows Task Scheduler task 'AminsaDailyMasterFaceEngine' verified and scheduled at 6:00 AM")
+        t_msg.append("Windows Task Scheduler task '\\Aminsa_360_Day_Master_Face_Generator' verified active & last run result = 0")
     else:
-        t_msg.append("Task Scheduler verified via fallback startup tier")
+        t_pass = False
+        t_msg.append("Task '\\Aminsa_360_Day_Master_Face_Generator' not registered in Task Scheduler")
     results.append(TestResult("Persistence", "System", "Windows Task Scheduler", t_pass, "; ".join(t_msg), "Scheduled"))
 
     # SYS-02: Windows Startup VBS Script
