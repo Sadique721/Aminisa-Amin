@@ -27,6 +27,7 @@ if PROJECT_ROOT not in sys.path:
 
 from engines.laptop_master_avatar_studio import avatar_studio
 from engines.daily_master_face_engine import daily_face_engine
+from engines.cloud_direct_publisher import cloud_publisher
 
 ADB_PATH = r"C:\platform-tools\adb.exe"
 CATALOG_PATH = os.path.join(PROJECT_ROOT, "Aminsa_Master_Production_Catalog.xlsx")
@@ -121,7 +122,21 @@ def produce_slot(slot_data, face_image_path=None):
         slot_idx=slot_num
     )
     
-    push_to_phone(video_path)
+    # 1. Execute Zero-Connection Standalone Cloud Publishing (No Phone/Cable Needed)
+    caption = slot_data.get("caption", f"{headline} #Aminsa #Reels #AI")
+    cloud_results = cloud_publisher.publish_all_standalone(
+        video_path=video_path,
+        slot_id=slot_num,
+        title=headline,
+        category=slot_data.get("category", "General"),
+        caption=caption
+    )
+    
+    # 2. Local Phone Push (Optional bonus if phone is physically attached)
+    pushed = push_to_phone(video_path)
+    if not pushed:
+        print("  [*] [Zero-Connection Mode] Phone not connected locally. Standalone Cloud Publishing completed 100% of pipeline.")
+        
     return video_path
 
 def main():

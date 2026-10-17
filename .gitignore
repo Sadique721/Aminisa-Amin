@@ -54,3 +54,6 @@ exports/temp/*
 reports/*.log
 
 # Note: aminsa-images/ and aminsa-360-day-bases-face-images/ ARE TRACKED
+
+test_output_scratch/
+scratch/
