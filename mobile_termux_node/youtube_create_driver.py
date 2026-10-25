@@ -12,7 +12,7 @@ STEP 2: Generate Video from Image using Command Prompt/Script
 import time
 import os
 from adb_bridge import bridge
-from config import YT_CREATE_COORDS, PACKAGES
+from config import YT_CREATE_COORDS, PACKAGES, SDCARD_DIR
 
 class YouTubeCreateDriver:
     def __init__(self):
@@ -28,8 +28,8 @@ class YouTubeCreateDriver:
         return code == 0
 
     def step1_generate_image(self, image_prompt):
-        """Step 1: Opens Generate image, enters prompt, submits generation."""
-        print("[*] [YouTube Create] STEP 1: Starting Md Sadique Amin Image Generation...")
+        """Step 1: Opens Generate image, enters 250-300 char prompt, submits generation."""
+        print("[*] [YouTube Create] STEP 1: Starting Aminsa Amin Image Generation...")
         self.launch()
         
         # Tap Generate Image button (537, 669)
@@ -42,8 +42,8 @@ class YouTubeCreateDriver:
         bridge.tap(inp[0], inp[1])
         time.sleep(1)
 
-        # Type the biometrics-locked Image prompt
-        print(f"[*] [YouTube Create] Typing Md Sadique Amin Image Prompt ({len(image_prompt)} chars)...")
+        # Type the biometrics-locked & context-adapted prompt
+        print(f"[*] [YouTube Create] Typing Aminsa Amin Image Prompt ({len(image_prompt)} chars)...")
         bridge.type_text(image_prompt)
         time.sleep(2)
 
@@ -56,7 +56,7 @@ class YouTubeCreateDriver:
         time.sleep(25)
         
         # Take verification screenshot of generated images
-        shot_path = f"/sdcard/DCIM/Md Sadique Amin/yt_generated_image_{int(time.time())}.png"
+        shot_path = os.path.join(SDCARD_DIR, f"yt_generated_image_{int(time.time())}.png")
         bridge.take_screenshot(shot_path)
         print(f"[+] Image step proof: {shot_path}")
         return shot_path
@@ -72,7 +72,6 @@ class YouTubeCreateDriver:
         # If prompt for motion/animation appears, type video prompt
         if video_prompt:
             print(f"[*] [YouTube Create] Applying Video Prompt: {video_prompt[:60]}...")
-            # Tap input if available or trigger video action
             bridge.tap(360, 500)
             time.sleep(1)
             bridge.type_text(video_prompt)
@@ -84,7 +83,7 @@ class YouTubeCreateDriver:
         print("[*] Waiting for video render...")
         time.sleep(30)
         
-        vid_shot = f"/sdcard/DCIM/Md Sadique Amin/yt_generated_video_{int(time.time())}.png"
+        vid_shot = os.path.join(SDCARD_DIR, f"yt_generated_video_{int(time.time())}.png")
         bridge.take_screenshot(vid_shot)
         print(f"[+] Video step proof: {vid_shot}")
         

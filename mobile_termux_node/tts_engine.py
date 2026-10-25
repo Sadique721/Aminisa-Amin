@@ -1,8 +1,8 @@
 """
-Voice Synthesis Engine for Md Sadique Amin Mobile
-========================================
+Voice Synthesis Engine for Aminsa Amin Mobile
+============================================
 Runs natively inside Termux on Android using Edge-TTS.
-Generates Md Sadique Amin's signature voice: hi-IN-SwaraNeural @ 224Hz (Pitch: +0Hz, Rate: +0%).
+Generates Aminsa Amin's signature voice: hi-IN-SwaraNeural @ 224Hz (Pitch: +1Hz, Rate: -2%).
 """
 
 import os
@@ -28,7 +28,7 @@ async def _synthesize_async(text, output_path):
     await communicate.save(output_path)
     return output_path
 
-def generate_voice(text, filename="md_sadique_amin_speech.mp3"):
+def generate_voice(text, filename="aminsa_speech.mp3"):
     """Synchronous wrapper to generate audio file.
     Audio dir is auto-resolved by config.py (sdcard if writable, else Termux home).
     """
@@ -41,6 +41,6 @@ def generate_voice(text, filename="md_sadique_amin_speech.mp3"):
     return target
 
 if __name__ == "__main__":
-    test_text = "Hello everyone! Main hoon Md Sadique Amin. Termux autonomous voice test successful."
+    test_text = "Hello everyone, main hoon Aminsa! Standalone Termux voice synthesis test successful."
     path = generate_voice(test_text, "test_audio.mp3")
     print(f"[+] Audio generated at: {path} (Size: {os.path.getsize(path)} bytes)")

@@ -1,6 +1,6 @@
 """
-Md Sadique Amin Mobile Ecosystem Configuration
-======================================
+Aminsa Amin Mobile Ecosystem Configuration
+=====================================
 100% Standalone on OPPO A78 5G (Android 15) inside Termux.
 Zero PC dependencies.
 """
@@ -8,12 +8,12 @@ Zero PC dependencies.
 import os
 
 # Base paths
-BASE_DIR = "/data/data/com.termux/files/home/md_sadique_amin_mobile_ecosystem"
+BASE_DIR = "/data/data/com.termux/files/home/aminsa_mobile_ecosystem"
 HOME_DIR = "/data/data/com.termux/files/home"
 
 # Smart storage: prefer /sdcard if writable, fallback to Termux home
 def _resolve_storage():
-    sdcard = "/sdcard/DCIM/Md Sadique Amin"
+    sdcard = "/sdcard/DCIM/Aminsa"
     try:
         os.makedirs(sdcard, exist_ok=True)
         test_path = os.path.join(sdcard, ".write_test")
@@ -22,12 +22,12 @@ def _resolve_storage():
         os.remove(test_path)
         return sdcard  # sdcard is writable
     except Exception:
-        fallback = os.path.join(HOME_DIR, "md_sadique_amin_data")
+        fallback = os.path.join(HOME_DIR, "aminsa_data")
         os.makedirs(fallback, exist_ok=True)
         return fallback  # fallback to Termux home
 
 SDCARD_DIR = _resolve_storage()
-LOG_FILE = os.path.join(SDCARD_DIR, "md_sadique_amin_daemon.log")
+LOG_FILE = os.path.join(SDCARD_DIR, "aminsa_daemon.log")
 AUDIO_DIR = os.path.join(SDCARD_DIR, "audio")
 MEDIA_DIR = os.path.join(SDCARD_DIR, "generated_media")
 
@@ -56,14 +56,20 @@ YT_CREATE_COORDS = {
     "close_back_btn": (47, 105),
 }
 
-# Persona & Voice Settings
-PERSONA_NAME = "Md Sadique Amin"
+# Persona & Voice Settings (Strictly Aminsa Amin, 22yo female AI creator)
+PERSONA_NAME = "Aminsa Amin"
 VOICE_NAME = "hi-IN-SwaraNeural"
-VOICE_RATE = "+0%"
-VOICE_PITCH = "+0Hz"
+VOICE_RATE = "-2%"
+VOICE_PITCH = "+1Hz"
 
-# Strict Rule: NEVER USE NAMASTE
+# Strict Rule: NEVER USE NAMASTE, ALWAYS START WITH HELLO EVERYONE
 GREETING = "Hello everyone"
+
+# YouTube Create Prompt & Speech Limits
+YT_CREATE_PROMPT_MIN_CHARS = 250
+YT_CREATE_PROMPT_MAX_CHARS = 300
+MAX_SPEECH_DURATION_SECONDS = 10.0
+MAX_SPEECH_WORD_COUNT = 25  # ~2.4 words/sec -> 24 words = 10 sec clean
 
 # 24-Hour Cycle Settings (10 videos = 2.4 hour intervals)
 CYCLE_HOURS = 2.4

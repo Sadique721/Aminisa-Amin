@@ -10,17 +10,32 @@ import time
 import os
 from config import ADB_TARGET, PACKAGES
 
+import shutil
+
 # Termux environment setup
-os.environ["PATH"] = "/data/data/com.termux/files/usr/bin:" + os.environ.get("PATH", "")
+os.environ["PATH"] = "/data/data/com.termux/files/usr/bin;" + os.environ.get("PATH", "")
 os.environ["TMPDIR"] = "/data/data/com.termux/files/usr/tmp"
 os.environ["HOME"] = "/data/data/com.termux/files/home"
 
-ADB_BIN = "/data/data/com.termux/files/usr/bin/adb"
+def _find_adb():
+    candidates = [
+        "/data/data/com.termux/files/usr/bin/adb",
+        shutil.which("adb"),
+        shutil.which("adb.exe"),
+        r"C:\Users\MD SADIQUE AMIN\Downloads\platform-tools-latest-windows\platform-tools\adb.exe",
+        r"C:\Users\MD SADIQUE AMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe",
+    ]
+    for c in candidates:
+        if c and os.path.exists(c):
+            return c
+    return "adb"
+
+ADB_BIN = _find_adb()
 
 class AdbBridge:
     def __init__(self, target=ADB_TARGET):
         self.target = target
-        self.adb = ADB_BIN if os.path.exists(ADB_BIN) else "adb"
+        self.adb = ADB_BIN
 
     def cmd(self, args, timeout=15):
         """Execute an ADB command against the target device."""
@@ -33,20 +48,25 @@ class AdbBridge:
 
     def ensure_connected(self):
         """Ensure connection to localhost ADB."""
-        # 1. Connect
-        subprocess.run([self.adb, "connect", self.target], capture_output=True, timeout=10)
-        # 2. Check via shell getprop (not bare adb getprop which is invalid)
-        out, err, code = self.cmd(["shell", "getprop", "ro.product.model"])
-        if code == 0 and out:
-            return True, out
-        
-        # Try reconnecting once (kill-server + reconnect)
-        subprocess.run([self.adb, "kill-server"], capture_output=True, timeout=5)
-        time.sleep(1)
-        subprocess.run([self.adb, "start-server"], capture_output=True, timeout=10)
-        subprocess.run([self.adb, "connect", self.target], capture_output=True, timeout=10)
-        out, err, code = self.cmd(["shell", "getprop", "ro.product.model"])
-        return code == 0, out or err
+        try:
+            # 1. Connect
+            subprocess.run([self.adb, "connect", self.target], capture_output=True, timeout=10)
+            # 2. Check via shell getprop
+            out, err, code = self.cmd(["shell", "getprop", "ro.product.model"])
+            if code == 0 and out:
+                return True, out
+            
+            # Try reconnecting once (kill-server + reconnect)
+            subprocess.run([self.adb, "kill-server"], capture_output=True, timeout=5)
+            time.sleep(1)
+            subprocess.run([self.adb, "start-server"], capture_output=True, timeout=10)
+            subprocess.run([self.adb, "connect", self.target], capture_output=True, timeout=10)
+            out, err, code = self.cmd(["shell", "getprop", "ro.product.model"])
+            return code == 0, out or err
+        except FileNotFoundError:
+            return False, "ADB binary not found"
+        except Exception as e:
+            return False, str(e)
 
     def wake_screen(self):
         """Wake up the screen and unlock if simple swipe."""
