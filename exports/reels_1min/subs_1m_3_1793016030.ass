@@ -1,0 +1,68 @@
+[Script Info]
+Title: Md Sadique Amin Kinetic Subtitles
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.601
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: KineticDefault,Arial,50,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,-1,0,0,0,100,100,1,0,1,4.5,2.5,2,40,40,420,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:00.56,KineticDefault,,0,0,0,,{\c&H0000E6FF&\b1\fscx110\fscy110}Hello{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}everyone! {\c&H00FFFFFF&\b1}Let {\c&H00FFFFFF&\b1}us
+Dialogue: 0,0:00:00.56,0:00:01.13,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}Hello {\c&H0000E6FF&\b1\fscx110\fscy110}everyone!{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}Let {\c&H00FFFFFF&\b1}us
+Dialogue: 0,0:00:01.13,0:00:01.69,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}Hello {\c&H00FFFFFF&\b1}everyone! {\c&H0000E6FF&\b1\fscx110\fscy110}Let{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}us
+Dialogue: 0,0:00:01.69,0:00:02.25,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}Hello {\c&H00FFFFFF&\b1}everyone! {\c&H00FFFFFF&\b1}Let {\c&H0000E6FF&\b1\fscx110\fscy110}us{\c&H00FFFFFF&\b1\fscx100\fscy100}
+Dialogue: 0,0:00:02.25,0:00:02.82,KineticDefault,,0,0,0,,{\c&H0000E6FF&\b1\fscx110\fscy110}talk{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}about {\c&H00FFFFFF&\b1}Autonomous {\c&H00FFFFFF&\b1}AI
+Dialogue: 0,0:00:02.82,0:00:03.38,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}talk {\c&H0000E6FF&\b1\fscx110\fscy110}about{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}Autonomous {\c&H00FFFFFF&\b1}AI
+Dialogue: 0,0:00:03.38,0:00:03.94,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}talk {\c&H00FFFFFF&\b1}about {\c&H0000E6FF&\b1\fscx110\fscy110}Autonomous{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}AI
+Dialogue: 0,0:00:03.94,0:00:04.51,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}talk {\c&H00FFFFFF&\b1}about {\c&H00FFFFFF&\b1}Autonomous {\c&H0000E6FF&\b1\fscx110\fscy110}AI{\c&H00FFFFFF&\b1\fscx100\fscy100}
+Dialogue: 0,0:00:04.51,0:00:05.07,KineticDefault,,0,0,0,,{\c&H0000E6FF&\b1\fscx110\fscy110}Systems{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}Transforming {\c&H00FFFFFF&\b1}Creative {\c&H00FFFFFF&\b1}Industries
+Dialogue: 0,0:00:05.07,0:00:05.63,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}Systems {\c&H0000E6FF&\b1\fscx110\fscy110}Transforming{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}Creative {\c&H00FFFFFF&\b1}Industries
+Dialogue: 0,0:00:05.63,0:00:06.20,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}Systems {\c&H00FFFFFF&\b1}Transforming {\c&H0000E6FF&\b1\fscx110\fscy110}Creative{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}Industries
+Dialogue: 0,0:00:06.20,0:00:06.76,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}Systems {\c&H00FFFFFF&\b1}Transforming {\c&H00FFFFFF&\b1}Creative {\c&H0000E6FF&\b1\fscx110\fscy110}Industries{\c&H00FFFFFF&\b1\fscx100\fscy100}
+Dialogue: 0,0:00:06.76,0:00:07.32,KineticDefault,,0,0,0,,{\c&H0000E6FF&\b1\fscx110\fscy110}2026.{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}Rapid {\c&H00FFFFFF&\b1}breakthroughs {\c&H00FFFFFF&\b1}in
+Dialogue: 0,0:00:07.32,0:00:07.89,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}2026. {\c&H0000E6FF&\b1\fscx110\fscy110}Rapid{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}breakthroughs {\c&H00FFFFFF&\b1}in
+Dialogue: 0,0:00:07.89,0:00:08.45,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}2026. {\c&H00FFFFFF&\b1}Rapid {\c&H0000E6FF&\b1\fscx110\fscy110}breakthroughs{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}in
+Dialogue: 0,0:00:08.45,0:00:09.01,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}2026. {\c&H00FFFFFF&\b1}Rapid {\c&H00FFFFFF&\b1}breakthroughs {\c&H0000E6FF&\b1\fscx110\fscy110}in{\c&H00FFFFFF&\b1\fscx100\fscy100}
+Dialogue: 0,0:00:09.01,0:00:09.58,KineticDefault,,0,0,0,,{\c&H0000E6FF&\b1\fscx110\fscy110}AI{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}and {\c&H00FFFFFF&\b1}software {\c&H00FFFFFF&\b1}systems
+Dialogue: 0,0:00:09.58,0:00:10.14,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}AI {\c&H0000E6FF&\b1\fscx110\fscy110}and{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}software {\c&H00FFFFFF&\b1}systems
+Dialogue: 0,0:00:10.14,0:00:10.70,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}AI {\c&H00FFFFFF&\b1}and {\c&H0000E6FF&\b1\fscx110\fscy110}software{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}systems
+Dialogue: 0,0:00:10.70,0:00:11.27,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}AI {\c&H00FFFFFF&\b1}and {\c&H00FFFFFF&\b1}software {\c&H0000E6FF&\b1\fscx110\fscy110}systems{\c&H00FFFFFF&\b1\fscx100\fscy100}
+Dialogue: 0,0:00:11.27,0:00:11.83,KineticDefault,,0,0,0,,{\c&H0000E6FF&\b1\fscx110\fscy110}are{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}transforming {\c&H00FFFFFF&\b1}everyday {\c&H00FFFFFF&\b1}workflows
+Dialogue: 0,0:00:11.83,0:00:12.39,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}are {\c&H0000E6FF&\b1\fscx110\fscy110}transforming{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}everyday {\c&H00FFFFFF&\b1}workflows
+Dialogue: 0,0:00:12.39,0:00:12.96,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}are {\c&H00FFFFFF&\b1}transforming {\c&H0000E6FF&\b1\fscx110\fscy110}everyday{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}workflows
+Dialogue: 0,0:00:12.96,0:00:13.52,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}are {\c&H00FFFFFF&\b1}transforming {\c&H00FFFFFF&\b1}everyday {\c&H0000E6FF&\b1\fscx110\fscy110}workflows{\c&H00FFFFFF&\b1\fscx100\fscy100}
+Dialogue: 0,0:00:13.52,0:00:14.08,KineticDefault,,0,0,0,,{\c&H0000E6FF&\b1\fscx110\fscy110}across{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}India. {\c&H00FFFFFF&\b1}From {\c&H00FFFFFF&\b1}autonomous
+Dialogue: 0,0:00:14.08,0:00:14.65,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}across {\c&H0000E6FF&\b1\fscx110\fscy110}India.{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}From {\c&H00FFFFFF&\b1}autonomous
+Dialogue: 0,0:00:14.65,0:00:15.21,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}across {\c&H00FFFFFF&\b1}India. {\c&H0000E6FF&\b1\fscx110\fscy110}From{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}autonomous
+Dialogue: 0,0:00:15.21,0:00:15.78,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}across {\c&H00FFFFFF&\b1}India. {\c&H00FFFFFF&\b1}From {\c&H0000E6FF&\b1\fscx110\fscy110}autonomous{\c&H00FFFFFF&\b1\fscx100\fscy100}
+Dialogue: 0,0:00:15.78,0:00:16.34,KineticDefault,,0,0,0,,{\c&H0000E6FF&\b1\fscx110\fscy110}agents{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}to {\c&H00FFFFFF&\b1}intuitive {\c&H00FFFFFF&\b1}interfaces,
+Dialogue: 0,0:00:16.34,0:00:16.90,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}agents {\c&H0000E6FF&\b1\fscx110\fscy110}to{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}intuitive {\c&H00FFFFFF&\b1}interfaces,
+Dialogue: 0,0:00:16.90,0:00:17.47,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}agents {\c&H00FFFFFF&\b1}to {\c&H0000E6FF&\b1\fscx110\fscy110}intuitive{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}interfaces,
+Dialogue: 0,0:00:17.47,0:00:18.03,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}agents {\c&H00FFFFFF&\b1}to {\c&H00FFFFFF&\b1}intuitive {\c&H0000E6FF&\b1\fscx110\fscy110}interfaces,{\c&H00FFFFFF&\b1\fscx100\fscy100}
+Dialogue: 0,0:00:18.03,0:00:18.59,KineticDefault,,0,0,0,,{\c&H0000E6FF&\b1\fscx110\fscy110}the{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}future {\c&H00FFFFFF&\b1}is {\c&H00FFFFFF&\b1}moving
+Dialogue: 0,0:00:18.59,0:00:19.16,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}the {\c&H0000E6FF&\b1\fscx110\fscy110}future{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}is {\c&H00FFFFFF&\b1}moving
+Dialogue: 0,0:00:19.16,0:00:19.72,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}the {\c&H00FFFFFF&\b1}future {\c&H0000E6FF&\b1\fscx110\fscy110}is{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}moving
+Dialogue: 0,0:00:19.72,0:00:20.28,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}the {\c&H00FFFFFF&\b1}future {\c&H00FFFFFF&\b1}is {\c&H0000E6FF&\b1\fscx110\fscy110}moving{\c&H00FFFFFF&\b1\fscx100\fscy100}
+Dialogue: 0,0:00:20.28,0:00:20.85,KineticDefault,,0,0,0,,{\c&H0000E6FF&\b1\fscx110\fscy110}faster{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}than {\c&H00FFFFFF&\b1}ever. {\c&H00FFFFFF&\b1}What
+Dialogue: 0,0:00:20.85,0:00:21.41,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}faster {\c&H0000E6FF&\b1\fscx110\fscy110}than{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}ever. {\c&H00FFFFFF&\b1}What
+Dialogue: 0,0:00:21.41,0:00:21.97,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}faster {\c&H00FFFFFF&\b1}than {\c&H0000E6FF&\b1\fscx110\fscy110}ever.{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}What
+Dialogue: 0,0:00:21.97,0:00:22.54,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}faster {\c&H00FFFFFF&\b1}than {\c&H00FFFFFF&\b1}ever. {\c&H0000E6FF&\b1\fscx110\fscy110}What{\c&H00FFFFFF&\b1\fscx100\fscy100}
+Dialogue: 0,0:00:22.54,0:00:23.10,KineticDefault,,0,0,0,,{\c&H0000E6FF&\b1\fscx110\fscy110}are{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}your {\c&H00FFFFFF&\b1}thoughts {\c&H00FFFFFF&\b1}on
+Dialogue: 0,0:00:23.10,0:00:23.66,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}are {\c&H0000E6FF&\b1\fscx110\fscy110}your{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}thoughts {\c&H00FFFFFF&\b1}on
+Dialogue: 0,0:00:23.66,0:00:24.23,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}are {\c&H00FFFFFF&\b1}your {\c&H0000E6FF&\b1\fscx110\fscy110}thoughts{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}on
+Dialogue: 0,0:00:24.23,0:00:24.79,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}are {\c&H00FFFFFF&\b1}your {\c&H00FFFFFF&\b1}thoughts {\c&H0000E6FF&\b1\fscx110\fscy110}on{\c&H00FFFFFF&\b1\fscx100\fscy100}
+Dialogue: 0,0:00:24.79,0:00:25.35,KineticDefault,,0,0,0,,{\c&H0000E6FF&\b1\fscx110\fscy110}this{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}shift? {\c&H00FFFFFF&\b1}Let {\c&H00FFFFFF&\b1}me
+Dialogue: 0,0:00:25.35,0:00:25.92,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}this {\c&H0000E6FF&\b1\fscx110\fscy110}shift?{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}Let {\c&H00FFFFFF&\b1}me
+Dialogue: 0,0:00:25.92,0:00:26.48,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}this {\c&H00FFFFFF&\b1}shift? {\c&H0000E6FF&\b1\fscx110\fscy110}Let{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}me
+Dialogue: 0,0:00:26.48,0:00:27.04,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}this {\c&H00FFFFFF&\b1}shift? {\c&H00FFFFFF&\b1}Let {\c&H0000E6FF&\b1\fscx110\fscy110}me{\c&H00FFFFFF&\b1\fscx100\fscy100}
+Dialogue: 0,0:00:27.04,0:00:27.61,KineticDefault,,0,0,0,,{\c&H0000E6FF&\b1\fscx110\fscy110}know{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}in {\c&H00FFFFFF&\b1}the {\c&H00FFFFFF&\b1}comments
+Dialogue: 0,0:00:27.61,0:00:28.17,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}know {\c&H0000E6FF&\b1\fscx110\fscy110}in{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}the {\c&H00FFFFFF&\b1}comments
+Dialogue: 0,0:00:28.17,0:00:28.73,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}know {\c&H00FFFFFF&\b1}in {\c&H0000E6FF&\b1\fscx110\fscy110}the{\c&H00FFFFFF&\b1\fscx100\fscy100} {\c&H00FFFFFF&\b1}comments
+Dialogue: 0,0:00:28.73,0:00:29.30,KineticDefault,,0,0,0,,{\c&H00FFFFFF&\b1}know {\c&H00FFFFFF&\b1}in {\c&H00FFFFFF&\b1}the {\c&H0000E6FF&\b1\fscx110\fscy110}comments{\c&H00FFFFFF&\b1\fscx100\fscy100}
+Dialogue: 0,0:00:29.30,0:00:29.86,KineticDefault,,0,0,0,,{\c&H0000E6FF&\b1\fscx110\fscy110}below!{\c&H00FFFFFF&\b1\fscx100\fscy100}

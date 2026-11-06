@@ -15,7 +15,7 @@ import urllib.parse
 def load_env(env_path=None):
     """Simple zero-dependency .env loader."""
     if not env_path:
-        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         env_path = os.path.join(root, ".env")
     
     env_vars = {}

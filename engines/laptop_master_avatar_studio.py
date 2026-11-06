@@ -151,6 +151,10 @@ class LaptopMasterAvatarStudio:
         print(f"[✓] [1-Min Reel Complete] -> {output_reel} ({os.path.getsize(output_reel)} bytes)")
         return output_reel
 
+    def render_talking_avatar_reel(self, face_image_path=None, script_text="", headline="", slot_idx=1):
+        """Bridge method for reel_pipeline to render 1-min reel with talking avatar."""
+        return self.render_1min_reel(script_text=script_text, headline=headline, face_image_path=face_image_path, slot_idx=slot_idx)
+
     def render_10min_concept_explainer(self, topic_item, chapters):
         """
         Renders 10-Minute Deep-Dive Concept Explainer (1920x1080 60FPS horizontal):

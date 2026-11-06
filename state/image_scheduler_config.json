@@ -1,0 +1,15 @@
+{
+  "status": "ARMED_ACTIVE",
+  "daily_target_count": 5,
+  "scheduled_slots": [
+    "07:00",
+    "11:00",
+    "15:00",
+    "19:00",
+    "22:00"
+  ],
+  "last_run_date": "2026-11-06",
+  "auto_phone_sync": true,
+  "face_similarity_threshold": 0.7,
+  "output_directory": "daily_generated_images"
+}

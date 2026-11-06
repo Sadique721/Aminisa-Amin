@@ -89,6 +89,8 @@ def run_daily_face_and_excel_initialization():
             res = daily_face_engine.ensure_today_master_face(wait_if_offline=True)
             print(f"[✔] [STARTUP HOOK] Master Face Status: {res.get('status')} | File: {res.get('png')}")
             daily_face_engine.sync_to_phone()
+            from engines.daily_5_images_scheduler import daily_scheduler
+            daily_scheduler.run_daily_cycle(force=False)
         except Exception as e:
             print(f"[-] [STARTUP HOOK] Daily face initialization notice: {e}")
 

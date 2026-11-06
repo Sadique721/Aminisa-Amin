@@ -47,6 +47,15 @@ def main():
     print(f"    • Excel Sheet : Aminsa_Master_Production_Catalog.xlsx (DEPLOYED)")
     print("    • Biometrics  : Wheatish Porcelain (#EAD5C3), Hazel Eyes (#6B4423), ZERO MOLES")
 
+    # 5-Image Autonomous Daily Pack
+    print("\n[*] Deploying Today's 5-Image Production Pack (Multi-Shot Diversity)...")
+    try:
+        from engines.daily_5_images_scheduler import daily_scheduler
+        daily_scheduler.run_daily_cycle(force=args.force)
+        print("    [✔] Successfully generated 5 unique images (Selfies, Full-Body, 3/4) in daily_generated_images/" + today_str)
+    except Exception as e:
+        print(f"    [-] 5-Image generator notice: {e}")
+
     # Mobile Sync
     print("\n[*] Checking Phone ADB Sync...")
     synced = daily_face_engine.sync_to_phone()
