@@ -8,7 +8,7 @@
     "19:00",
     "22:00"
   ],
-  "last_run_date": "2026-11-13",
+  "last_run_date": "2026-11-14",
   "auto_phone_sync": true,
   "face_similarity_threshold": 0.7,
   "output_directory": "daily_generated_images"
