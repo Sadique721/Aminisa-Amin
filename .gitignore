@@ -57,3 +57,5 @@ reports/*.log
 
 test_output_scratch/
 scratch/
+character/multi_angle_reference/extracted_reference_cells/
+character/multi_angle_reference/raw_generated/

@@ -14,7 +14,7 @@
       "png_file": "01_aminsa_front.png",
       "jpg_file": "01_aminsa_front.jpg",
       "resolution": "1080x1350 (4:5 Editorial Master)",
-      "similarity_score": 0.9896,
+      "similarity_score": 0.6074,
       "prompt_snippet": "front view, eye level shot, looking directly into camera, symmetrical lighting, photorealistic 8k",
       "biometrics": {
         "skin": "#EAD5C3 (Wheatish Porcelain)",
@@ -33,7 +33,7 @@
       "png_file": "02_aminsa_front_quarter_right.png",
       "jpg_file": "02_aminsa_front_quarter_right.jpg",
       "resolution": "1080x1350 (4:5 Editorial Master)",
-      "similarity_score": 0.9535,
+      "similarity_score": 0.6354,
       "prompt_snippet": "three-quarter view facing right, 45 degree angle, key light on right cheek, soft fill light",
       "biometrics": {
         "skin": "#EAD5C3 (Wheatish Porcelain)",
@@ -52,7 +52,7 @@
       "png_file": "03_aminsa_front_quarter_left.png",
       "jpg_file": "03_aminsa_front_quarter_left.jpg",
       "resolution": "1080x1350 (4:5 Editorial Master)",
-      "similarity_score": 0.9537,
+      "similarity_score": 0.6605,
       "prompt_snippet": "three-quarter view facing left, 45 degree angle, key light on left cheek, soft rim light",
       "biometrics": {
         "skin": "#EAD5C3 (Wheatish Porcelain)",
@@ -71,7 +71,7 @@
       "png_file": "04_aminsa_side_profile_right.png",
       "jpg_file": "04_aminsa_side_profile_right.jpg",
       "resolution": "1080x1350 (4:5 Editorial Master)",
-      "similarity_score": 0.9471,
+      "similarity_score": 0.6969,
       "prompt_snippet": "side profile right view, 90 degree orthogonal angle, sharp jawline silhouette, hair falling over shoulder",
       "biometrics": {
         "skin": "#EAD5C3 (Wheatish Porcelain)",
@@ -90,7 +90,7 @@
       "png_file": "05_aminsa_side_profile_left.png",
       "jpg_file": "05_aminsa_side_profile_left.jpg",
       "resolution": "1080x1350 (4:5 Editorial Master)",
-      "similarity_score": 0.9478,
+      "similarity_score": 0.6931,
       "prompt_snippet": "side profile left view, 90 degree orthogonal angle, elegant nose bridge, crisp rim contour",
       "biometrics": {
         "skin": "#EAD5C3 (Wheatish Porcelain)",
@@ -109,7 +109,7 @@
       "png_file": "06_aminsa_three_quarter_right_back.png",
       "jpg_file": "06_aminsa_three_quarter_right_back.jpg",
       "resolution": "1080x1350 (4:5 Editorial Master)",
-      "similarity_score": 0.978,
+      "similarity_score": 0.6496,
       "prompt_snippet": "rear three-quarter view over right shoulder, hair cascading down upper back, subtle jawline curve",
       "biometrics": {
         "skin": "#EAD5C3 (Wheatish Porcelain)",
@@ -128,7 +128,7 @@
       "png_file": "07_aminsa_three_quarter_left_back.png",
       "jpg_file": "07_aminsa_three_quarter_left_back.jpg",
       "resolution": "1080x1350 (4:5 Editorial Master)",
-      "similarity_score": 0.9782,
+      "similarity_score": 0.6651,
       "prompt_snippet": "rear three-quarter view over left shoulder, dark espresso wavy hair texture, soft ambient back light",
       "biometrics": {
         "skin": "#EAD5C3 (Wheatish Porcelain)",
@@ -147,7 +147,7 @@
       "png_file": "08_aminsa_back_view_direct.png",
       "jpg_file": "08_aminsa_back_view_direct.jpg",
       "resolution": "1080x1350 (4:5 Editorial Master)",
-      "similarity_score": 0.9782,
+      "similarity_score": 0.6578,
       "prompt_snippet": "direct back view, 180 degrees rear angle, full hair back silhouette, symmetrical shoulders",
       "biometrics": {
         "skin": "#EAD5C3 (Wheatish Porcelain)",
@@ -166,7 +166,7 @@
       "png_file": "09_aminsa_low_angle_front.png",
       "jpg_file": "09_aminsa_low_angle_front.jpg",
       "resolution": "1080x1350 (4:5 Editorial Master)",
-      "similarity_score": 0.9461,
+      "similarity_score": 0.6996,
       "prompt_snippet": "low angle shot looking up, worm's eye perspective, upward perspective convergence, cinematic heroic angle",
       "biometrics": {
         "skin": "#EAD5C3 (Wheatish Porcelain)",
@@ -185,7 +185,7 @@
       "png_file": "10_aminsa_low_angle_right.png",
       "jpg_file": "10_aminsa_low_angle_right.jpg",
       "resolution": "1080x1350 (4:5 Editorial Master)",
-      "similarity_score": 0.9307,
+      "similarity_score": 0.6942,
       "prompt_snippet": "low angle right three-quarter shot, camera at waist level tilted upward, dramatic architectural lighting",
       "biometrics": {
         "skin": "#EAD5C3 (Wheatish Porcelain)",
@@ -204,7 +204,7 @@
       "png_file": "11_aminsa_low_angle_left.png",
       "jpg_file": "11_aminsa_low_angle_left.jpg",
       "resolution": "1080x1350 (4:5 Editorial Master)",
-      "similarity_score": 0.9463,
+      "similarity_score": 0.7048,
       "prompt_snippet": "low angle left three-quarter shot, upward tilt perspective, soft rim light on left cheek",
       "biometrics": {
         "skin": "#EAD5C3 (Wheatish Porcelain)",
@@ -223,7 +223,7 @@
       "png_file": "12_aminsa_low_angle_back.png",
       "jpg_file": "12_aminsa_low_angle_back.jpg",
       "resolution": "1080x1350 (4:5 Editorial Master)",
-      "similarity_score": 0.8842,
+      "similarity_score": 0.6994,
       "prompt_snippet": "low angle rear view, camera low pointing up at back and shoulders, wide sky background",
       "biometrics": {
         "skin": "#EAD5C3 (Wheatish Porcelain)",
@@ -242,7 +242,7 @@
       "png_file": "13_aminsa_high_angle_front.png",
       "jpg_file": "13_aminsa_high_angle_front.jpg",
       "resolution": "1080x1350 (4:5 Editorial Master)",
-      "similarity_score": 0.9199,
+      "similarity_score": 0.8093,
       "prompt_snippet": "high angle shot looking down, bird's eye perspective, hazel eyes looking up at camera, delicate facial contours",
       "biometrics": {
         "skin": "#EAD5C3 (Wheatish Porcelain)",
@@ -261,7 +261,7 @@
       "png_file": "14_aminsa_high_angle_right.png",
       "jpg_file": "14_aminsa_high_angle_right.jpg",
       "resolution": "1080x1350 (4:5 Editorial Master)",
-      "similarity_score": 0.9032,
+      "similarity_score": 0.8191,
       "prompt_snippet": "high angle right three-quarter perspective, looking down at right cheek and collar, downward tilt",
       "biometrics": {
         "skin": "#EAD5C3 (Wheatish Porcelain)",
@@ -280,7 +280,7 @@
       "png_file": "15_aminsa_high_angle_left.png",
       "jpg_file": "15_aminsa_high_angle_left.jpg",
       "resolution": "1080x1350 (4:5 Editorial Master)",
-      "similarity_score": 0.9198,
+      "similarity_score": 0.8117,
       "prompt_snippet": "high angle left three-quarter perspective, looking down from upper left, soft overhead key light",
       "biometrics": {
         "skin": "#EAD5C3 (Wheatish Porcelain)",
@@ -299,7 +299,7 @@
       "png_file": "16_aminsa_high_angle_back.png",
       "jpg_file": "16_aminsa_high_angle_back.jpg",
       "resolution": "1080x1350 (4:5 Editorial Master)",
-      "similarity_score": 0.8639,
+      "similarity_score": 0.4867,
       "prompt_snippet": "high angle rear shot looking down at crown and upper back, cascading hair waves from above",
       "biometrics": {
         "skin": "#EAD5C3 (Wheatish Porcelain)",
@@ -318,7 +318,7 @@
       "png_file": "17_aminsa_close_up_portrait.png",
       "jpg_file": "17_aminsa_close_up_portrait.jpg",
       "resolution": "1080x1350 (4:5 Editorial Master)",
-      "similarity_score": 0.9118,
+      "similarity_score": 0.4337,
       "prompt_snippet": "extreme close-up portrait, 85mm prime lens f/1.4, micro-pore skin texture, hazel brown eyes with dark rings, zero moles, 8k",
       "biometrics": {
         "skin": "#EAD5C3 (Wheatish Porcelain)",
