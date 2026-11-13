@@ -276,8 +276,13 @@ def get_unique_daily_slots(date_obj=None):
             topic = f"Celebrating {fest_name} with Modern Grace, Joy & Unity"
             setting = f"{setting} — adorned with subtle festive elegance in honor of {fest_name}"
 
+        # Map to canonical 17-angle turnaround matrix
+        canonical_angle_map = ["01", "02", "09", "13", "17"]
+        canonical_angle_id = canonical_angle_map[i % len(canonical_angle_map)]
+
         slots.append({
             "slot_id": slot_num,
+            "canonical_angle_id": canonical_angle_id,
             "time": t,
             "title": f"{theme_title} — {loc['name']}",
             "theme": loc["type"],

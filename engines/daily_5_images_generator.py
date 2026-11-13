@@ -155,6 +155,7 @@ class Daily5ImageGenerator:
             "slot_id": slot_id,
             "title": slot_meta["title"],
             "theme": theme,
+            "canonical_angle_id": slot_meta.get("canonical_angle_id", "01"),
             "shot_type": shot_type,
             "shot_name": slot_meta.get("shot_name", "Portrait"),
             "framing": slot_meta.get("framing", ""),
