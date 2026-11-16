@@ -202,6 +202,18 @@ SPECIAL_DAYS = {
         "description": "Kargil yuddh me veeron ki aitihasik jeet aur shahadat",
         "focus": "Operation Vijay - saluting the courageous soldiers who recaptured Himalayan peaks in 1999."
     },
+    (7, 30): {
+        "title": "International Friendship Day",
+        "category": "observance",
+        "description": "Dosti, aapsi vishwas aur sacche yaaron ke sath ka jashn",
+        "focus": "Celebrating true friends, unconditional support, childhood bonds, and the beautiful spirit of friendship."
+    },
+    (8, 2): {
+        "title": "National Friendship Day",
+        "category": "observance",
+        "description": "Dosti ka tyohar - har dost zaroori hota hai",
+        "focus": "Celebrating lifelong friends, chai tapri yaari, and unforgettable college memories across India."
+    },
     (8, 7): {
         "title": "National Handloom Day (Swadeshi Movement)",
         "category": "cultural_day",
