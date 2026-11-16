@@ -12,9 +12,10 @@ Write-Host "==========================================================" -Foregro
 # 0. Check Connected Devices
 Write-Host "[0/5] Detecting ADB device..." -ForegroundColor Yellow
 $devList = & $adb devices
-Write-Host $devList
+Write-Host ($devList -join "`n")
 
-if ($devList -notmatch "device\b") {
+$hasDevice = ($devList | Where-Object { $_ -match "\bdevice\b" -and $_ -notmatch "List of" })
+if (-not $hasDevice) {
     Write-Host "[!] No active ADB device found!" -ForegroundColor Red
     Write-Host "    Please connect phone via USB with USB Debugging ON, or connect via Wi-Fi: adb connect <PHONE_IP>:5555" -ForegroundColor Yellow
     exit 1
