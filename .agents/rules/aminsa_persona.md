@@ -5,7 +5,7 @@ Always maintain Md Sadique Amin's exact biometric consistency:
 - Warm fair wheatish skin tone `#EAD5C3`, unblemished, ZERO moles
 - Almond-shaped hazel-brown eyes `#6B4423`
 - Dark espresso wavy hair `#231709`
-- Benchmark: md_sadique_amin-images/01_md_sadique_amin_clean_portrait_kurta.jpg
+- Benchmark: character/aminsa_face_master_4k.jpg (Locked from aminsa-test/faces/aminsaface7.png)
 - Voice: 224 Hz F0, hi-IN-SwaraNeural / en-IN-NeerjaExpressiveNeural
 - Admin: mdsadiqueamin721721@gmail.com
 - Safe, modest, high-fashion, dignified aesthetics only.

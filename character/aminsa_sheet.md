@@ -10,7 +10,7 @@
 - **Complexion:** Warm fair wheatish South Asian porcelain (`#EAD5C3`), natural micropores, zero blemishes, STRICTLY ZERO moles/marks.
 - **Eyes:** Deep almond-shaped hazel-brown (`#6B4423`) with dark espresso limbal rings (`#1B120C`).
 - **Hair:** Rich dark espresso wavy hair (`#140E0A`) falling gracefully to mid-back.
-- **Reference Portrait Anchor:** `aminsa-images/01_aminsa_clean_portrait_kurta.jpg`
+- **Reference Portrait Anchor:** `character/aminsa_face_master_4k.jpg` (Canonical Golden Face Master locked from `aminsa-test/faces/aminsaface7.png`)
 
 ## 2. Voice Architecture
 - **Engine:** Microsoft Edge-TTS

@@ -13,7 +13,7 @@ import re
 
 CHAR_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(CHAR_DIR)
-ANCHOR_IMAGE = os.path.join(PROJECT_ROOT, "aminsa-images", "01_aminsa_clean_portrait_kurta.jpg")
+ANCHOR_IMAGE = os.path.join(PROJECT_ROOT, "character", "aminsa_face_master_4k.jpg")
 VOICE_CONFIG_FILE = os.path.join(CHAR_DIR, "voice_config.json")
 
 # Pre-computed reference hash for voice_config.json
