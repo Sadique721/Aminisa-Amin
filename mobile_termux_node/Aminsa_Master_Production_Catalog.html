@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Aminsa &bull; Daily Production Catalog</title>
+    <style>
+        :root {
+            --bg-main: #212121;
+            --bg-card: #2f2f2f;
+            --bg-subtle: #171717;
+            --bg-code: #181818;
+            --border: rgba(255, 255, 255, 0.12);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --text-main: #ececec;
+            --text-secondary: #b4b4b4;
+            --text-muted: #737373;
+            --gpt-green: #10a37f;
+            --gpt-green-hover: #1a7f64;
+            --accent-cyan: #38bdf8;
+            --accent-gold: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            font-size: 14.5px;
+            line-height: 1.55;
+            padding: 12px;
+            padding-bottom: 110px;
+        }
+
+        /* ChatGPT Header */
+        .chatgpt-nav {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: rgba(33, 33, 33, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 6px;
+            margin: -12px -12px 14px -12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gpt-pill {
+            background: #2f2f2f;
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13.5px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-main);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--gpt-green);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px var(--gpt-green);
+        }
+
+        .date-pill {
+            font-size: 11.5px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Segmented Tabs (ChatGPT Model Switcher Style) */
+        .tab-switcher {
+            display: flex;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-subtle);
+            padding: 3px;
+            border-radius: 12px;
+            margin-bottom: 14px;
+            gap: 4px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 9px 8px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.15s ease;
+        }
+
+        .tab-btn.active {
+            background: #3b3b3b;
+            color: #ffffff;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+        }
+
+        /* Search Filter */
+        .search-box {
+            width: 100%;
+            padding: 10px 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 13.5px;
+            margin-bottom: 14px;
+            outline: none;
+            transition: border 0.2s;
+        }
+
+        .search-box:focus {
+            border-color: var(--gpt-green);
+        }
+
+        /* Chat Message Cards */
+        .chat-message {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 16px 14px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+            transition: transform 0.15s ease;
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .avatar-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #10a37f, #0d8366);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: white;
+            box-shadow: 0 2px 6px rgba(16, 163, 127, 0.4);
+        }
+
+        .avatar-name {
+            font-weight: 700;
+            font-size: 14px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .verified-icon {
+            color: var(--gpt-green);
+            font-weight: 800;
+            font-size: 12px;
+        }
+
+        .slot-pill-group {
+            display: flex;
+            gap: 6px;
+            margin-top: 2px;
+            flex-wrap: wrap;
+        }
+
+        .slot-pill {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 6px;
+            padding: 1px 7px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .category-pill {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-gold);
+            border-radius: 6px;
+            padding: 1px 7px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .slot-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+            line-height: 1.35;
+        }
+
+        .section-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .script-bubble {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-subtle);
+            border-left: 3px solid var(--gpt-green);
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 13.5px;
+            color: #e2e8f0;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+        }
+
+        /* ChatGPT Code Blocks */
+        .code-block-container {
+            background: var(--bg-code);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .code-block-header {
+            background: #262626;
+            padding: 7px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .code-lang {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-family: monospace;
+            text-transform: lowercase;
+        }
+
+        .code-copy-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: all 0.15s;
+        }
+
+        .code-copy-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .code-content {
+            padding: 10px 12px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 12px;
+            color: #d1d5db;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-break: break-word;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+
+        /* Action Buttons Row */
+        .action-buttons-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .pill-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 9px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: #3b3b3b;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .pill-btn:hover {
+            background: #474747;
+        }
+
+        .pill-btn.primary {
+            background: rgba(16, 163, 127, 0.2);
+            border-color: rgba(16, 163, 127, 0.4);
+            color: #6ee7b7;
+        }
+
+        .pill-btn.primary:hover {
+            background: rgba(16, 163, 127, 0.35);
+        }
+
+        .pill-btn.secondary {
+            background: rgba(56, 189, 248, 0.18);
+            border-color: rgba(56, 189, 248, 0.35);
+            color: #7dd3fc;
+        }
+
+        .pill-btn.secondary:hover {
+            background: rgba(56, 189, 248, 0.3);
+        }
+
+        .pill-btn.tertiary {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--border);
+            color: var(--text-secondary);
+        }
+
+        .pill-btn.tertiary:hover {
+            background: rgba(255, 255, 255, 0.14);
+            color: #fff;
+        }
+
+        /* Table View (Original Grid Layout Restored) */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg-card);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            min-width: 1350px;
+        }
+
+        th {
+            background: #262626;
+            color: var(--text-secondary);
+            font-weight: 700;
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid var(--border);
+            border-right: 1px solid var(--border-subtle);
+            position: sticky;
+            top: 0;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid var(--border-subtle);
+            border-right: 1px solid var(--border-subtle);
+            vertical-align: top;
+            color: var(--text-main);
+        }
+
+        tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .nowrap { white-space: nowrap; }
+        .center { text-align: center; }
+        .bold { font-weight: 700; color: #fff; }
+        .cat-cell { color: var(--accent-gold); font-weight: 600; min-width: 130px; }
+        .title-cell { font-weight: 700; color: #fff; min-width: 150px; }
+        .text-cell { min-width: 240px; }
+        .code-cell { font-family: monospace; font-size: 11px; min-width: 250px; color: #bae6fd; }
+
+        .table-copy-btn {
+            background: #3b3b3b;
+            color: #fff;
+            border: 1px solid var(--border);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-top: 5px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .table-copy-btn:hover {
+            background: #4a4a4a;
+            color: var(--gpt-green);
+        }
+
+        /* Floating Bottom Action Bar */
+        .bottom-action-bar {
+            position: fixed;
+            bottom: 14px;
+            left: 12px;
+            right: 12px;
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(47, 47, 47, 0.95);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 26px;
+            padding: 8px 12px;
+            display: flex;
+            gap: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            z-index: 999;
+        }
+
+        .bottom-btn {
+            flex: 1;
+            padding: 10px 8px;
+            border-radius: 18px;
+            border: none;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.15s;
+        }
+
+        .bottom-btn.all {
+            background: var(--gpt-green);
+            color: white;
+        }
+
+        .bottom-btn.excel {
+            background: #3b3b3b;
+            color: white;
+            border: 1px solid var(--border);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gpt-green);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-weight: 700;
+            font-size: 13px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            display: none;
+            z-index: 10000;
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="chatgpt-nav">
+        <div class="brand-container">
+            <div class="gpt-pill">
+                <span class="status-dot"></span>
+                <span>Aminsa 4o</span>
+            </div>
+            <span class="date-pill">Tuesday, 17 November 2026</span>
+        </div>
+        <div style="font-size: 11.5px; color: var(--accent-cyan); font-weight: 600;">
+            10 Slots &bull; 2.4h Loop
+        </div>
+    </div>
+
+    <!-- TABS SWITCHER -->
+    <div class="tab-switcher">
+        <button class="tab-btn active" id="btn-tab-chat" onclick="switchTab('tab-chat')">💬 10 Chat Cards</button>
+        <button class="tab-btn" id="btn-tab-table" onclick="switchTab('tab-table')">📊 Live Excel Grid</button>
+        <button class="tab-btn" id="btn-tab-dna" onclick="switchTab('tab-dna')">🧬 DNA Rules</button>
+    </div>
+
+    <!-- TAB 1: CHAT CARDS -->
+    <div id="tab-chat" class="tab-content active">
+        <input type="text" class="search-box" placeholder="🔍 Search topics, scripts, keywords..." oninput="filterCards(this.value)">
+        
+        <div class="chat-message" id="slot-card-1" data-search="india national developments and policy updates shaping youth opportunities today india national day & morning focus hello everyone! main hoon aminsa. aaj ki sabse badi update: india national developments and policy updates shaping youth opportunities today — is badlaav ka direct asar hamare aam logon ke jeevan aur future opportunities par padne wala hai!">
+            <div class="message-header">
+                <div class="avatar-badge">
+                    <div class="avatar-icon">✨</div>
+                    <div class="avatar-info">
+                        <div class="avatar-name">Aminsa AI <span class="verified-icon">✓</span></div>
+                        <div class="slot-pill-group">
+                            <span class="slot-pill">SLOT 1 &bull; 08:00 AM</span>
+                            <span class="category-pill">India National Day & Morning Focus</span>
+                            <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">HINGLISH</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-body">
+                <h3 class="slot-title">India National developments and policy updates shaping youth opportunities today</h3>
+
+                <!-- Script Section -->
+                <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
+                <div class="script-bubble" id="script-1">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: India National developments and policy updates shaping youth opportunities today — Is badlaav ka direct asar hamare aam logon ke jeevan aur future opportunities par padne wala hai!</div>
+
+                <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
+                <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">motion</span>
+                        <button class="code-copy-btn" onclick="copyFromId('vid-1', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy code</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="vid-1">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: India National developments and policy updates shaping youth opportunities today. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                </div>
+
+                <!-- YouTube Shorts / Reel Posting Section -->
+                <div class="section-title">📱 YouTube Shorts &bull; Title & Tags</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">youtube-tags</span>
+                        <button class="code-copy-btn" onclick="copyFromId('yt-1', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy tags</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="yt-1">India National developments and policy updates shaping youth opportunities today ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #IndiaUpdates #BreakingNews #Bharat</pre>
+                </div>
+
+                <!-- Action Button Row -->
+                <div class="action-buttons-row">
+                    <button class="pill-btn primary" onclick="copyFromId('script-1', this)">
+                        <span>📋</span> Copy Script
+                    </button>
+                    <button class="pill-btn secondary" onclick="copyFromId('vid-1', this)">
+                        <span>🎬</span> Copy Video Prompt
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('yt-1', this)" style="border-color: rgba(245, 158, 11, 0.4); color: #fbbf24;">
+                        <span>📱</span> Copy YouTube Tags
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('cap-1', this)">
+                        <span>📢</span> Copy Social Post
+                    </button>
+                </div>
+
+                <div style="display:none;" id="cap-1">✨ India National developments and policy updates shaping youth opportunities today
+
+Aminsa brings you today's live update on India National Day & Morning Focus.
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #specialdayorindiatop #DailyTrends #IndiaUpdates</div>
+            </div>
+        </div>
+        
+        <div class="chat-message" id="slot-card-2" data-search="india ai compute mission and next-generation tech ecosystem momentum global & indian tech & ai revolution hello everyone! i'm aminsa. today's top tech breakthrough: india ai compute mission and next-generation tech ecosystem momentum — this breakthrough is set to reshape productivity and push compute efficiency into unprecedented frontiers!">
+            <div class="message-header">
+                <div class="avatar-badge">
+                    <div class="avatar-icon">✨</div>
+                    <div class="avatar-info">
+                        <div class="avatar-name">Aminsa AI <span class="verified-icon">✓</span></div>
+                        <div class="slot-pill-group">
+                            <span class="slot-pill">SLOT 2 &bull; 10:24 AM</span>
+                            <span class="category-pill">Global & Indian Tech & AI Revolution</span>
+                            <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">ENGLISH</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-body">
+                <h3 class="slot-title">India AI compute mission and next-generation tech ecosystem momentum</h3>
+
+                <!-- Script Section -->
+                <div class="section-title">🗣️ Spoken Script (ENGLISH)</div>
+                <div class="script-bubble" id="script-2">Hello everyone! I'm Aminsa. Today's top tech breakthrough: India AI compute mission and next-generation tech ecosystem momentum — This breakthrough is set to reshape productivity and push compute efficiency into unprecedented frontiers!</div>
+
+                <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
+                <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">motion</span>
+                        <button class="code-copy-btn" onclick="copyFromId('vid-2', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy code</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="vid-2">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: India AI compute mission and next-generation tech ecosystem momentum. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                </div>
+
+                <!-- YouTube Shorts / Reel Posting Section -->
+                <div class="section-title">📱 YouTube Shorts &bull; Title & Tags</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">youtube-tags</span>
+                        <button class="code-copy-btn" onclick="copyFromId('yt-2', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy tags</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="yt-2">India AI compute mission and next-generation tech ecosystem momentum ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #AI #TechNews #ArtificialIntelligence #FutureTech</pre>
+                </div>
+
+                <!-- Action Button Row -->
+                <div class="action-buttons-row">
+                    <button class="pill-btn primary" onclick="copyFromId('script-2', this)">
+                        <span>📋</span> Copy Script
+                    </button>
+                    <button class="pill-btn secondary" onclick="copyFromId('vid-2', this)">
+                        <span>🎬</span> Copy Video Prompt
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('yt-2', this)" style="border-color: rgba(245, 158, 11, 0.4); color: #fbbf24;">
+                        <span>📱</span> Copy YouTube Tags
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('cap-2', this)">
+                        <span>📢</span> Copy Social Post
+                    </button>
+                </div>
+
+                <div style="display:none;" id="cap-2">✨ India AI compute mission and next-generation tech ecosystem momentum
+
+Aminsa brings you today's live update on Global & Indian Tech & AI Revolution.
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #techai #DailyTrends #IndiaUpdates</div>
+            </div>
+        </div>
+        
+        <div class="chat-message" id="slot-card-3" data-search="indian cricket squad intensive prep and domestic sports action cricket & sports updates hello everyone! main hoon aminsa. aaj ki sabse badi update: indian cricket squad intensive prep and domestic sports action — ground par players ka jazba aur fans ka josh dekhne layak hai — bharat ka sporting spirit har match me naye records bana raha hai!">
+            <div class="message-header">
+                <div class="avatar-badge">
+                    <div class="avatar-icon">✨</div>
+                    <div class="avatar-info">
+                        <div class="avatar-name">Aminsa AI <span class="verified-icon">✓</span></div>
+                        <div class="slot-pill-group">
+                            <span class="slot-pill">SLOT 3 &bull; 12:48 PM</span>
+                            <span class="category-pill">Cricket & Sports Updates</span>
+                            <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">HINGLISH</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-body">
+                <h3 class="slot-title">Indian cricket squad intensive prep and domestic sports action</h3>
+
+                <!-- Script Section -->
+                <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
+                <div class="script-bubble" id="script-3">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: Indian cricket squad intensive prep and domestic sports action — Ground par players ka jazba aur fans ka josh dekhne layak hai — Bharat ka sporting spirit har match me naye records bana raha hai!</div>
+
+                <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
+                <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">motion</span>
+                        <button class="code-copy-btn" onclick="copyFromId('vid-3', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy code</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="vid-3">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Indian cricket squad intensive prep and domestic sports action. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                </div>
+
+                <!-- YouTube Shorts / Reel Posting Section -->
+                <div class="section-title">📱 YouTube Shorts &bull; Title & Tags</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">youtube-tags</span>
+                        <button class="code-copy-btn" onclick="copyFromId('yt-3', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy tags</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="yt-3">Indian cricket squad intensive prep and domestic sports action ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #Cricket #TeamIndia #SportsUpdate #IPL</pre>
+                </div>
+
+                <!-- Action Button Row -->
+                <div class="action-buttons-row">
+                    <button class="pill-btn primary" onclick="copyFromId('script-3', this)">
+                        <span>📋</span> Copy Script
+                    </button>
+                    <button class="pill-btn secondary" onclick="copyFromId('vid-3', this)">
+                        <span>🎬</span> Copy Video Prompt
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('yt-3', this)" style="border-color: rgba(245, 158, 11, 0.4); color: #fbbf24;">
+                        <span>📱</span> Copy YouTube Tags
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('cap-3', this)">
+                        <span>📢</span> Copy Social Post
+                    </button>
+                </div>
+
+                <div style="display:none;" id="cap-3">✨ Indian cricket squad intensive prep and domestic sports action
+
+Aminsa brings you today's live update on Cricket & Sports Updates.
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #cricketsports #DailyTrends #IndiaUpdates</div>
+            </div>
+        </div>
+        
+        <div class="chat-message" id="slot-card-4" data-search="indian startup ecosystem and domestic market trends driving economic growth indian economy, startups & market trends hello everyone! main hoon aminsa. aaj ki sabse badi update: indian startup ecosystem and domestic market trends driving economic growth — indian economy aur domestic markets ki yeh tezi aane wale kal ke liye behad majboot sanket hai!">
+            <div class="message-header">
+                <div class="avatar-badge">
+                    <div class="avatar-icon">✨</div>
+                    <div class="avatar-info">
+                        <div class="avatar-name">Aminsa AI <span class="verified-icon">✓</span></div>
+                        <div class="slot-pill-group">
+                            <span class="slot-pill">SLOT 4 &bull; 03:12 PM</span>
+                            <span class="category-pill">Indian Economy, Startups & Market Trends</span>
+                            <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">HINGLISH</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-body">
+                <h3 class="slot-title">Indian startup ecosystem and domestic market trends driving economic growth</h3>
+
+                <!-- Script Section -->
+                <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
+                <div class="script-bubble" id="script-4">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: Indian startup ecosystem and domestic market trends driving economic growth — Indian economy aur domestic markets ki yeh tezi aane wale kal ke liye behad majboot sanket hai!</div>
+
+                <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
+                <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">motion</span>
+                        <button class="code-copy-btn" onclick="copyFromId('vid-4', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy code</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="vid-4">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Indian startup ecosystem and domestic market trends driving economic growth. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                </div>
+
+                <!-- YouTube Shorts / Reel Posting Section -->
+                <div class="section-title">📱 YouTube Shorts &bull; Title & Tags</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">youtube-tags</span>
+                        <button class="code-copy-btn" onclick="copyFromId('yt-4', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy tags</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="yt-4">Indian startup ecosystem and domestic market trends driving economic growth ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #Startups #IndianEconomy #BusinessNews #Finance</pre>
+                </div>
+
+                <!-- Action Button Row -->
+                <div class="action-buttons-row">
+                    <button class="pill-btn primary" onclick="copyFromId('script-4', this)">
+                        <span>📋</span> Copy Script
+                    </button>
+                    <button class="pill-btn secondary" onclick="copyFromId('vid-4', this)">
+                        <span>🎬</span> Copy Video Prompt
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('yt-4', this)" style="border-color: rgba(245, 158, 11, 0.4); color: #fbbf24;">
+                        <span>📱</span> Copy YouTube Tags
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('cap-4', this)">
+                        <span>📢</span> Copy Social Post
+                    </button>
+                </div>
+
+                <div style="display:none;" id="cap-4">✨ Indian startup ecosystem and domestic market trends driving economic growth
+
+Aminsa brings you today's live update on Indian Economy, Startups & Market Trends.
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #economybusiness #DailyTrends #IndiaUpdates</div>
+            </div>
+        </div>
+        
+        <div class="chat-message" id="slot-card-5" data-search="rich indian cultural traditions, crafts and regional heritage celebrated across states indian culture, art & regional heritage hello everyone! main hoon aminsa. aaj ki sabse badi update: rich indian cultural traditions, crafts and regional heritage celebrated across states — modern lifestyle ke beech apni jadon aur sanskriti se jude rehna ek behad khoobsurat anubhuti hai!">
+            <div class="message-header">
+                <div class="avatar-badge">
+                    <div class="avatar-icon">✨</div>
+                    <div class="avatar-info">
+                        <div class="avatar-name">Aminsa AI <span class="verified-icon">✓</span></div>
+                        <div class="slot-pill-group">
+                            <span class="slot-pill">SLOT 5 &bull; 05:36 PM</span>
+                            <span class="category-pill">Indian Culture, Art & Regional Heritage</span>
+                            <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">HINGLISH</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-body">
+                <h3 class="slot-title">Rich Indian cultural traditions, crafts and regional heritage celebrated across states</h3>
+
+                <!-- Script Section -->
+                <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
+                <div class="script-bubble" id="script-5">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: Rich Indian cultural traditions, crafts and regional heritage celebrated across states — Modern lifestyle ke beech apni jadon aur sanskriti se jude rehna ek behad khoobsurat anubhuti hai!</div>
+
+                <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
+                <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">motion</span>
+                        <button class="code-copy-btn" onclick="copyFromId('vid-5', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy code</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="vid-5">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Rich Indian cultural traditions, crafts and regional heritage celebrated across states. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                </div>
+
+                <!-- YouTube Shorts / Reel Posting Section -->
+                <div class="section-title">📱 YouTube Shorts &bull; Title & Tags</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">youtube-tags</span>
+                        <button class="code-copy-btn" onclick="copyFromId('yt-5', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy tags</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="yt-5">Rich Indian cultural traditions, crafts and regional heritage celebrated across states ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #IndianCulture #IncredibleIndia #Heritage #Festivals</pre>
+                </div>
+
+                <!-- Action Button Row -->
+                <div class="action-buttons-row">
+                    <button class="pill-btn primary" onclick="copyFromId('script-5', this)">
+                        <span>📋</span> Copy Script
+                    </button>
+                    <button class="pill-btn secondary" onclick="copyFromId('vid-5', this)">
+                        <span>🎬</span> Copy Video Prompt
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('yt-5', this)" style="border-color: rgba(245, 158, 11, 0.4); color: #fbbf24;">
+                        <span>📱</span> Copy YouTube Tags
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('cap-5', this)">
+                        <span>📢</span> Copy Social Post
+                    </button>
+                </div>
+
+                <div style="display:none;" id="cap-5">✨ Rich Indian cultural traditions, crafts and regional heritage celebrated across states
+
+Aminsa brings you today's live update on Indian Culture, Art & Regional Heritage.
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #cultureheritage #DailyTrends #IndiaUpdates</div>
+            </div>
+        </div>
+        
+        <div class="chat-message" id="slot-card-6" data-search="cinema and ott entertainment buzz with audience excitement and new releases bollywood, ott & entertainment trends hello everyone! main hoon aminsa. aaj ki sabse badi update: cinema and ott entertainment buzz with audience excitement and new releases — entertainment world ka yeh fresh twist har kisi ko hook kar raha hai!">
+            <div class="message-header">
+                <div class="avatar-badge">
+                    <div class="avatar-icon">✨</div>
+                    <div class="avatar-info">
+                        <div class="avatar-name">Aminsa AI <span class="verified-icon">✓</span></div>
+                        <div class="slot-pill-group">
+                            <span class="slot-pill">SLOT 6 &bull; 08:00 PM</span>
+                            <span class="category-pill">Bollywood, OTT & Entertainment Trends</span>
+                            <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">HINGLISH</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-body">
+                <h3 class="slot-title">Cinema and OTT entertainment buzz with audience excitement and new releases</h3>
+
+                <!-- Script Section -->
+                <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
+                <div class="script-bubble" id="script-6">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: Cinema and OTT entertainment buzz with audience excitement and new releases — Entertainment world ka yeh fresh twist har kisi ko hook kar raha hai!</div>
+
+                <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
+                <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">motion</span>
+                        <button class="code-copy-btn" onclick="copyFromId('vid-6', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy code</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="vid-6">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Cinema and OTT entertainment buzz with audience excitement and new releases. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                </div>
+
+                <!-- YouTube Shorts / Reel Posting Section -->
+                <div class="section-title">📱 YouTube Shorts &bull; Title & Tags</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">youtube-tags</span>
+                        <button class="code-copy-btn" onclick="copyFromId('yt-6', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy tags</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="yt-6">Cinema and OTT entertainment buzz with audience excitement and new releases ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #Bollywood #OTT #TrendingNow #Entertainment</pre>
+                </div>
+
+                <!-- Action Button Row -->
+                <div class="action-buttons-row">
+                    <button class="pill-btn primary" onclick="copyFromId('script-6', this)">
+                        <span>📋</span> Copy Script
+                    </button>
+                    <button class="pill-btn secondary" onclick="copyFromId('vid-6', this)">
+                        <span>🎬</span> Copy Video Prompt
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('yt-6', this)" style="border-color: rgba(245, 158, 11, 0.4); color: #fbbf24;">
+                        <span>📱</span> Copy YouTube Tags
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('cap-6', this)">
+                        <span>📢</span> Copy Social Post
+                    </button>
+                </div>
+
+                <div style="display:none;" id="cap-6">✨ Cinema and OTT entertainment buzz with audience excitement and new releases
+
+Aminsa brings you today's live update on Bollywood, OTT & Entertainment Trends.
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #bollywoodtrends #DailyTrends #IndiaUpdates</div>
+            </div>
+        </div>
+        
+        <div class="chat-message" id="slot-card-7" data-search="isro space missions and indigenous science innovations advancing national pride isro, space & indian innovations hello everyone! main hoon aminsa. aaj ki sabse badi update: isro space missions and indigenous science innovations advancing national pride — bhartiya scientists ka yeh indigenous achievement pure vishwa me hamara seena garv se chauda karta hai!">
+            <div class="message-header">
+                <div class="avatar-badge">
+                    <div class="avatar-icon">✨</div>
+                    <div class="avatar-info">
+                        <div class="avatar-name">Aminsa AI <span class="verified-icon">✓</span></div>
+                        <div class="slot-pill-group">
+                            <span class="slot-pill">SLOT 7 &bull; 10:24 PM</span>
+                            <span class="category-pill">ISRO, Space & Indian Innovations</span>
+                            <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">HINGLISH</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-body">
+                <h3 class="slot-title">ISRO space missions and indigenous science innovations advancing national pride</h3>
+
+                <!-- Script Section -->
+                <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
+                <div class="script-bubble" id="script-7">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: ISRO space missions and indigenous science innovations advancing national pride — Bhartiya scientists ka yeh indigenous achievement pure vishwa me hamara seena garv se chauda karta hai!</div>
+
+                <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
+                <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">motion</span>
+                        <button class="code-copy-btn" onclick="copyFromId('vid-7', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy code</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="vid-7">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: ISRO space missions and indigenous science innovations advancing national pride. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                </div>
+
+                <!-- YouTube Shorts / Reel Posting Section -->
+                <div class="section-title">📱 YouTube Shorts &bull; Title & Tags</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">youtube-tags</span>
+                        <button class="code-copy-btn" onclick="copyFromId('yt-7', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy tags</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="yt-7">ISRO space missions and indigenous science innovations advancing national pride ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #ISRO #SpaceScience #IndianInnovation #ScienceNews</pre>
+                </div>
+
+                <!-- Action Button Row -->
+                <div class="action-buttons-row">
+                    <button class="pill-btn primary" onclick="copyFromId('script-7', this)">
+                        <span>📋</span> Copy Script
+                    </button>
+                    <button class="pill-btn secondary" onclick="copyFromId('vid-7', this)">
+                        <span>🎬</span> Copy Video Prompt
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('yt-7', this)" style="border-color: rgba(245, 158, 11, 0.4); color: #fbbf24;">
+                        <span>📱</span> Copy YouTube Tags
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('cap-7', this)">
+                        <span>📢</span> Copy Social Post
+                    </button>
+                </div>
+
+                <div style="display:none;" id="cap-7">✨ ISRO space missions and indigenous science innovations advancing national pride
+
+Aminsa brings you today's live update on ISRO, Space & Indian Innovations.
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #scienceisro #DailyTrends #IndiaUpdates</div>
+            </div>
+        </div>
+        
+        <div class="chat-message" id="slot-card-8" data-search="next-generation developer frameworks and open-source breakthroughs gaining momentum future tech & developer ecosystem hello everyone! i'm aminsa. today's top tech breakthrough: next-generation developer frameworks and open-source breakthroughs gaining momentum — engineers and developers globally are watching closely as this architecture redefines intelligent workflows!">
+            <div class="message-header">
+                <div class="avatar-badge">
+                    <div class="avatar-icon">✨</div>
+                    <div class="avatar-info">
+                        <div class="avatar-name">Aminsa AI <span class="verified-icon">✓</span></div>
+                        <div class="slot-pill-group">
+                            <span class="slot-pill">SLOT 8 &bull; 12:48 AM</span>
+                            <span class="category-pill">Future Tech & Developer Ecosystem</span>
+                            <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">ENGLISH</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-body">
+                <h3 class="slot-title">Next-generation developer frameworks and open-source breakthroughs gaining momentum</h3>
+
+                <!-- Script Section -->
+                <div class="section-title">🗣️ Spoken Script (ENGLISH)</div>
+                <div class="script-bubble" id="script-8">Hello everyone! I'm Aminsa. Today's top tech breakthrough: Next-generation developer frameworks and open-source breakthroughs gaining momentum — Engineers and developers globally are watching closely as this architecture redefines intelligent workflows!</div>
+
+                <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
+                <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">motion</span>
+                        <button class="code-copy-btn" onclick="copyFromId('vid-8', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy code</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="vid-8">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Next-generation developer frameworks and open-source breakthroughs gaining momentum. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                </div>
+
+                <!-- YouTube Shorts / Reel Posting Section -->
+                <div class="section-title">📱 YouTube Shorts &bull; Title & Tags</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">youtube-tags</span>
+                        <button class="code-copy-btn" onclick="copyFromId('yt-8', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy tags</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="yt-8">Next-generation developer frameworks and open-source breakthroughs gaining momentum ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #Developer #OpenSource #Coding #SoftwareEngineering</pre>
+                </div>
+
+                <!-- Action Button Row -->
+                <div class="action-buttons-row">
+                    <button class="pill-btn primary" onclick="copyFromId('script-8', this)">
+                        <span>📋</span> Copy Script
+                    </button>
+                    <button class="pill-btn secondary" onclick="copyFromId('vid-8', this)">
+                        <span>🎬</span> Copy Video Prompt
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('yt-8', this)" style="border-color: rgba(245, 158, 11, 0.4); color: #fbbf24;">
+                        <span>📱</span> Copy YouTube Tags
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('cap-8', this)">
+                        <span>📢</span> Copy Social Post
+                    </button>
+                </div>
+
+                <div style="display:none;" id="cap-8">✨ Next-generation developer frameworks and open-source breakthroughs gaining momentum
+
+Aminsa brings you today's live update on Future Tech & Developer Ecosystem.
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #futuretech #DailyTrends #IndiaUpdates</div>
+            </div>
+        </div>
+        
+        <div class="chat-message" id="slot-card-9" data-search="india's strategic global partnerships and international diplomacy at key forums global affairs (india's lens) hello everyone! main hoon aminsa. aaj ki sabse badi update: india's strategic global partnerships and international diplomacy at key forums — duniya bhar ke developments ka asar hamare trade aur economic ties par gehra padne wala hai!">
+            <div class="message-header">
+                <div class="avatar-badge">
+                    <div class="avatar-icon">✨</div>
+                    <div class="avatar-info">
+                        <div class="avatar-name">Aminsa AI <span class="verified-icon">✓</span></div>
+                        <div class="slot-pill-group">
+                            <span class="slot-pill">SLOT 9 &bull; 03:12 AM</span>
+                            <span class="category-pill">Global Affairs (India's Lens)</span>
+                            <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">HINGLISH</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-body">
+                <h3 class="slot-title">India's strategic global partnerships and international diplomacy at key forums</h3>
+
+                <!-- Script Section -->
+                <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
+                <div class="script-bubble" id="script-9">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: India's strategic global partnerships and international diplomacy at key forums — Duniya bhar ke developments ka asar hamare trade aur economic ties par gehra padne wala hai!</div>
+
+                <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
+                <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">motion</span>
+                        <button class="code-copy-btn" onclick="copyFromId('vid-9', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy code</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="vid-9">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Indias strategic global partnerships and international diplomacy at key forums. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                </div>
+
+                <!-- YouTube Shorts / Reel Posting Section -->
+                <div class="section-title">📱 YouTube Shorts &bull; Title & Tags</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">youtube-tags</span>
+                        <button class="code-copy-btn" onclick="copyFromId('yt-9', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy tags</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="yt-9">Indias strategic global partnerships and international diplomacy at key forums ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #GlobalAffairs #Geopolitics #WorldNews #Diplomacy</pre>
+                </div>
+
+                <!-- Action Button Row -->
+                <div class="action-buttons-row">
+                    <button class="pill-btn primary" onclick="copyFromId('script-9', this)">
+                        <span>📋</span> Copy Script
+                    </button>
+                    <button class="pill-btn secondary" onclick="copyFromId('vid-9', this)">
+                        <span>🎬</span> Copy Video Prompt
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('yt-9', this)" style="border-color: rgba(245, 158, 11, 0.4); color: #fbbf24;">
+                        <span>📱</span> Copy YouTube Tags
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('cap-9', this)">
+                        <span>📢</span> Copy Social Post
+                    </button>
+                </div>
+
+                <div style="display:none;" id="cap-9">✨ India's strategic global partnerships and international diplomacy at key forums
+
+Aminsa brings you today's live update on Global Affairs (India's Lens).
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #globalaffairs #DailyTrends #IndiaUpdates</div>
+            </div>
+        </div>
+        
+        <div class="chat-message" id="slot-card-10" data-search="holistic indian wellness routines, yoga and balanced lifestyle practices for daily energy morning health, yoga & wellness hello everyone! main hoon aminsa. aaj ki sabse badi update: holistic indian wellness routines, yoga and balanced lifestyle practices for daily energy — subah ki shanti me thoda samay apne sharir aur man ke liye nikalna dinbhar active rehne ka asli secret hai!">
+            <div class="message-header">
+                <div class="avatar-badge">
+                    <div class="avatar-icon">✨</div>
+                    <div class="avatar-info">
+                        <div class="avatar-name">Aminsa AI <span class="verified-icon">✓</span></div>
+                        <div class="slot-pill-group">
+                            <span class="slot-pill">SLOT 10 &bull; 05:36 AM</span>
+                            <span class="category-pill">Morning Health, Yoga & Wellness</span>
+                            <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">HINGLISH</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-body">
+                <h3 class="slot-title">Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy</h3>
+
+                <!-- Script Section -->
+                <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
+                <div class="script-bubble" id="script-10">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy — Subah ki shanti me thoda samay apne sharir aur man ke liye nikalna dinbhar active rehne ka asli secret hai!</div>
+
+                <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
+                <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">motion</span>
+                        <button class="code-copy-btn" onclick="copyFromId('vid-10', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy code</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="vid-10">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                </div>
+
+                <!-- YouTube Shorts / Reel Posting Section -->
+                <div class="section-title">📱 YouTube Shorts &bull; Title & Tags</div>
+                <div class="code-block-container">
+                    <div class="code-block-header">
+                        <span class="code-lang">youtube-tags</span>
+                        <button class="code-copy-btn" onclick="copyFromId('yt-10', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copy tags</span>
+                        </button>
+                    </div>
+                    <pre class="code-content" id="yt-10">Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #HealthTips #YogaLife #WellnessRoutine #HealthyLiving</pre>
+                </div>
+
+                <!-- Action Button Row -->
+                <div class="action-buttons-row">
+                    <button class="pill-btn primary" onclick="copyFromId('script-10', this)">
+                        <span>📋</span> Copy Script
+                    </button>
+                    <button class="pill-btn secondary" onclick="copyFromId('vid-10', this)">
+                        <span>🎬</span> Copy Video Prompt
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('yt-10', this)" style="border-color: rgba(245, 158, 11, 0.4); color: #fbbf24;">
+                        <span>📱</span> Copy YouTube Tags
+                    </button>
+                    <button class="pill-btn tertiary" onclick="copyFromId('cap-10', this)">
+                        <span>📢</span> Copy Social Post
+                    </button>
+                </div>
+
+                <div style="display:none;" id="cap-10">✨ Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy
+
+Aminsa brings you today's live update on Morning Health, Yoga & Wellness.
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #wellnesshealth #DailyTrends #IndiaUpdates</div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- TAB 2: LIVE EXCEL GRID -->
+    <div id="tab-table" class="tab-content">
+        <div style="margin-bottom: 8px; font-size: 12px; color: var(--accent-gold); font-weight: 600;">
+            📊 MASTER EXCEL SPREADSHEET GRID (Scroll horizontally)
+        </div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Slot</th>
+                        <th>Time</th>
+                        <th>Category</th>
+                        <th>Language</th>
+                        <th>Headline / Focus</th>
+                        <th>Video Motion Prompt (&lt;300 Chars)</th>
+                        <th>YouTube Shorts Title &amp; Tags</th>
+                        <th>Social Media Caption &amp; Tags</th>
+                        <th>Wardrobe &amp; Attire</th>
+                        <th>Setting / Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td class="center bold">1</td>
+            <td class="nowrap center">08:00 AM</td>
+            <td class="cat-cell">India National Day & Morning Focus</td>
+            <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">HINGLISH</span></td>
+            <td class="title-cell">
+                <div id="table-title-1">India National developments and policy updates shaping youth opportunities today</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-title-1', this)">Copy</button>
+            </td>
+            <td class="code-cell">
+                <div id="table-vid-1">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: India National developments and policy updates shaping youth opportunities today. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-vid-1', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-yt-1" style="white-space: pre-line; font-size: 11.5px; color: #fbbf24;">India National developments and policy updates shaping youth opportunities today ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #IndiaUpdates #BreakingNews #Bharat</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-yt-1', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-cap-1" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ India National developments and policy updates shaping youth opportunities today
+
+Aminsa brings you today's live update on India National Day & Morning Focus.
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #specialdayorindiatop #DailyTrends #IndiaUpdates</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-cap-1', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-wardrobe-1" style="font-size: 11px;">Graceful ivory khadi short kurti with delicate tricolor thread border</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-1', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-loc-1" style="font-size: 11px;">Warm morning sunlight courtyard with historic Indian stone pillars softly blurred</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-loc-1', this)">Copy</button>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="center bold">2</td>
+            <td class="nowrap center">10:24 AM</td>
+            <td class="cat-cell">Global & Indian Tech & AI Revolution</td>
+            <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">ENGLISH</span></td>
+            <td class="title-cell">
+                <div id="table-title-2">India AI compute mission and next-generation tech ecosystem momentum</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-title-2', this)">Copy</button>
+            </td>
+            <td class="code-cell">
+                <div id="table-vid-2">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: India AI compute mission and next-generation tech ecosystem momentum. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-vid-2', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-yt-2" style="white-space: pre-line; font-size: 11.5px; color: #fbbf24;">India AI compute mission and next-generation tech ecosystem momentum ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #AI #TechNews #ArtificialIntelligence #FutureTech</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-yt-2', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-cap-2" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ India AI compute mission and next-generation tech ecosystem momentum
+
+Aminsa brings you today's live update on Global & Indian Tech & AI Revolution.
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #techai #DailyTrends #IndiaUpdates</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-cap-2', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-wardrobe-2" style="font-size: 11px;">Crisp modern navy-blue tailored blazer over minimalist white silk top</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-2', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-loc-2" style="font-size: 11px;">Futuristic tech lab studio with subtle blue ambient rim lighting and glass monitor</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-loc-2', this)">Copy</button>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="center bold">3</td>
+            <td class="nowrap center">12:48 PM</td>
+            <td class="cat-cell">Cricket & Sports Updates</td>
+            <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">HINGLISH</span></td>
+            <td class="title-cell">
+                <div id="table-title-3">Indian cricket squad intensive prep and domestic sports action</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-title-3', this)">Copy</button>
+            </td>
+            <td class="code-cell">
+                <div id="table-vid-3">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Indian cricket squad intensive prep and domestic sports action. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-vid-3', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-yt-3" style="white-space: pre-line; font-size: 11.5px; color: #fbbf24;">Indian cricket squad intensive prep and domestic sports action ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #Cricket #TeamIndia #SportsUpdate #IPL</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-yt-3', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-cap-3" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ Indian cricket squad intensive prep and domestic sports action
+
+Aminsa brings you today's live update on Cricket & Sports Updates.
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #cricketsports #DailyTrends #IndiaUpdates</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-cap-3', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-wardrobe-3" style="font-size: 11px;">Sporty royal blue zip-up athletic jacket with clean white accents</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-3', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-loc-3" style="font-size: 11px;">Vibrant sports broadcast studio desk with stadium illumination in backdrop</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-loc-3', this)">Copy</button>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="center bold">4</td>
+            <td class="nowrap center">03:12 PM</td>
+            <td class="cat-cell">Indian Economy, Startups & Market Trends</td>
+            <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">HINGLISH</span></td>
+            <td class="title-cell">
+                <div id="table-title-4">Indian startup ecosystem and domestic market trends driving economic growth</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-title-4', this)">Copy</button>
+            </td>
+            <td class="code-cell">
+                <div id="table-vid-4">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Indian startup ecosystem and domestic market trends driving economic growth. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-vid-4', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-yt-4" style="white-space: pre-line; font-size: 11.5px; color: #fbbf24;">Indian startup ecosystem and domestic market trends driving economic growth ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #Startups #IndianEconomy #BusinessNews #Finance</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-yt-4', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-cap-4" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ Indian startup ecosystem and domestic market trends driving economic growth
+
+Aminsa brings you today's live update on Indian Economy, Startups & Market Trends.
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #economybusiness #DailyTrends #IndiaUpdates</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-cap-4', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-wardrobe-4" style="font-size: 11px;">Elegantly tailored charcoal formal blazer over an emerald green top</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-4', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-loc-4" style="font-size: 11px;">Modern minimalist corporate glass boardroom overlooking Bengaluru skyline</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-loc-4', this)">Copy</button>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="center bold">5</td>
+            <td class="nowrap center">05:36 PM</td>
+            <td class="cat-cell">Indian Culture, Art & Regional Heritage</td>
+            <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">HINGLISH</span></td>
+            <td class="title-cell">
+                <div id="table-title-5">Rich Indian cultural traditions, crafts and regional heritage celebrated across states</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-title-5', this)">Copy</button>
+            </td>
+            <td class="code-cell">
+                <div id="table-vid-5">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Rich Indian cultural traditions, crafts and regional heritage celebrated across states. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-vid-5', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-yt-5" style="white-space: pre-line; font-size: 11.5px; color: #fbbf24;">Rich Indian cultural traditions, crafts and regional heritage celebrated across states ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #IndianCulture #IncredibleIndia #Heritage #Festivals</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-yt-5', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-cap-5" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ Rich Indian cultural traditions, crafts and regional heritage celebrated across states
+
+Aminsa brings you today's live update on Indian Culture, Art & Regional Heritage.
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #cultureheritage #DailyTrends #IndiaUpdates</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-cap-5', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-wardrobe-5" style="font-size: 11px;">Vibrant mustard-yellow embroidered chanderi kurta with silver jhumkas</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-5', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-loc-5" style="font-size: 11px;">Aesthetic Indian heritage courtyard illuminated with warm terracotta lamps</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-loc-5', this)">Copy</button>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="center bold">6</td>
+            <td class="nowrap center">08:00 PM</td>
+            <td class="cat-cell">Bollywood, OTT & Entertainment Trends</td>
+            <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">HINGLISH</span></td>
+            <td class="title-cell">
+                <div id="table-title-6">Cinema and OTT entertainment buzz with audience excitement and new releases</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-title-6', this)">Copy</button>
+            </td>
+            <td class="code-cell">
+                <div id="table-vid-6">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Cinema and OTT entertainment buzz with audience excitement and new releases. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-vid-6', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-yt-6" style="white-space: pre-line; font-size: 11.5px; color: #fbbf24;">Cinema and OTT entertainment buzz with audience excitement and new releases ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #Bollywood #OTT #TrendingNow #Entertainment</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-yt-6', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-cap-6" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ Cinema and OTT entertainment buzz with audience excitement and new releases
+
+Aminsa brings you today's live update on Bollywood, OTT & Entertainment Trends.
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #bollywoodtrends #DailyTrends #IndiaUpdates</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-cap-6', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-wardrobe-6" style="font-size: 11px;">Chic contemporary maroon satin co-ord set with minimalist gold pendant</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-6', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-loc-6" style="font-size: 11px;">Lively warm studio lounge with golden fairy lights and cinematic bokeh</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-loc-6', this)">Copy</button>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="center bold">7</td>
+            <td class="nowrap center">10:24 PM</td>
+            <td class="cat-cell">ISRO, Space & Indian Innovations</td>
+            <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">HINGLISH</span></td>
+            <td class="title-cell">
+                <div id="table-title-7">ISRO space missions and indigenous science innovations advancing national pride</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-title-7', this)">Copy</button>
+            </td>
+            <td class="code-cell">
+                <div id="table-vid-7">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: ISRO space missions and indigenous science innovations advancing national pride. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-vid-7', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-yt-7" style="white-space: pre-line; font-size: 11.5px; color: #fbbf24;">ISRO space missions and indigenous science innovations advancing national pride ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #ISRO #SpaceScience #IndianInnovation #ScienceNews</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-yt-7', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-cap-7" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ ISRO space missions and indigenous science innovations advancing national pride
+
+Aminsa brings you today's live update on ISRO, Space & Indian Innovations.
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #scienceisro #DailyTrends #IndiaUpdates</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-cap-7', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-wardrobe-7" style="font-size: 11px;">Clean metallic-accented slate grey smart blazer</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-7', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-loc-7" style="font-size: 11px;">High-tech space observatory control center with glowing telemetry screens</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-loc-7', this)">Copy</button>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="center bold">8</td>
+            <td class="nowrap center">12:48 AM</td>
+            <td class="cat-cell">Future Tech & Developer Ecosystem</td>
+            <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">ENGLISH</span></td>
+            <td class="title-cell">
+                <div id="table-title-8">Next-generation developer frameworks and open-source breakthroughs gaining momentum</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-title-8', this)">Copy</button>
+            </td>
+            <td class="code-cell">
+                <div id="table-vid-8">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Next-generation developer frameworks and open-source breakthroughs gaining momentum. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-vid-8', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-yt-8" style="white-space: pre-line; font-size: 11.5px; color: #fbbf24;">Next-generation developer frameworks and open-source breakthroughs gaining momentum ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #Developer #OpenSource #Coding #SoftwareEngineering</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-yt-8', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-cap-8" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ Next-generation developer frameworks and open-source breakthroughs gaining momentum
+
+Aminsa brings you today's live update on Future Tech & Developer Ecosystem.
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #futuretech #DailyTrends #IndiaUpdates</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-cap-8', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-wardrobe-8" style="font-size: 11px;">Dark minimalist designer hoodie with subtle neon geometric trim</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-8', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-loc-8" style="font-size: 11px;">Late-night developer workstation with dual ultra-wide curved code displays</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-loc-8', this)">Copy</button>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="center bold">9</td>
+            <td class="nowrap center">03:12 AM</td>
+            <td class="cat-cell">Global Affairs (India's Lens)</td>
+            <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">HINGLISH</span></td>
+            <td class="title-cell">
+                <div id="table-title-9">India's strategic global partnerships and international diplomacy at key forums</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-title-9', this)">Copy</button>
+            </td>
+            <td class="code-cell">
+                <div id="table-vid-9">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Indias strategic global partnerships and international diplomacy at key forums. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-vid-9', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-yt-9" style="white-space: pre-line; font-size: 11.5px; color: #fbbf24;">Indias strategic global partnerships and international diplomacy at key forums ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #GlobalAffairs #Geopolitics #WorldNews #Diplomacy</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-yt-9', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-cap-9" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ India's strategic global partnerships and international diplomacy at key forums
+
+Aminsa brings you today's live update on Global Affairs (India's Lens).
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #globalaffairs #DailyTrends #IndiaUpdates</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-cap-9', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-wardrobe-9" style="font-size: 11px;">Classic navy formal collared shirt with rolled cuffs</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-9', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-loc-9" style="font-size: 11px;">Sophisticated global news studio with backlit world map glass panel</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-loc-9', this)">Copy</button>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="center bold">10</td>
+            <td class="nowrap center">05:36 AM</td>
+            <td class="cat-cell">Morning Health, Yoga & Wellness</td>
+            <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">HINGLISH</span></td>
+            <td class="title-cell">
+                <div id="table-title-10">Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-title-10', this)">Copy</button>
+            </td>
+            <td class="code-cell">
+                <div id="table-vid-10">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-vid-10', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-yt-10" style="white-space: pre-line; font-size: 11.5px; color: #fbbf24;">Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy ✨
+
+#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels #HealthTips #YogaLife #WellnessRoutine #HealthyLiving</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-yt-10', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-cap-10" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy
+
+Aminsa brings you today's live update on Morning Health, Yoga & Wellness.
+What are your thoughts on this? Drop your perspective in the comments!
+
+#Aminsa #IndiaFirst #wellnesshealth #DailyTrends #IndiaUpdates</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-cap-10', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-wardrobe-10" style="font-size: 11px;">Pastel peach breathable cotton yoga kurta with comfortable stretch fit</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-10', this)">Copy</button>
+            </td>
+            <td class="text-cell">
+                <div id="table-loc-10" style="font-size: 11px;">Lush green outdoor botanical terrace at sunrise with golden dawn mist</div>
+                <button class="table-copy-btn" onclick="copyFromId('table-loc-10', this)">Copy</button>
+            </td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- TAB 3: DNA RULES -->
+    <div id="tab-dna" class="tab-content">
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Enforced Rule</th>
+                        <th>Verification Protocol</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td class="bold">Full Name</td>
+            <td class="val-cell">Aminsa</td>
+            <td>Locked across all social accounts (@aminsa.official)</td>
+        </tr>
+        
+        <tr>
+            <td class="bold">Age</td>
+            <td class="val-cell">22 Years Old</td>
+            <td>Strictly consistent visual and vocal maturity</td>
+        </tr>
+        
+        <tr>
+            <td class="bold">Skin Complexion</td>
+            <td class="val-cell">Warm Wheatish Porcelain (#EAD5C3)</td>
+            <td>Strictly ZERO moles, ZERO blemishes, ZERO marks</td>
+        </tr>
+        
+        <tr>
+            <td class="bold">Eye Color & Shape</td>
+            <td class="val-cell">Hazel-Brown Almond Eyes (#6B4423)</td>
+            <td>Deep, expressive, intelligent and warm</td>
+        </tr>
+        
+        <tr>
+            <td class="bold">Hair & Features</td>
+            <td class="val-cell">Lustrous wavy dark espresso hair</td>
+            <td>Naturally arched eyebrows, delicate straight nose</td>
+        </tr>
+        
+        <tr>
+            <td class="bold">Vocal Persona</td>
+            <td class="val-cell">224 Hz Vocal Pitch (hi-IN-SwaraNeural)</td>
+            <td>Warm, articulate, natural conversational speed</td>
+        </tr>
+        
+        <tr>
+            <td class="bold">Greeting Protocol</td>
+            <td class="val-cell">STRICTLY 'Hello everyone!'</td>
+            <td>Strictly ZERO 'Namaste' across all scripts</td>
+        </tr>
+        
+        <tr>
+            <td class="bold">Daily Quota</td>
+            <td class="val-cell">10 Slots / Day (Every 2.4 Hours)</td>
+            <td>YouTube Create Prompts (<300 chars) + AI Video Motion</td>
+        </tr>
+        
+        <tr>
+            <td class="bold">Content Engine</td>
+            <td class="val-cell">100% Real-Time Live News Harvester</td>
+            <td>Zero hardcoded text, multi-tier live RSS fallback pipeline</td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- FLOATING BOTTOM BAR -->
+    <div class="bottom-action-bar">
+        <button class="bottom-btn all" onclick="copyAll10Slots()">
+            <span>📋</span> Copy All 10 Slots
+        </button>
+        <button class="bottom-btn excel" onclick="switchTab('tab-table')">
+            <span>📊</span> View Excel Sheet
+        </button>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">✓ Copied to clipboard!</div>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            if (tabId === 'tab-chat') document.getElementById('btn-tab-chat').classList.add('active');
+            if (tabId === 'tab-table') document.getElementById('btn-tab-table').classList.add('active');
+            if (tabId === 'tab-dna') document.getElementById('btn-tab-dna').classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.innerText = msg;
+            t.style.display = 'block';
+            setTimeout(() => { t.style.display = 'none'; }, 2000);
+        }
+
+        function copyTextDirect(text, btn) {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => {
+                    successAnim(btn);
+                }).catch(() => fallbackCopy(text, btn));
+            } else {
+                fallbackCopy(text, btn);
+            }
+        }
+
+        function copyFromId(id, btn) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const text = el.innerText;
+            copyTextDirect(text, btn);
+        }
+
+        function successAnim(btn) {
+            if (!btn) return;
+            const orig = btn.innerHTML;
+            btn.innerHTML = "<span>✓</span> Copied!";
+            const origColor = btn.style.color;
+            btn.style.color = "#10a37f";
+            setTimeout(() => {
+                btn.innerHTML = orig;
+                btn.style.color = origColor;
+            }, 2000);
+            showToast("✓ Copied to clipboard!");
+        }
+
+        function fallbackCopy(text, btn) {
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            ta.style.position = "fixed";
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            document.body.removeChild(ta);
+            successAnim(btn);
+        }
+
+        function copyAll10Slots() {
+            let allText = "🌟 AMINSA DAILY MASTER PRODUCTION SCHEDULE\nDate: Tuesday, 17 November 2026\n\n";
+            for (let i = 1; i <= 10; i++) {
+                const s = document.getElementById("script-" + i);
+                const v = document.getElementById("vid-" + i);
+                const y = document.getElementById("yt-" + i);
+                if (s && v) {
+                    allText += `[SLOT ${i}]\nSCRIPT: ${s.innerText}\nVIDEO PROMPT: ${v.innerText}\n`;
+                    if (y) allText += `YOUTUBE SHORTS: ${y.innerText}\n`;
+                    allText += `\n`;
+                }
+            }
+            fallbackCopy(allText, event.target);
+        }
+
+        function filterCards(query) {
+            const q = query.toLowerCase().trim();
+            document.querySelectorAll('.chat-message').forEach(el => {
+                const data = el.getAttribute('data-search') || '';
+                if (!q || data.includes(q)) {
+                    el.style.display = 'block';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

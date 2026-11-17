@@ -14,6 +14,9 @@ PORT = 8765
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 SEARCH_DIRS = [
     SCRIPT_DIR,
+    "/sdcard/DCIM/Aminsa/mobile_termux_node",
+    "/sdcard/DCIM/Aminsa",
+    "/sdcard/Download",
     "/data/data/com.termux/files/home",
     "/data/data/com.termux/files/home/aminsa_mobile_ecosystem",
     "/data/data/com.termux",

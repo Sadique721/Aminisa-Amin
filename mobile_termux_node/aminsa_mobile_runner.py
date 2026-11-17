@@ -180,11 +180,13 @@ def open_excel_on_device(excel_file):
 
 def format_slot_copy_text(s):
     lang_tag = s.get("language", "hinglish").upper()
+    yt_post = s.get("yt_shorts_posting", "")
     return (
         f"[SLOT {s['slot']} | {s['time']}] {s['title']} ({lang_tag})\n"
         f"--------------------------------------------------\n"
         f"🗣️ SCRIPT:\n{s['script']}\n\n"
         f"🎬 VIDEO PROMPT:\n{s['video_prompt']}\n\n"
+        f"✨ YOUTUBE SHORTS (TITLE & TAGS):\n{yt_post}\n\n"
         f"📱 CAPTION:\n{s['caption']}\n"
     )
 

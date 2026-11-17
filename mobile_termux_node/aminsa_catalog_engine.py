@@ -57,7 +57,7 @@ def generate_master_excel(output_path: str, target_date=None) -> str:
     left_wrap = Alignment(horizontal="left", vertical="center", wrap_text=True)
 
     # Title Banner
-    ws1.merge_cells("A1:J1")
+    ws1.merge_cells("A1:K1")
     t_cell = ws1["A1"]
     t_cell.value = f"AMINSA 24/7 DYNAMIC VIDEO PRODUCTION CATALOG — {date_str.upper()}"
     t_cell.font = Font(name="Calibri", size=14, bold=True, color="FFFFFF")
@@ -73,6 +73,7 @@ def generate_master_excel(output_path: str, target_date=None) -> str:
         "Live Headline / Focus",
         "Spoken Script (Dialogue)",
         "Video Motion Prompt (YouTube Create / AI)",
+        "YouTube Shorts Title & Tags",
         "Social Media Caption & Tags",
         "Wardrobe & Attire",
         "Setting / Location"
@@ -95,6 +96,7 @@ def generate_master_excel(output_path: str, target_date=None) -> str:
             s["title"],
             s["script"],
             s["video_prompt"],
+            s.get("yt_shorts_posting", s["title"] + " #Aminsa #Shorts"),
             s["caption"],
             s.get("wardrobe", "Modern tailored chic"),
             s.get("location", "Studio")
@@ -112,7 +114,7 @@ def generate_master_excel(output_path: str, target_date=None) -> str:
         ws1.row_dimensions[row_idx].height = 80
 
     # Auto Column Widths
-    col_widths = {1: 10, 2: 15, 3: 25, 4: 12, 5: 35, 6: 45, 7: 45, 8: 35, 9: 25, 10: 25}
+    col_widths = {1: 10, 2: 15, 3: 25, 4: 12, 5: 35, 6: 45, 7: 45, 8: 40, 9: 35, 10: 25, 11: 25}
     for col_idx, w in col_widths.items():
         ws1.column_dimensions[get_column_letter(col_idx)].width = w
 

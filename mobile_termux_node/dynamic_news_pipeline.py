@@ -152,7 +152,21 @@ def fetch_live_headline(category_key: str, primary_query: str) -> str:
     if headlines:
         return headlines[0]
 
-    return "Live India breaking news and national developments unfolding today"
+    category_fallbacks = {
+        "special_day_or_india_top": "India National developments and policy updates shaping youth opportunities today",
+        "india_general": "India National developments and policy updates shaping youth opportunities today",
+        "tech_ai": "India AI compute mission and next-generation tech ecosystem momentum",
+        "cricket_sports": "Indian cricket squad intensive prep and domestic sports action",
+        "economy_business": "Indian startup ecosystem and domestic market trends driving economic growth",
+        "culture_heritage": "Rich Indian cultural traditions, crafts and regional heritage celebrated across states",
+        "bollywood_trends": "Cinema and OTT entertainment buzz with audience excitement and new releases",
+        "science_isro": "ISRO space missions and indigenous science innovations advancing national pride",
+        "future_tech": "Next-generation developer frameworks and open-source breakthroughs gaining momentum",
+        "global_affairs": "India's strategic global partnerships and international diplomacy at key forums",
+        "wellness_health": "Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy",
+        "health_wellness": "Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy"
+    }
+    return category_fallbacks.get(category_key, "Live India breaking news and national developments unfolding today")
 
 
 if __name__ == "__main__":

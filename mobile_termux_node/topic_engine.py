@@ -19,6 +19,31 @@ from config import CATEGORIES, PERSONA_NAME, GREETING
 from special_days import get_special_day_for_date
 from dynamic_news_pipeline import fetch_live_headline
 
+def make_yt_shorts_posting_text(headline: str, category_key: str) -> str:
+    """
+    Constructs the exact YouTube Shorts / Reel posting title and tags:
+    - Catchy clean headline
+    - Essential mandatory tags: #Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels
+    - Category-specific hashtags derived from video topic details.
+    """
+    clean_hl = re.sub(r'["\'\\/–—]', '', headline).strip()
+    category_tags = {
+        "special_day_or_india_top": ["#IndiaUpdates", "#BreakingNews", "#Bharat"],
+        "tech_ai": ["#AI", "#TechNews", "#ArtificialIntelligence", "#FutureTech"],
+        "cricket_sports": ["#Cricket", "#TeamIndia", "#SportsUpdate", "#IPL"],
+        "economy_business": ["#Startups", "#IndianEconomy", "#BusinessNews", "#Finance"],
+        "culture_heritage": ["#IndianCulture", "#IncredibleIndia", "#Heritage", "#Festivals"],
+        "bollywood_trends": ["#Bollywood", "#OTT", "#TrendingNow", "#Entertainment"],
+        "science_isro": ["#ISRO", "#SpaceScience", "#IndianInnovation", "#ScienceNews"],
+        "future_tech": ["#Developer", "#OpenSource", "#Coding", "#SoftwareEngineering"],
+        "global_affairs": ["#GlobalAffairs", "#Geopolitics", "#WorldNews", "#Diplomacy"],
+        "wellness_health": ["#HealthTips", "#YogaLife", "#WellnessRoutine", "#HealthyLiving"]
+    }
+    tags = category_tags.get(category_key, ["#DailyTrends", "#India", "#Trending"])
+    tags_str = "#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels " + " ".join(tags)
+    return f"{clean_hl} ✨\n\n{tags_str}"
+
+
 def make_yt_create_video_prompt(persona_name: str, look: dict, headline: str) -> str:
     """
     Pure Motion & Narrative Prompt for Image-to-Video (YouTube Create).
@@ -152,16 +177,21 @@ def generate_single_slot(slot_idx: int, target_dt=None) -> dict:
             insight = random.choice(insights_pool)
             outro = random.choice(HINGLISH_OUTROS)
 
-    # 3. CONSTRUCT SCRIPT (Strictly Adheres to Approved Rules)
-    if lang == "english":
-        script = f"{GREETING}! I'm {PERSONA_NAME}. Today's top tech breakthrough: {headline}. {insight}. {outro}"
+    # 3. CONSTRUCT SCRIPT (Strictly 1 to 2 punchy statements, natural language)
+    if is_special_day:
+        script = f"{GREETING}! Main hoon {PERSONA_NAME}. Aaj desh mana raha hai {title} — aap sabhi ko is aitihasik diwas ki shubhkaamnayein, Jai Hind!"
+    elif lang == "english":
+        script = f"{GREETING}! I'm {PERSONA_NAME}. Today's top tech breakthrough: {headline} — {insight}!"
     else:
-        script = f"{GREETING}! Main hoon {PERSONA_NAME}. Aaj ki sabse badi khabar: {headline}. {insight}. {outro}"
+        script = f"{GREETING}! Main hoon {PERSONA_NAME}. Aaj ki sabse badi update: {headline} — {insight}!"
 
     # 4. CONSTRUCT YOUTUBE CREATE VIDEO MOTION PROMPT ONLY (Strictly 260-295 chars)
     video_prompt = make_yt_create_video_prompt(PERSONA_NAME, look, headline)
 
-    # 5. SOCIAL MEDIA CAPTION
+    # 5. CONSTRUCT YOUTUBE SHORTS REEL POSTING (Title, Details & Hashtags)
+    yt_shorts_posting = make_yt_shorts_posting_text(headline, category_key)
+
+    # 6. SOCIAL MEDIA CAPTION
     caption = (
         f"✨ {headline}\n\n"
         f"Aminsa brings you today's live update on {cat_name}.\n"
@@ -180,6 +210,7 @@ def generate_single_slot(slot_idx: int, target_dt=None) -> dict:
         "headline": headline,
         "script": script,
         "video_prompt": video_prompt,
+        "yt_shorts_posting": yt_shorts_posting,
         "caption": caption,
         "fb_description": caption,
         "wardrobe": look["attire"],
