@@ -73,7 +73,7 @@ def generate_master_excel(output_path: str, target_date=None) -> str:
         "Live Headline / Focus",
         "Spoken Script (Dialogue)",
         "Video Motion Prompt (YouTube Create / AI)",
-        "YouTube Shorts Title & Tags",
+        "YouTube Shorts Title (<100 Chars)",
         "Social Media Caption & Tags",
         "Wardrobe & Attire",
         "Setting / Location"

@@ -31,7 +31,7 @@ def build_chatgpt_html(date_str, mobile_slots, dna_rows=None):
         slot_title = s["title"]
         script_txt = s["script"]
         vid_txt = s.get("video_prompt", "")
-        yt_post_txt = s.get("yt_shorts_posting", f"{slot_title} ✨\n\n#Aminsa #AminsaAmin #Shorts #YouTubeShorts")
+        yt_post_txt = s.get("yt_shorts_posting", f"{slot_title[:65]} #Aminsa #Shorts")
         fb_txt = s.get("fb_description", s.get("caption", ""))
         wardrobe_txt = s.get("wardrobe", "Modern tailored chic")
         location_txt = s.get("location", "Studio")
@@ -73,14 +73,14 @@ def build_chatgpt_html(date_str, mobile_slots, dna_rows=None):
                     <pre class="code-content" id="vid-{slot_num}">{vid_txt}</pre>
                 </div>
 
-                <!-- YouTube Shorts / Reel Posting Section -->
-                <div class="section-title">📱 YouTube Shorts &bull; Title & Tags</div>
+                <!-- YouTube Shorts / Reel Posting Section (Strictly <100 Chars) -->
+                <div class="section-title">📱 YouTube Shorts &bull; Title (&lt;100 Chars)</div>
                 <div class="code-block-container">
                     <div class="code-block-header">
-                        <span class="code-lang">youtube-tags</span>
+                        <span class="code-lang">youtube-title-under-100c</span>
                         <button class="code-copy-btn" onclick="copyFromId('yt-{slot_num}', this)">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                            <span>Copy tags</span>
+                            <span>Copy Title</span>
                         </button>
                     </div>
                     <pre class="code-content" id="yt-{slot_num}">{yt_post_txt}</pre>
@@ -123,7 +123,7 @@ def build_chatgpt_html(date_str, mobile_slots, dna_rows=None):
                 <button class="table-copy-btn" onclick="copyFromId('table-vid-{slot_num}', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-yt-{slot_num}" style="white-space: pre-line; font-size: 11.5px; color: #fbbf24;">{yt_post_txt}</div>
+                <div id="table-yt-{slot_num}" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">{yt_post_txt}</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-yt-{slot_num}', this)">Copy</button>
             </td>
             <td class="text-cell">
@@ -694,7 +694,7 @@ def build_chatgpt_html(date_str, mobile_slots, dna_rows=None):
                         <th>Language</th>
                         <th>Headline / Focus</th>
                         <th>Video Motion Prompt (&lt;300 Chars)</th>
-                        <th>YouTube Shorts Title &amp; Tags</th>
+                        <th>YouTube Shorts Title (&lt;100 Chars)</th>
                         <th>Social Media Caption &amp; Tags</th>
                         <th>Wardrobe &amp; Attire</th>
                         <th>Setting / Location</th>

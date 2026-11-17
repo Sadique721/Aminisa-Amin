@@ -21,27 +21,48 @@ from dynamic_news_pipeline import fetch_live_headline
 
 def make_yt_shorts_posting_text(headline: str, category_key: str) -> str:
     """
-    Constructs the exact YouTube Shorts / Reel posting title and tags:
-    - Catchy clean headline
-    - Essential mandatory tags: #Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels
-    - Category-specific hashtags derived from video topic details.
+    Constructs YouTube Shorts Title strictly <= 100 characters (Hard YouTube Limit: 100 chars).
+    Guarantees 0% overflow on YouTube mobile 'Add details' screen (Target: 80-95 chars).
+    Structure: [Clean Headline] #Aminsa #Shorts [#Tag]
     """
-    clean_hl = re.sub(r'["\'\\/–—]', '', headline).strip()
-    category_tags = {
-        "special_day_or_india_top": ["#IndiaUpdates", "#BreakingNews", "#Bharat"],
-        "tech_ai": ["#AI", "#TechNews", "#ArtificialIntelligence", "#FutureTech"],
-        "cricket_sports": ["#Cricket", "#TeamIndia", "#SportsUpdate", "#IPL"],
-        "economy_business": ["#Startups", "#IndianEconomy", "#BusinessNews", "#Finance"],
-        "culture_heritage": ["#IndianCulture", "#IncredibleIndia", "#Heritage", "#Festivals"],
-        "bollywood_trends": ["#Bollywood", "#OTT", "#TrendingNow", "#Entertainment"],
-        "science_isro": ["#ISRO", "#SpaceScience", "#IndianInnovation", "#ScienceNews"],
-        "future_tech": ["#Developer", "#OpenSource", "#Coding", "#SoftwareEngineering"],
-        "global_affairs": ["#GlobalAffairs", "#Geopolitics", "#WorldNews", "#Diplomacy"],
-        "wellness_health": ["#HealthTips", "#YogaLife", "#WellnessRoutine", "#HealthyLiving"]
+    clean_hl = re.sub(r'[\r\n"\'\\/–—]', ' ', headline)
+    clean_hl = re.sub(r'\s+', ' ', clean_hl).strip()
+
+    domain_tags = {
+        "special_day_or_india_top": "#India",
+        "tech_ai": "#AI",
+        "cricket_sports": "#Cricket",
+        "economy_business": "#Startups",
+        "culture_heritage": "#Culture",
+        "bollywood_trends": "#Bollywood",
+        "science_isro": "#ISRO",
+        "future_tech": "#Tech",
+        "global_affairs": "#Geopolitics",
+        "wellness_health": "#Yoga"
     }
-    tags = category_tags.get(category_key, ["#DailyTrends", "#India", "#Trending"])
-    tags_str = "#Aminsa #AminsaAmin #Shorts #YouTubeShorts #Reels " + " ".join(tags)
-    return f"{clean_hl} ✨\n\n{tags_str}"
+    dom_tag = domain_tags.get(category_key, "#Daily")
+    tags_suffix = f"#Aminsa #Shorts {dom_tag}"
+    
+    # Target maximum 95 chars (safe 5-char margin below YouTube's 100-char limit)
+    max_hl_budget = 95 - len(tags_suffix) - 1
+
+    if len(clean_hl) > max_hl_budget:
+        trimmed = clean_hl[:max_hl_budget]
+        words = trimmed.rsplit(' ', 1)
+        if len(words) > 1 and len(words[0]) >= 15:
+            clean_hl = words[0].rstrip(':,.- ')
+        else:
+            clean_hl = trimmed.rstrip(':,.- ')
+
+    result = f"{clean_hl} {tags_suffix}".strip()
+
+    # Absolute hard ceiling <= 98 chars
+    if len(result) > 100:
+        excess = len(result) - 96
+        clean_hl = clean_hl[:-excess].rsplit(' ', 1)[0].rstrip(':,.- ')
+        result = f"{clean_hl} {tags_suffix}".strip()
+
+    return result
 
 
 def make_yt_create_video_prompt(persona_name: str, look: dict, headline: str) -> str:
