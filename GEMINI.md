@@ -19,3 +19,4 @@
 >        - Pulls: ALWAYS pull latest from `amin-keyanna`.
 >        - Commits & Pushes: STRICT 2-STEP CONFIRMATION MANDATORY. NEVER commit or push without explicit user review & approval!
 >    - Under NO circumstance should company code (KTPL) be pushed to Sadique721, or personal code pushed to amin-keyanna/Bitbucket.
+> 5. MANDATORY GOOGLE GEMINI NATIVE IMAGE GENERATION PROTOCOL: For all image generations, character visual assets, multi-angle reference guides, portraits, and thumbnails across all locations and workflows, ALWAYS use Google Gemini native image generator (via `image-generator` subagent/API). NEVER use Python/OpenCV geometric drawing, OpenCV filters, or artificial drawing (like `cv2.circle`) to modify eyes, skin, or facial features.
