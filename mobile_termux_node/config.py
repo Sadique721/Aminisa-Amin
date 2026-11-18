@@ -53,6 +53,16 @@ PACKAGES = {
     "facebook": "com.facebook.katana",
 }
 
+# YouTube Create UI Touch Coordinates (OPPO A78 5G 720x1612)
+YT_CREATE_COORDS = {
+    "generate_video_btn": (387, 669),
+    "generate_image_btn": (537, 669),
+    "edit_with_ai_btn": (238, 669),
+    "prompt_input": (360, 500),
+    "generate_submit_btn": (643, 906),
+    "close_back_btn": (47, 105),
+}
+
 # Persona & Voice Settings
 PERSONA_NAME = "Aminsa"
 VOICE_NAME = "hi-IN-SwaraNeural"

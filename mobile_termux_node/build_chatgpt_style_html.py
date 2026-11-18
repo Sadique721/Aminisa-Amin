@@ -226,6 +226,26 @@ def build_chatgpt_html(date_str, mobile_slots, dna_rows=None):
             color: var(--text-main);
         }}
 
+        .refresh-pill {{
+            background: rgba(16, 163, 127, 0.2);
+            border: 1px solid rgba(16, 163, 127, 0.4);
+            color: #6ee7b7;
+            padding: 4px 10px;
+            border-radius: 14px;
+            font-size: 11px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.15s;
+        }}
+
+        .refresh-pill:active {{
+            transform: scale(0.95);
+            background: rgba(16, 163, 127, 0.4);
+        }}
+
         .status-dot {{
             width: 8px;
             height: 8px;
@@ -661,8 +681,13 @@ def build_chatgpt_html(date_str, mobile_slots, dna_rows=None):
             </div>
             <span class="date-pill">{date_str}</span>
         </div>
-        <div style="font-size: 11.5px; color: var(--accent-cyan); font-weight: 600;">
-            10 Slots &bull; 2.4h Loop
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <a href="/refresh" class="refresh-pill" onclick="this.innerHTML='&#x23F3; Harvesting...';">
+                <span>&#x1F504;</span> Refresh Live
+            </a>
+            <div style="font-size: 11px; color: var(--accent-cyan); font-weight: 600;">
+                10 Slots &bull; 2.4h Loop
+            </div>
         </div>
     </div>
 

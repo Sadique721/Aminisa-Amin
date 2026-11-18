@@ -7,9 +7,9 @@ Strict Rules:
 1. 100% Real-Time Live Multi-Tier RSS (Zero Hardcoded Text / Fallback).
 2. Date-Aware Special Days (Republic Day, Teachers' Day, etc. if on date, else Live Top News).
 3. Tech in English ("Hello everyone! I'm Aminsa. Today's top tech breakthrough: ...").
-4. India/Others in Hinglish ("Hello everyone! Main hoon Aminsa. Aaj ki sabse badi khabar: ...").
-5. Dynamic fresh closing/outro on every single slot.
-6. Video Prompts ONLY (Zero Image Prompts).
+4. India/Others in Hinglish ("Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: ...").
+5. Dynamic 7-Day Rotating Wardrobe & Contextual Setting Matrix.
+6. Video Prompts ONLY (YouTube Create <300 chars, YouTube Shorts Title <100 chars).
 """
 
 import random
@@ -18,6 +18,7 @@ from datetime import datetime
 from config import CATEGORIES, PERSONA_NAME, GREETING
 from special_days import get_special_day_for_date
 from dynamic_news_pipeline import fetch_live_headline
+from wardrobe_engine import get_dynamic_wardrobe_and_setting
 
 def make_yt_shorts_posting_text(headline: str, category_key: str) -> str:
     """
@@ -88,12 +89,21 @@ def make_yt_create_video_prompt(persona_name: str, look: dict, headline: str) ->
 
     return f"{prefix} {clean_hl}. {suffix}"
 
-# Dynamic Insights and Fresh Outro Variations (Zero Static Monotony)
+
+# Extensive Dynamic Tech & AI Insights (English) — Zero Repetition
 ENG_INSIGHTS = [
     "This breakthrough is set to reshape productivity and push compute efficiency into unprecedented frontiers",
     "Engineers and developers globally are watching closely as this architecture redefines intelligent workflows",
     "The rapid convergence of software systems and intelligent models here marks a pivotal technological leap",
-    "This development brings massive scalability and fundamentally optimizes modern developer tooling"
+    "This development brings massive scalability and fundamentally optimizes modern developer tooling",
+    "The speed of execution here demonstrates how rapidly autonomous architectures are advancing this year",
+    "Industry leaders believe this infrastructure shift will set new benchmarks across global tech ecosystems",
+    "From hardware acceleration to seamless inference, this marks an exciting new chapter for innovation",
+    "This milestone provides open-source developers with unmatched flexibility to build scalable solutions",
+    "The technical benchmarks achieved here highlight the true potential of next-generation distributed systems",
+    "This paradigm shift allows engineering teams to optimize performance while drastically lowering runtime costs",
+    "A remarkable leap forward that bridges algorithmic intelligence with real-world developer applications",
+    "This architecture establishes a powerful foundation for the next decade of intelligent automation"
 ]
 
 ENG_OUTROS = [
@@ -103,51 +113,75 @@ ENG_OUTROS = [
     "Exciting times ahead for tech enthusiasts! Tell me your take on this and don't forget to follow for daily tech insights."
 ]
 
+# Rich Natural Conversational Hinglish Insights (Zero Shuddh Hindi / Zero Static Monotony)
 HINGLISH_INSIGHTS = {
     "special_day": [
         "Yeh din hum sabhi ko hamari aazadi, balidan aur rashtriya garima ki yaad dilata hai",
         "Hamari sanskriti aur aadarshon ka yeh utsav har Bhartiya ke dil me nayi urja bharta hai",
-        "Desh ke nirmataon ke sapnon ko aage badhane ka yeh ek pavitra sankalp hai"
+        "Desh ke nirmataon ke sapnon ko aage badhane ka yeh ek pavitra sankalp hai",
+        "Bharat ke har nagrik ke liye yeh garv aur rashtriya ekta ka ek behad khaas mauka hai"
     ],
     "cricket_sports": [
         "Ground par players ka jazba aur fans ka josh dekhne layak hai — Bharat ka sporting spirit har match me naye records bana raha hai",
         "Match ki strategy aur intensity ne har sports lover ko seat ke kinare par la khada kiya hai",
-        "Youth athletes ka yeh dedication saabit karta hai ki Bharat ab world sports me naye heights touch kar raha hai"
+        "Youth athletes ka yeh dedication saabit karta hai ki Bharat ab world sports me naye heights touch kar raha hai",
+        "Team ka solid coordination aur tactical moves aane wale bade tournaments ke liye behad positive sign hai",
+        "Players ka yeh fearless mindset aur fitness level Indian sports ke golden era ki shuruat ko darshata hai",
+        "Fans ka zabardast support aur stadium ka electrifying atmosphere game ko ek alag hi level par le jata hai",
+        "Critical moments par aisi clutch performance hi aage chalkar champions banati hai"
     ],
     "economy_business": [
         "Desh ke yuva entrepreneurs aur startup founders naye innovation ke sath market me danka baja rahe hain",
         "Indian economy aur domestic markets ki yeh tezi aane wale kal ke liye behad majboot sanket hai",
-        "Local business aur consumer demand ka yeh surge ground reality ko completely transform kar raha hai"
+        "Local business aur consumer demand ka yeh surge ground reality ko completely transform kar raha hai",
+        "Digital adoption aur innovative business models ab tier-2 aur tier-3 cities me bhi tezi se expand ho rahe hain",
+        "Global investors ka Indian market par yeh bharosa hamari economic growth story ko naye pankh de raha hai",
+        "Young founders ka execution speed aur problem-solving approach pure ecosystem ko inspire karta hai",
+        "Manufacturing se lekar modern services tak, har sector me yeh tezi naye employment opportunities create kar rahi hai"
     ],
     "culture_heritage": [
         "Hamari paramparayein aur aitihasik dharohar hamari sabse badi pehchan hain jise sanjo kar rakhna zaroori hai",
         "Desh ke kone-kone me bikhri kala aur vibrant festivals me ek anokha aakarshan aur apnapan hai",
-        "Modern lifestyle ke beech apni jadon aur sanskriti se jude rehna ek behad khoobsurat anubhuti hai"
+        "Modern lifestyle ke beech apni jadon aur sanskriti se jude rehna ek behad khoobsurat anubhuti hai",
+        "Hamare traditional artisans aur handloom weavers ka yeh hunar duniya bhar me Bharat ka naam roshan kar raha hai",
+        "Aitihasik dharohar aur local crafts ko modern generation jis tarah apna rahi hai wo waqai dil ko chhu lene wala hai",
+        "Har tyohar aur sanskritik dharohar hamare samaj ko apas me jodne ka sabse majboot dhaga hai"
     ],
     "bollywood_trends": [
         "Social media par is viral trend aur nayi release ko lekar fans ka craze lagatar badhta ja raha hai",
         "Audience ab unique content aur genuine storytelling ko sabse zyada support de rahi hai",
-        "Entertainment world ka yeh fresh twist har kisi ko hook kar raha hai"
+        "Entertainment world ka yeh fresh twist har kisi ko hook kar raha hai",
+        "Creative cinematography aur gripping background score is project ko audience ka all-time favorite bana raha hai",
+        "Performances ki depth aur natural screen presence har viewer ke dil ko seedha touch kar rahi hai",
+        "Box office numbers ke sath-sath viewers ka emotional connect is project ko sabse bada hit bana raha hai"
     ],
     "science_isro": [
         "Bhartiya scientists ka yeh indigenous achievement pure vishwa me hamara seena garv se chauda karta hai",
         "Vigyan aur research me Bharat ka yeh badam aane wali generation ko nayi disha dikhayega",
-        "Indigenous technology aur space exploration me hamari aatmanirbharta ka yeh shandar prateek hai"
+        "Indigenous technology aur space exploration me hamari aatmanirbharta ka yeh shandar prateek hai",
+        "Complex engineering challenges ko low-cost aur high-precision ke sath solve karna ISRO ki sabse badi pehchan hai",
+        "Antariksh vigyan me hamare naye experiments Bharat ko world science ke leading league me stand karate hain",
+        "Desh ke research institutions aur young scientists ka yeh commitment sach me lajawab hai"
     ],
     "global_affairs": [
         "Global stage par Bharat ki strategic position aur impactful aawaz ko aaj poori duniya dhyan se sun rahi hai",
         "International diplomacy me yeh badlaav aane wale samay me global dynamics ko shape karega",
-        "Duniya bhar ke developments ka asar hamare trade aur economic ties par gehra padne wala hai"
+        "Duniya bhar ke developments ka asar hamare trade aur economic ties par gehra padne wala hai",
+        "Multilateral forums par hamari clear stance aur cooperative diplomacy hamari foreign policy ki badi jeet hai",
+        "Geopolitical balance banate huye national interests ko prioritize karna Bharat ki strong diplomacy ka sabut hai"
     ],
     "wellness_health": [
         "Subah ki shanti me thoda samay apne sharir aur man ke liye nikalna dinbhar active rehne ka asli secret hai",
         "Desi lifestyle aur ancient Indian health wisdom modern busy life me sukoon pane ka best tareeqa hai",
-        "Balanced routine aur holistic health se hi hum har challenge ko confidently face kar sakte hain"
+        "Balanced routine aur holistic health se hi hum har challenge ko confidently face kar sakte hain",
+        "Mindful breathing aur natural diet ka simple combination stress ko door rakhne ka sabse powerful tool hai",
+        "Physical fitness ke sath-sath mental peace par dhyan dena hi asli wellness hai"
     ],
     "default": [
         "Yeh development saabit karta hai ki ground level par hamara desh kitni tezi se progress kar raha hai",
         "Is badlaav ka direct asar hamare aam logon ke jeevan aur future opportunities par padne wala hai",
-        "Aane wale samay me iska positive outcome dekhne layak hoga"
+        "Aane wale samay me iska positive outcome dekhne layak hoga",
+        "Desh ke vikas me aisi positive updates har kisi ko aage badhne ki nayi prerna deti hain"
     ]
 }
 
@@ -170,7 +204,9 @@ def generate_single_slot(slot_idx: int, target_dt=None) -> dict:
     category_key = slot_meta["category"]
     cat_name = slot_meta["name"]
     lang = slot_meta["language"]
-    look = slot_meta["look"]
+
+    # Dynamic 7-Day Wardrobe & Setting (Rotates with Day of Week and Category)
+    look = get_dynamic_wardrobe_and_setting(category_key, target_dt)
 
     # 1. SPECIAL DAY CHECK FOR SLOT 1
     is_special_day = False
@@ -209,7 +245,7 @@ def generate_single_slot(slot_idx: int, target_dt=None) -> dict:
     # 4. CONSTRUCT YOUTUBE CREATE VIDEO MOTION PROMPT ONLY (Strictly 260-295 chars)
     video_prompt = make_yt_create_video_prompt(PERSONA_NAME, look, headline)
 
-    # 5. CONSTRUCT YOUTUBE SHORTS REEL POSTING (Title, Details & Hashtags)
+    # 5. CONSTRUCT YOUTUBE SHORTS REEL POSTING (Strictly <= 100 chars)
     yt_shorts_posting = make_yt_shorts_posting_text(headline, category_key)
 
     # 6. SOCIAL MEDIA CAPTION
@@ -264,18 +300,3 @@ def get_slot_topic_and_prompts(slot_index: int) -> dict:
         "hair": "Sleek styled"
     }
     return data
-
-
-if __name__ == "__main__":
-    print("Generating Slot 1 and Slot 2 Preview:")
-    s1 = generate_single_slot(0)
-    print("SLOT 1 (India Focus):")
-    print(f"Title : {s1['title']}")
-    print(f"Script: {s1['script']}\n")
-    print(f"Video Prompt:\n{s1['video_prompt']}\n")
-
-    s2 = generate_single_slot(1)
-    print("SLOT 2 (Tech AI Focus - English):")
-    print(f"Title : {s2['title']}")
-    print(f"Script: {s2['script']}\n")
-    print(f"Video Prompt:\n{s2['video_prompt']}\n")

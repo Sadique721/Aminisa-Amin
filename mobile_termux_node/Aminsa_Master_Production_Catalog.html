@@ -72,6 +72,26 @@
             color: var(--text-main);
         }
 
+        .refresh-pill {
+            background: rgba(16, 163, 127, 0.2);
+            border: 1px solid rgba(16, 163, 127, 0.4);
+            color: #6ee7b7;
+            padding: 4px 10px;
+            border-radius: 14px;
+            font-size: 11px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.15s;
+        }
+
+        .refresh-pill:active {
+            transform: scale(0.95);
+            background: rgba(16, 163, 127, 0.4);
+        }
+
         .status-dot {
             width: 8px;
             height: 8px;
@@ -505,10 +525,15 @@
                 <span class="status-dot"></span>
                 <span>Aminsa 4o</span>
             </div>
-            <span class="date-pill">Tuesday, 17 November 2026</span>
+            <span class="date-pill">Wednesday, 18 November 2026</span>
         </div>
-        <div style="font-size: 11.5px; color: var(--accent-cyan); font-weight: 600;">
-            10 Slots &bull; 2.4h Loop
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <a href="/refresh" class="refresh-pill" onclick="this.innerHTML='&#x23F3; Harvesting...';">
+                <span>&#x1F504;</span> Refresh Live
+            </a>
+            <div style="font-size: 11px; color: var(--accent-cyan); font-weight: 600;">
+                10 Slots &bull; 2.4h Loop
+            </div>
         </div>
     </div>
 
@@ -523,7 +548,7 @@
     <div id="tab-chat" class="tab-content active">
         <input type="text" class="search-box" placeholder="🔍 Search topics, scripts, keywords..." oninput="filterCards(this.value)">
         
-        <div class="chat-message" id="slot-card-1" data-search="india national developments and policy updates shaping youth opportunities today india national day & morning focus hello everyone! main hoon aminsa. aaj ki sabse badi update: india national developments and policy updates shaping youth opportunities today — aane wale samay me iska positive outcome dekhne layak hoga!">
+        <div class="chat-message" id="slot-card-1" data-search="india national developments and policy updates shaping youth opportunities today india national day & morning focus hello everyone! main hoon aminsa. aaj ki sabse badi update: india national developments and policy updates shaping youth opportunities today — yeh development saabit karta hai ki ground level par hamara desh kitni tezi se progress kar raha hai!">
             <div class="message-header">
                 <div class="avatar-badge">
                     <div class="avatar-icon">✨</div>
@@ -543,7 +568,7 @@
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
-                <div class="script-bubble" id="script-1">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: India National developments and policy updates shaping youth opportunities today — Aane wale samay me iska positive outcome dekhne layak hoga!</div>
+                <div class="script-bubble" id="script-1">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: India National developments and policy updates shaping youth opportunities today — Yeh development saabit karta hai ki ground level par hamara desh kitni tezi se progress kar raha hai!</div>
 
                 <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
                 <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
@@ -596,7 +621,7 @@ What are your thoughts on this? Drop your perspective in the comments!
             </div>
         </div>
         
-        <div class="chat-message" id="slot-card-2" data-search="india ai compute mission and next-generation tech ecosystem momentum global & indian tech & ai revolution hello everyone! i'm aminsa. today's top tech breakthrough: india ai compute mission and next-generation tech ecosystem momentum — this development brings massive scalability and fundamentally optimizes modern developer tooling!">
+        <div class="chat-message" id="slot-card-2" data-search="india ai compute mission and next-generation tech ecosystem momentum global & indian tech & ai revolution hello everyone! i'm aminsa. today's top tech breakthrough: india ai compute mission and next-generation tech ecosystem momentum — from hardware acceleration to seamless inference, this marks an exciting new chapter for innovation!">
             <div class="message-header">
                 <div class="avatar-badge">
                     <div class="avatar-icon">✨</div>
@@ -616,7 +641,7 @@ What are your thoughts on this? Drop your perspective in the comments!
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script (ENGLISH)</div>
-                <div class="script-bubble" id="script-2">Hello everyone! I'm Aminsa. Today's top tech breakthrough: India AI compute mission and next-generation tech ecosystem momentum — This development brings massive scalability and fundamentally optimizes modern developer tooling!</div>
+                <div class="script-bubble" id="script-2">Hello everyone! I'm Aminsa. Today's top tech breakthrough: India AI compute mission and next-generation tech ecosystem momentum — From hardware acceleration to seamless inference, this marks an exciting new chapter for innovation!</div>
 
                 <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
                 <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
@@ -669,7 +694,7 @@ What are your thoughts on this? Drop your perspective in the comments!
             </div>
         </div>
         
-        <div class="chat-message" id="slot-card-3" data-search="indian cricket squad intensive prep and domestic sports action cricket & sports updates hello everyone! main hoon aminsa. aaj ki sabse badi update: indian cricket squad intensive prep and domestic sports action — match ki strategy aur intensity ne har sports lover ko seat ke kinare par la khada kiya hai!">
+        <div class="chat-message" id="slot-card-3" data-search="indian cricket squad intensive prep and domestic sports action cricket & sports updates hello everyone! main hoon aminsa. aaj ki sabse badi update: indian cricket squad intensive prep and domestic sports action — fans ka zabardast support aur stadium ka electrifying atmosphere game ko ek alag hi level par le jata hai!">
             <div class="message-header">
                 <div class="avatar-badge">
                     <div class="avatar-icon">✨</div>
@@ -689,7 +714,7 @@ What are your thoughts on this? Drop your perspective in the comments!
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
-                <div class="script-bubble" id="script-3">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: Indian cricket squad intensive prep and domestic sports action — Match ki strategy aur intensity ne har sports lover ko seat ke kinare par la khada kiya hai!</div>
+                <div class="script-bubble" id="script-3">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: Indian cricket squad intensive prep and domestic sports action — Fans ka zabardast support aur stadium ka electrifying atmosphere game ko ek alag hi level par le jata hai!</div>
 
                 <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
                 <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
@@ -742,7 +767,7 @@ What are your thoughts on this? Drop your perspective in the comments!
             </div>
         </div>
         
-        <div class="chat-message" id="slot-card-4" data-search="indian startup ecosystem and domestic market trends driving economic growth indian economy, startups & market trends hello everyone! main hoon aminsa. aaj ki sabse badi update: indian startup ecosystem and domestic market trends driving economic growth — desh ke yuva entrepreneurs aur startup founders naye innovation ke sath market me danka baja rahe hain!">
+        <div class="chat-message" id="slot-card-4" data-search="indian startup ecosystem and domestic market trends driving economic growth indian economy, startups & market trends hello everyone! main hoon aminsa. aaj ki sabse badi update: indian startup ecosystem and domestic market trends driving economic growth — local business aur consumer demand ka yeh surge ground reality ko completely transform kar raha hai!">
             <div class="message-header">
                 <div class="avatar-badge">
                     <div class="avatar-icon">✨</div>
@@ -762,7 +787,7 @@ What are your thoughts on this? Drop your perspective in the comments!
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
-                <div class="script-bubble" id="script-4">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: Indian startup ecosystem and domestic market trends driving economic growth — Desh ke yuva entrepreneurs aur startup founders naye innovation ke sath market me danka baja rahe hain!</div>
+                <div class="script-bubble" id="script-4">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: Indian startup ecosystem and domestic market trends driving economic growth — Local business aur consumer demand ka yeh surge ground reality ko completely transform kar raha hai!</div>
 
                 <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
                 <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
@@ -815,7 +840,7 @@ What are your thoughts on this? Drop your perspective in the comments!
             </div>
         </div>
         
-        <div class="chat-message" id="slot-card-5" data-search="rich indian cultural traditions, crafts and regional heritage celebrated across states indian culture, art & regional heritage hello everyone! main hoon aminsa. aaj ki sabse badi update: rich indian cultural traditions, crafts and regional heritage celebrated across states — hamari paramparayein aur aitihasik dharohar hamari sabse badi pehchan hain jise sanjo kar rakhna zaroori hai!">
+        <div class="chat-message" id="slot-card-5" data-search="rich indian cultural traditions, crafts and regional heritage celebrated across states indian culture, art & regional heritage hello everyone! main hoon aminsa. aaj ki sabse badi update: rich indian cultural traditions, crafts and regional heritage celebrated across states — desh ke kone-kone me bikhri kala aur vibrant festivals me ek anokha aakarshan aur apnapan hai!">
             <div class="message-header">
                 <div class="avatar-badge">
                     <div class="avatar-icon">✨</div>
@@ -835,7 +860,7 @@ What are your thoughts on this? Drop your perspective in the comments!
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
-                <div class="script-bubble" id="script-5">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: Rich Indian cultural traditions, crafts and regional heritage celebrated across states — Hamari paramparayein aur aitihasik dharohar hamari sabse badi pehchan hain jise sanjo kar rakhna zaroori hai!</div>
+                <div class="script-bubble" id="script-5">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: Rich Indian cultural traditions, crafts and regional heritage celebrated across states — Desh ke kone-kone me bikhri kala aur vibrant festivals me ek anokha aakarshan aur apnapan hai!</div>
 
                 <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
                 <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
@@ -961,7 +986,7 @@ What are your thoughts on this? Drop your perspective in the comments!
             </div>
         </div>
         
-        <div class="chat-message" id="slot-card-7" data-search="isro space missions and indigenous science innovations advancing national pride isro, space & indian innovations hello everyone! main hoon aminsa. aaj ki sabse badi update: isro space missions and indigenous science innovations advancing national pride — vigyan aur research me bharat ka yeh badam aane wali generation ko nayi disha dikhayega!">
+        <div class="chat-message" id="slot-card-7" data-search="isro space missions and indigenous science innovations advancing national pride isro, space & indian innovations hello everyone! main hoon aminsa. aaj ki sabse badi update: isro space missions and indigenous science innovations advancing national pride — complex engineering challenges ko low-cost aur high-precision ke sath solve karna isro ki sabse badi pehchan hai!">
             <div class="message-header">
                 <div class="avatar-badge">
                     <div class="avatar-icon">✨</div>
@@ -981,7 +1006,7 @@ What are your thoughts on this? Drop your perspective in the comments!
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
-                <div class="script-bubble" id="script-7">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: ISRO space missions and indigenous science innovations advancing national pride — Vigyan aur research me Bharat ka yeh badam aane wali generation ko nayi disha dikhayega!</div>
+                <div class="script-bubble" id="script-7">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: ISRO space missions and indigenous science innovations advancing national pride — Complex engineering challenges ko low-cost aur high-precision ke sath solve karna ISRO ki sabse badi pehchan hai!</div>
 
                 <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
                 <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
@@ -1034,7 +1059,7 @@ What are your thoughts on this? Drop your perspective in the comments!
             </div>
         </div>
         
-        <div class="chat-message" id="slot-card-8" data-search="next-generation developer frameworks and open-source breakthroughs gaining momentum future tech & developer ecosystem hello everyone! i'm aminsa. today's top tech breakthrough: next-generation developer frameworks and open-source breakthroughs gaining momentum — engineers and developers globally are watching closely as this architecture redefines intelligent workflows!">
+        <div class="chat-message" id="slot-card-8" data-search="next-generation developer frameworks and open-source breakthroughs gaining momentum future tech & developer ecosystem hello everyone! i'm aminsa. today's top tech breakthrough: next-generation developer frameworks and open-source breakthroughs gaining momentum — from hardware acceleration to seamless inference, this marks an exciting new chapter for innovation!">
             <div class="message-header">
                 <div class="avatar-badge">
                     <div class="avatar-icon">✨</div>
@@ -1054,7 +1079,7 @@ What are your thoughts on this? Drop your perspective in the comments!
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script (ENGLISH)</div>
-                <div class="script-bubble" id="script-8">Hello everyone! I'm Aminsa. Today's top tech breakthrough: Next-generation developer frameworks and open-source breakthroughs gaining momentum — Engineers and developers globally are watching closely as this architecture redefines intelligent workflows!</div>
+                <div class="script-bubble" id="script-8">Hello everyone! I'm Aminsa. Today's top tech breakthrough: Next-generation developer frameworks and open-source breakthroughs gaining momentum — From hardware acceleration to seamless inference, this marks an exciting new chapter for innovation!</div>
 
                 <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
                 <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
@@ -1180,7 +1205,7 @@ What are your thoughts on this? Drop your perspective in the comments!
             </div>
         </div>
         
-        <div class="chat-message" id="slot-card-10" data-search="holistic indian wellness routines, yoga and balanced lifestyle practices for daily energy morning health, yoga & wellness hello everyone! main hoon aminsa. aaj ki sabse badi update: holistic indian wellness routines, yoga and balanced lifestyle practices for daily energy — desi lifestyle aur ancient indian health wisdom modern busy life me sukoon pane ka best tareeqa hai!">
+        <div class="chat-message" id="slot-card-10" data-search="holistic indian wellness routines, yoga and balanced lifestyle practices for daily energy morning health, yoga & wellness hello everyone! main hoon aminsa. aaj ki sabse badi update: holistic indian wellness routines, yoga and balanced lifestyle practices for daily energy — mindful breathing aur natural diet ka simple combination stress ko door rakhne ka sabse powerful tool hai!">
             <div class="message-header">
                 <div class="avatar-badge">
                     <div class="avatar-icon">✨</div>
@@ -1200,7 +1225,7 @@ What are your thoughts on this? Drop your perspective in the comments!
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
-                <div class="script-bubble" id="script-10">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy — Desi lifestyle aur ancient Indian health wisdom modern busy life me sukoon pane ka best tareeqa hai!</div>
+                <div class="script-bubble" id="script-10">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy — Mindful breathing aur natural diet ka simple combination stress ko door rakhne ka sabse powerful tool hai!</div>
 
                 <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
                 <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
@@ -1305,11 +1330,11 @@ What are your thoughts on this? Drop your perspective in the comments!
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-1', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-1" style="font-size: 11px;">Graceful ivory khadi short kurti with delicate tricolor thread border</div>
+                <div id="table-wardrobe-1" style="font-size: 11px;">Pristine white handloom khadi shirt kurta with tricolor silk pocket square</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-1', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-1" style="font-size: 11px;">Warm morning sunlight courtyard with historic Indian stone pillars softly blurred</div>
+                <div id="table-loc-1" style="font-size: 11px;">Historic colonial Indian portico bathed in soft natural daylight</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-1', this)">Copy</button>
             </td>
         </tr>
@@ -1341,11 +1366,11 @@ What are your thoughts on this? Drop your perspective in the comments!
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-2', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-2" style="font-size: 11px;">Crisp modern navy-blue tailored blazer over minimalist white silk top</div>
+                <div id="table-wardrobe-2" style="font-size: 11px;">Modern cobalt blue structured blazer over minimalist dark grey top</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-2', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-2" style="font-size: 11px;">Futuristic tech lab studio with subtle blue ambient rim lighting and glass monitor</div>
+                <div id="table-loc-2" style="font-size: 11px;">Sleek neural network visualization lounge with holographic blue rings</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-2', this)">Copy</button>
             </td>
         </tr>
@@ -1377,11 +1402,11 @@ What are your thoughts on this? Drop your perspective in the comments!
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-3', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-3" style="font-size: 11px;">Sporty royal blue zip-up athletic jacket with clean white accents</div>
+                <div id="table-wardrobe-3" style="font-size: 11px;">Athletic black track jacket with electric blue sleeve stripes</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-3', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-3" style="font-size: 11px;">Vibrant sports broadcast studio desk with stadium illumination in backdrop</div>
+                <div id="table-loc-3" style="font-size: 11px;">High-tech sports biomechanics testing pavilion with track view</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-3', this)">Copy</button>
             </td>
         </tr>
@@ -1413,11 +1438,11 @@ What are your thoughts on this? Drop your perspective in the comments!
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-4', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-4" style="font-size: 11px;">Elegantly tailored charcoal formal blazer over an emerald green top</div>
+                <div id="table-wardrobe-4" style="font-size: 11px;">Warm camel-tan tailored blazer paired with a crisp cream silk shirt</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-4', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-4" style="font-size: 11px;">Modern minimalist corporate glass boardroom overlooking Bengaluru skyline</div>
+                <div id="table-loc-4" style="font-size: 11px;">Venture capital investor lounge with panoramic city skyline windows</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-4', this)">Copy</button>
             </td>
         </tr>
@@ -1449,11 +1474,11 @@ What are your thoughts on this? Drop your perspective in the comments!
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-5', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-5" style="font-size: 11px;">Vibrant mustard-yellow embroidered chanderi kurta with silver jhumkas</div>
+                <div id="table-wardrobe-5" style="font-size: 11px;">Graceful maroon and gold Bagru printed kurti with delicate silver cuffs</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-5', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-5" style="font-size: 11px;">Aesthetic Indian heritage courtyard illuminated with warm terracotta lamps</div>
+                <div id="table-loc-5" style="font-size: 11px;">Traditional Indian courtyard with carved jharokha window balconies</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-5', this)">Copy</button>
             </td>
         </tr>
@@ -1485,11 +1510,11 @@ What are your thoughts on this? Drop your perspective in the comments!
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-6', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-6" style="font-size: 11px;">Chic contemporary maroon satin co-ord set with minimalist gold pendant</div>
+                <div id="table-wardrobe-6" style="font-size: 11px;">Sleek emerald green contemporary trouser suit with dainty gold layered chain</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-6', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-6" style="font-size: 11px;">Lively warm studio lounge with golden fairy lights and cinematic bokeh</div>
+                <div id="table-loc-6" style="font-size: 11px;">Modern cinema studio set with warm ambient spotlights and directors chair</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-6', this)">Copy</button>
             </td>
         </tr>
@@ -1521,11 +1546,11 @@ What are your thoughts on this? Drop your perspective in the comments!
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-7', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-7" style="font-size: 11px;">Clean metallic-accented slate grey smart blazer</div>
+                <div id="table-wardrobe-7" style="font-size: 11px;">Astronomy-inspired deep navy tailored blazer with silver stellar badge</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-7', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-7" style="font-size: 11px;">High-tech space observatory control center with glowing telemetry screens</div>
+                <div id="table-loc-7" style="font-size: 11px;">Astronomical telescope dome facility looking out at star field</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-7', this)">Copy</button>
             </td>
         </tr>
@@ -1557,11 +1582,11 @@ What are your thoughts on this? Drop your perspective in the comments!
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-8', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-8" style="font-size: 11px;">Dark minimalist designer hoodie with subtle neon geometric trim</div>
+                <div id="table-wardrobe-8" style="font-size: 11px;">Futuristic matte obsidian cyber-jacket with clean mandarin collar</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-8', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-8" style="font-size: 11px;">Late-night developer workstation with dual ultra-wide curved code displays</div>
+                <div id="table-loc-8" style="font-size: 11px;">Quantum computing server hall with ambient purple luminescence</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-8', this)">Copy</button>
             </td>
         </tr>
@@ -1593,11 +1618,11 @@ What are your thoughts on this? Drop your perspective in the comments!
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-9', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-9" style="font-size: 11px;">Classic navy formal collared shirt with rolled cuffs</div>
+                <div id="table-wardrobe-9" style="font-size: 11px;">Deep olive-grey formal blazer over an off-white silk shell top</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-9', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-9" style="font-size: 11px;">Sophisticated global news studio with backlit world map glass panel</div>
+                <div id="table-loc-9" style="font-size: 11px;">Global multilateral conference hall with polished mahogany desk</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-9', this)">Copy</button>
             </td>
         </tr>
@@ -1629,11 +1654,11 @@ What are your thoughts on this? Drop your perspective in the comments!
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-10', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-10" style="font-size: 11px;">Pastel peach breathable cotton yoga kurta with comfortable stretch fit</div>
+                <div id="table-wardrobe-10" style="font-size: 11px;">Pure white breathable organic cotton kurta with pale lavender piping</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-10', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-10" style="font-size: 11px;">Lush green outdoor botanical terrace at sunrise with golden dawn mist</div>
+                <div id="table-loc-10" style="font-size: 11px;">Sunlit meditation deck surrounded by calming water lilies and greenery</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-10', this)">Copy</button>
             </td>
         </tr>
@@ -1789,7 +1814,7 @@ What are your thoughts on this? Drop your perspective in the comments!
         }
 
         function copyAll10Slots() {
-            let allText = "🌟 AMINSA DAILY MASTER PRODUCTION SCHEDULE\nDate: Tuesday, 17 November 2026\n\n";
+            let allText = "🌟 AMINSA DAILY MASTER PRODUCTION SCHEDULE\nDate: Wednesday, 18 November 2026\n\n";
             for (let i = 1; i <= 10; i++) {
                 const s = document.getElementById("script-" + i);
                 const v = document.getElementById("vid-" + i);
