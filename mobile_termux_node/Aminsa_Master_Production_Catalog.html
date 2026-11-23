@@ -92,6 +92,26 @@
             background: rgba(16, 163, 127, 0.4);
         }
 
+        .next-pill {
+            background: rgba(56, 189, 248, 0.2);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #7dd3fc;
+            padding: 4px 10px;
+            border-radius: 14px;
+            font-size: 11px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.15s;
+        }
+
+        .next-pill:active {
+            transform: scale(0.95);
+            background: rgba(56, 189, 248, 0.4);
+        }
+
         .status-dot {
             width: 8px;
             height: 8px;
@@ -525,9 +545,13 @@
                 <span class="status-dot"></span>
                 <span>Aminsa 4o</span>
             </div>
-            <span class="date-pill">Wednesday, 18 November 2026</span>
+            <span class="date-pill">Tuesday, 24 November 2026</span>
         </div>
         <div style="display: flex; align-items: center; gap: 8px;">
+            <a href="/kill_switch/toggle" style="text-decoration:none;" title="Click to Emergency Pause"><span style="background: rgba(16, 163, 127, 0.2); border: 1px solid #10a37f; color: #6ee7b7; padding: 5px 12px; border-radius: 14px; font-size: 11px; font-weight: 700; cursor: pointer;">🟢 PROD ACTIVE</span></a>
+            <a href="/next" class="next-pill" onclick="this.innerHTML='&#x23F3; Advancing...';">
+                <span>&#x23ED;</span> NEXT Cycle
+            </a>
             <a href="/refresh" class="refresh-pill" onclick="this.innerHTML='&#x23F3; Harvesting...';">
                 <span>&#x1F504;</span> Refresh Live
             </a>
@@ -537,10 +561,24 @@
         </div>
     </div>
 
+    <!-- DUAL-AI & ECOSYSTEM METADATA STATUS BANNER -->
+    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 8px 12px; margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; font-size: 11.5px; color: var(--text-secondary);">
+        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <span>💻 <strong>Laptop AI:</strong> <span style="color:#6ee7b7; font-weight:600;">MSA_AI_AGENT_LAPTOP</span></span>
+            <span>📱 <strong>Mobile AI:</strong> <span style="color:#7dd3fc; font-weight:600;">GOOGLE_AI_EDGE_MOBILE</span></span>
+            <span>📊 <strong>Status:</strong> <span style="color:#fcd34d; font-weight:600;">10/10 Slots [DRAFT]</span></span>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <span style="color: #a7f3d0; background: rgba(16,163,127,0.15); padding: 2px 8px; border-radius: 6px; font-weight:600;">✓ 30-Day Anti-Repetition</span>
+            <span style="color: #94a3b8; background: rgba(148,163,184,0.12); padding: 2px 8px; border-radius: 6px; font-weight:600;">🔒 Zero Auto-Publish</span>
+        </div>
+    </div>
+
     <!-- TABS SWITCHER -->
     <div class="tab-switcher">
         <button class="tab-btn active" id="btn-tab-chat" onclick="switchTab('tab-chat')">💬 10 Chat Cards</button>
         <button class="tab-btn" id="btn-tab-table" onclick="switchTab('tab-table')">📊 Live Excel Grid</button>
+        <button class="tab-btn" id="btn-tab-health" onclick="switchTab('tab-health')">🛡️ Ecosystem Health &amp; Sync</button>
         <button class="tab-btn" id="btn-tab-dna" onclick="switchTab('tab-dna')">🧬 DNA Rules</button>
     </div>
 
@@ -548,7 +586,7 @@
     <div id="tab-chat" class="tab-content active">
         <input type="text" class="search-box" placeholder="🔍 Search topics, scripts, keywords..." oninput="filterCards(this.value)">
         
-        <div class="chat-message" id="slot-card-1" data-search="india national developments and policy updates shaping youth opportunities today india national day & morning focus hello everyone! main hoon aminsa. aaj ki sabse badi update: india national developments and policy updates shaping youth opportunities today — yeh development saabit karta hai ki ground level par hamara desh kitni tezi se progress kar raha hai!">
+        <div class="chat-message" id="slot-card-1" data-search="how india's digital public infrastructure (upi, aadhaar, ondc) became a global benchmark (deep dive) india national day & morning focus hello everyone! main hoon aminsa. aaj ki sabse badi khabar: how indias digital public infrastructure (upi, aadhaar, ondc) became a global benchmark (deep dive). foundational explainer topic on national dpi explainer curated for evergreen engagement. is mudde par aapki kya raye hai? apne thoughts comments me batayein aur daily updates ke liye follow karein!">
             <div class="message-header">
                 <div class="avatar-badge">
                     <div class="avatar-icon">✨</div>
@@ -558,17 +596,20 @@
                             <span class="slot-pill">SLOT 1 &bull; 08:00 AM</span>
                             <span class="category-pill">India National Day & Morning Focus</span>
                             <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">HINGLISH</span>
+                            <span class="category-pill" style="background: rgba(148, 163, 184, 0.15); color: #94a3b8; font-weight: 700;">✓ EVERGREEN (100%)</span>
+                            <span class="category-pill" style="background: rgba(16, 163, 127, 0.12); color: #34d399;">30-Day Fresh ✓</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="message-body">
-                <h3 class="slot-title">India National developments and policy updates shaping youth opportunities today</h3>
+                <h3 class="slot-title">How India's Digital Public Infrastructure (UPI, Aadhaar, ONDC) Became a Global Benchmark (Deep Dive)</h3>
+                <div style="margin: 8px 0 12px 0; padding: 8px 12px; background: rgba(255,255,255,0.03); border-left: 3px solid #94a3b8; border-radius: 4px; font-size: 12px; color: var(--text-secondary);"><strong style="color: #94a3b8;">📌 Verified Source Context:</strong> Foundational explainer topic on National DPI Explainer curated for evergreen engagement.</div>
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
-                <div class="script-bubble" id="script-1">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: India National developments and policy updates shaping youth opportunities today — Yeh development saabit karta hai ki ground level par hamara desh kitni tezi se progress kar raha hai!</div>
+                <div class="script-bubble" id="script-1">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi khabar: How Indias Digital Public Infrastructure (UPI, Aadhaar, ONDC) Became a Global Benchmark (Deep Dive). Foundational explainer topic on National DPI Explainer curated for evergreen engagement. Is mudde par aapki kya raye hai? Apne thoughts comments me batayein aur daily updates ke liye follow karein!</div>
 
                 <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
                 <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
@@ -580,7 +621,7 @@
                             <span>Copy code</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="vid-1">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: India National developments and policy updates shaping youth opportunities today. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                    <pre class="code-content" id="vid-1">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: How India s Digital Public Infrastructure (UPI, Aadhaar, ONDC) Became a Global Benchmark (Deep Dive). Attire: Emerald Green raw silk soft chikankari cotton kurta featuring tone-on-tone self-texture, complemented by matte silver cuff bracelet. Environment: Contemporary Newsroom Studio in High-ceiling broadcast auditorium, featuring Backlit topographic map of India on frosted glass panels. Balanced 5600K broadcast key light with soft warm backfill with Tiered broadcast newsroom desks softly out of focus. Cinematic 9:16 vertical 60fps video.</pre>
                 </div>
 
                 <!-- YouTube Shorts / Reel Posting Section (Strictly <100 Chars) -->
@@ -593,7 +634,7 @@
                             <span>Copy Title</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="yt-1">India National developments and policy updates shaping youth #Aminsa #Shorts #India</pre>
+                    <pre class="code-content" id="yt-1">How India s Digital Public Infrastructure (UPI, Aadhaar, ONDC) Became a #Aminsa #Shorts #India</pre>
                 </div>
 
                 <!-- Action Button Row -->
@@ -612,16 +653,11 @@
                     </button>
                 </div>
 
-                <div style="display:none;" id="cap-1">✨ India National developments and policy updates shaping youth opportunities today
-
-Aminsa brings you today's live update on India National Day & Morning Focus.
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #specialdayorindiatop #DailyTrends #IndiaUpdates</div>
+                <div style="display:none;" id="cap-1">How India's Digital Public Infrastructure (UPI, Aadhaar, ONDC) Became a Global Benchmark (Deep Dive). Aminsa brings you verified insights on India National / Morning Brief. #Aminsa #Shorts #India</div>
             </div>
         </div>
         
-        <div class="chat-message" id="slot-card-2" data-search="india ai compute mission and next-generation tech ecosystem momentum global & indian tech & ai revolution hello everyone! i'm aminsa. today's top tech breakthrough: india ai compute mission and next-generation tech ecosystem momentum — from hardware acceleration to seamless inference, this marks an exciting new chapter for innovation!">
+        <div class="chat-message" id="slot-card-2" data-search="understanding transformer neural networks & next-gen multi-agent systems in plain english (deep dive) global & indian tech & ai revolution hello everyone! i'm aminsa. today's key development: understanding transformer neural networks & next-gen multi-agent systems in plain english (deep dive). foundational explainer topic on ai foundations curated for evergreen engagement. how do you see this shaping our technology ecosystem? share your perspective below!">
             <div class="message-header">
                 <div class="avatar-badge">
                     <div class="avatar-icon">✨</div>
@@ -631,17 +667,20 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span class="slot-pill">SLOT 2 &bull; 10:24 AM</span>
                             <span class="category-pill">Global & Indian Tech & AI Revolution</span>
                             <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">ENGLISH</span>
+                            <span class="category-pill" style="background: rgba(148, 163, 184, 0.15); color: #94a3b8; font-weight: 700;">✓ EVERGREEN (100%)</span>
+                            <span class="category-pill" style="background: rgba(16, 163, 127, 0.12); color: #34d399;">30-Day Fresh ✓</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="message-body">
-                <h3 class="slot-title">India AI compute mission and next-generation tech ecosystem momentum</h3>
+                <h3 class="slot-title">Understanding Transformer Neural Networks & Next-Gen Multi-Agent Systems in Plain English (Deep Dive)</h3>
+                <div style="margin: 8px 0 12px 0; padding: 8px 12px; background: rgba(255,255,255,0.03); border-left: 3px solid #94a3b8; border-radius: 4px; font-size: 12px; color: var(--text-secondary);"><strong style="color: #94a3b8;">📌 Verified Source Context:</strong> Foundational explainer topic on AI Foundations curated for evergreen engagement.</div>
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script (ENGLISH)</div>
-                <div class="script-bubble" id="script-2">Hello everyone! I'm Aminsa. Today's top tech breakthrough: India AI compute mission and next-generation tech ecosystem momentum — From hardware acceleration to seamless inference, this marks an exciting new chapter for innovation!</div>
+                <div class="script-bubble" id="script-2">Hello everyone! I'm Aminsa. Today's key development: Understanding Transformer Neural Networks & Next-Gen Multi-Agent Systems in Plain English (Deep Dive). Foundational explainer topic on AI Foundations curated for evergreen engagement. How do you see this shaping our technology ecosystem? Share your perspective below!</div>
 
                 <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
                 <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
@@ -653,7 +692,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span>Copy code</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="vid-2">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: India AI compute mission and next-generation tech ecosystem momentum. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                    <pre class="code-content" id="vid-2">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: Understanding Transformer Neural Networks & Next-Gen Multi-Agent Systems in Plain English (Deep Dive). Attire: Pearl White structured wool-blend tailored blazer over silk shell blouse featuring minimalist micro-check pattern, complemented by minimalist rose-gold chain. Environment: AI Research Studio in Futuristic minimalist laboratory, featuring Transparent glowing holographic data displays, server rack indicator lights. Cool cyan and soft white edge lighting with subtle blue volumetric haze with Deep studio depth with softly blurred fiber-optic cables. Cinematic 9:16 vertical 60fps video.</pre>
                 </div>
 
                 <!-- YouTube Shorts / Reel Posting Section (Strictly <100 Chars) -->
@@ -666,7 +705,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span>Copy Title</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="yt-2">India AI compute mission and next-generation tech ecosystem momentum #Aminsa #Shorts #AI</pre>
+                    <pre class="code-content" id="yt-2">Understanding Transformer Neural Networks & Next-Gen Multi-Agent Systems in #Aminsa #Shorts #AI</pre>
                 </div>
 
                 <!-- Action Button Row -->
@@ -685,16 +724,11 @@ What are your thoughts on this? Drop your perspective in the comments!
                     </button>
                 </div>
 
-                <div style="display:none;" id="cap-2">✨ India AI compute mission and next-generation tech ecosystem momentum
-
-Aminsa brings you today's live update on Global & Indian Tech & AI Revolution.
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #techai #DailyTrends #IndiaUpdates</div>
+                <div style="display:none;" id="cap-2">Understanding Transformer Neural Networks & Next-Gen Multi-Agent Systems in Plain English (Deep Dive). Aminsa brings you verified insights on Global & Indian Technology / AI. #Aminsa #Shorts #AI</div>
             </div>
         </div>
         
-        <div class="chat-message" id="slot-card-3" data-search="indian cricket squad intensive prep and domestic sports action cricket & sports updates hello everyone! main hoon aminsa. aaj ki sabse badi update: indian cricket squad intensive prep and domestic sports action — fans ka zabardast support aur stadium ka electrifying atmosphere game ko ek alag hi level par le jata hai!">
+        <div class="chat-message" id="slot-card-3" data-search="the science of fast bowling biomechanics and injury prevention in elite cricket (deep dive) cricket & sports updates hello everyone! main hoon aminsa. aaj ki sabse badi khabar: the science of fast bowling biomechanics and injury prevention in elite cricket (deep dive). foundational explainer topic on sports science curated for evergreen engagement. is mudde par aapki kya raye hai? apne thoughts comments me batayein aur daily updates ke liye follow karein!">
             <div class="message-header">
                 <div class="avatar-badge">
                     <div class="avatar-icon">✨</div>
@@ -704,17 +738,20 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span class="slot-pill">SLOT 3 &bull; 12:48 PM</span>
                             <span class="category-pill">Cricket & Sports Updates</span>
                             <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">HINGLISH</span>
+                            <span class="category-pill" style="background: rgba(148, 163, 184, 0.15); color: #94a3b8; font-weight: 700;">✓ EVERGREEN (100%)</span>
+                            <span class="category-pill" style="background: rgba(16, 163, 127, 0.12); color: #34d399;">30-Day Fresh ✓</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="message-body">
-                <h3 class="slot-title">Indian cricket squad intensive prep and domestic sports action</h3>
+                <h3 class="slot-title">The Science of Fast Bowling Biomechanics and Injury Prevention in Elite Cricket (Deep Dive)</h3>
+                <div style="margin: 8px 0 12px 0; padding: 8px 12px; background: rgba(255,255,255,0.03); border-left: 3px solid #94a3b8; border-radius: 4px; font-size: 12px; color: var(--text-secondary);"><strong style="color: #94a3b8;">📌 Verified Source Context:</strong> Foundational explainer topic on Sports Science curated for evergreen engagement.</div>
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
-                <div class="script-bubble" id="script-3">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: Indian cricket squad intensive prep and domestic sports action — Fans ka zabardast support aur stadium ka electrifying atmosphere game ko ek alag hi level par le jata hai!</div>
+                <div class="script-bubble" id="script-3">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi khabar: The Science of Fast Bowling Biomechanics and Injury Prevention in Elite Cricket (Deep Dive). Foundational explainer topic on Sports Science curated for evergreen engagement. Is mudde par aapki kya raye hai? Apne thoughts comments me batayein aur daily updates ke liye follow karein!</div>
 
                 <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
                 <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
@@ -726,7 +763,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span>Copy code</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="vid-3">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Indian cricket squad intensive prep and domestic sports action. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                    <pre class="code-content" id="vid-3">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: The Science of Fast Bowling Biomechanics and Injury Prevention in Elite Cricket (Deep Dive). Attire: Terracotta pure linen athletic zip-up technical jacket with contour piping featuring minimalist micro-check pattern, complemented by sleek titanium smart watch. Environment: Sports Broadcast Hub in Curved contemporary stadium broadcast booth, featuring Interactive digital scoreboard touchscreen, cricket gear displays. Dynamic high-CRI stadium spotlights with vibrant cobalt and amber rim lights with Illuminated cricket stadium pitch visible through expansive glass wall. Cinematic 9:16 vertical 60fps video.</pre>
                 </div>
 
                 <!-- YouTube Shorts / Reel Posting Section (Strictly <100 Chars) -->
@@ -739,7 +776,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span>Copy Title</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="yt-3">Indian cricket squad intensive prep and domestic sports action #Aminsa #Shorts #Cricket</pre>
+                    <pre class="code-content" id="yt-3">The Science of Fast Bowling Biomechanics and Injury Prevention in Elite #Aminsa #Shorts #Cricket</pre>
                 </div>
 
                 <!-- Action Button Row -->
@@ -758,16 +795,11 @@ What are your thoughts on this? Drop your perspective in the comments!
                     </button>
                 </div>
 
-                <div style="display:none;" id="cap-3">✨ Indian cricket squad intensive prep and domestic sports action
-
-Aminsa brings you today's live update on Cricket & Sports Updates.
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #cricketsports #DailyTrends #IndiaUpdates</div>
+                <div style="display:none;" id="cap-3">The Science of Fast Bowling Biomechanics and Injury Prevention in Elite Cricket (Deep Dive). Aminsa brings you verified insights on Cricket & Sports. #Aminsa #Shorts #Cricket</div>
             </div>
         </div>
         
-        <div class="chat-message" id="slot-card-4" data-search="indian startup ecosystem and domestic market trends driving economic growth indian economy, startups & market trends hello everyone! main hoon aminsa. aaj ki sabse badi update: indian startup ecosystem and domestic market trends driving economic growth — local business aur consumer demand ka yeh surge ground reality ko completely transform kar raha hai!">
+        <div class="chat-message" id="slot-card-4" data-search="demystifying venture capital term sheets and startup valuation metrics in india (deep dive) indian economy, startups & market trends hello everyone! main hoon aminsa. aaj ki sabse badi khabar: demystifying venture capital term sheets and startup valuation metrics in india (deep dive). foundational explainer topic on startup economics curated for evergreen engagement. is mudde par aapki kya raye hai? apne thoughts comments me batayein aur daily updates ke liye follow karein!">
             <div class="message-header">
                 <div class="avatar-badge">
                     <div class="avatar-icon">✨</div>
@@ -777,17 +809,20 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span class="slot-pill">SLOT 4 &bull; 03:12 PM</span>
                             <span class="category-pill">Indian Economy, Startups & Market Trends</span>
                             <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">HINGLISH</span>
+                            <span class="category-pill" style="background: rgba(148, 163, 184, 0.15); color: #94a3b8; font-weight: 700;">✓ EVERGREEN (100%)</span>
+                            <span class="category-pill" style="background: rgba(16, 163, 127, 0.12); color: #34d399;">30-Day Fresh ✓</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="message-body">
-                <h3 class="slot-title">Indian startup ecosystem and domestic market trends driving economic growth</h3>
+                <h3 class="slot-title">Demystifying Venture Capital Term Sheets and Startup Valuation Metrics in India (Deep Dive)</h3>
+                <div style="margin: 8px 0 12px 0; padding: 8px 12px; background: rgba(255,255,255,0.03); border-left: 3px solid #94a3b8; border-radius: 4px; font-size: 12px; color: var(--text-secondary);"><strong style="color: #94a3b8;">📌 Verified Source Context:</strong> Foundational explainer topic on Startup Economics curated for evergreen engagement.</div>
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
-                <div class="script-bubble" id="script-4">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: Indian startup ecosystem and domestic market trends driving economic growth — Local business aur consumer demand ka yeh surge ground reality ko completely transform kar raha hai!</div>
+                <div class="script-bubble" id="script-4">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi khabar: Demystifying Venture Capital Term Sheets and Startup Valuation Metrics in India (Deep Dive). Foundational explainer topic on Startup Economics curated for evergreen engagement. Is mudde par aapki kya raye hai? Apne thoughts comments me batayein aur daily updates ke liye follow karein!</div>
 
                 <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
                 <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
@@ -799,7 +834,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span>Copy code</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="vid-4">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Indian startup ecosystem and domestic market trends driving economic growth. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                    <pre class="code-content" id="vid-4">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: Demystifying Venture Capital Term Sheets and Startup Valuation Metrics in India (Deep Dive). Attire: Ivory White chanderi silk linen collared shirt with rolled cuffs featuring geometric block motifs, complemented by matte silver cuff bracelet. Environment: Corporate High-Rise Boardroom in Sleek glass and brushed brass executive boardroom, featuring Polished granite conference table, subtle financial market tickers. Natural afternoon daylight through floor-to-ceiling panoramic glass with Bengaluru and Mumbai high-rise skyline visible in soft haze. Cinematic 9:16 vertical 60fps video.</pre>
                 </div>
 
                 <!-- YouTube Shorts / Reel Posting Section (Strictly <100 Chars) -->
@@ -812,7 +847,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span>Copy Title</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="yt-4">Indian startup ecosystem and domestic market trends driving economic #Aminsa #Shorts #Startups</pre>
+                    <pre class="code-content" id="yt-4">Demystifying Venture Capital Term Sheets and Startup Valuation Metrics #Aminsa #Shorts #Economy</pre>
                 </div>
 
                 <!-- Action Button Row -->
@@ -831,16 +866,11 @@ What are your thoughts on this? Drop your perspective in the comments!
                     </button>
                 </div>
 
-                <div style="display:none;" id="cap-4">✨ Indian startup ecosystem and domestic market trends driving economic growth
-
-Aminsa brings you today's live update on Indian Economy, Startups & Market Trends.
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #economybusiness #DailyTrends #IndiaUpdates</div>
+                <div style="display:none;" id="cap-4">Demystifying Venture Capital Term Sheets and Startup Valuation Metrics in India (Deep Dive). Aminsa brings you verified insights on Indian Economy / Startups / Markets. #Aminsa #Shorts #Economy</div>
             </div>
         </div>
         
-        <div class="chat-message" id="slot-card-5" data-search="rich indian cultural traditions, crafts and regional heritage celebrated across states indian culture, art & regional heritage hello everyone! main hoon aminsa. aaj ki sabse badi update: rich indian cultural traditions, crafts and regional heritage celebrated across states — desh ke kone-kone me bikhri kala aur vibrant festivals me ek anokha aakarshan aur apnapan hai!">
+        <div class="chat-message" id="slot-card-5" data-search="the mathematical perfection and architectural acoustics of chola dynasty temples (deep dive) indian culture, art & regional heritage hello everyone! main hoon aminsa. aaj ki sabse badi khabar: the mathematical perfection and architectural acoustics of chola dynasty temples (deep dive). foundational explainer topic on heritage engineering curated for evergreen engagement. is mudde par aapki kya raye hai? apne thoughts comments me batayein aur daily updates ke liye follow karein!">
             <div class="message-header">
                 <div class="avatar-badge">
                     <div class="avatar-icon">✨</div>
@@ -850,17 +880,20 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span class="slot-pill">SLOT 5 &bull; 05:36 PM</span>
                             <span class="category-pill">Indian Culture, Art & Regional Heritage</span>
                             <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">HINGLISH</span>
+                            <span class="category-pill" style="background: rgba(148, 163, 184, 0.15); color: #94a3b8; font-weight: 700;">✓ EVERGREEN (100%)</span>
+                            <span class="category-pill" style="background: rgba(16, 163, 127, 0.12); color: #34d399;">30-Day Fresh ✓</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="message-body">
-                <h3 class="slot-title">Rich Indian cultural traditions, crafts and regional heritage celebrated across states</h3>
+                <h3 class="slot-title">The Mathematical Perfection and Architectural Acoustics of Chola Dynasty Temples (Deep Dive)</h3>
+                <div style="margin: 8px 0 12px 0; padding: 8px 12px; background: rgba(255,255,255,0.03); border-left: 3px solid #94a3b8; border-radius: 4px; font-size: 12px; color: var(--text-secondary);"><strong style="color: #94a3b8;">📌 Verified Source Context:</strong> Foundational explainer topic on Heritage Engineering curated for evergreen engagement.</div>
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
-                <div class="script-bubble" id="script-5">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: Rich Indian cultural traditions, crafts and regional heritage celebrated across states — Desh ke kone-kone me bikhri kala aur vibrant festivals me ek anokha aakarshan aur apnapan hai!</div>
+                <div class="script-bubble" id="script-5">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi khabar: The Mathematical Perfection and Architectural Acoustics of Chola Dynasty Temples (Deep Dive). Foundational explainer topic on Heritage Engineering curated for evergreen engagement. Is mudde par aapki kya raye hai? Apne thoughts comments me batayein aur daily updates ke liye follow karein!</div>
 
                 <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
                 <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
@@ -872,7 +905,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span>Copy code</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="vid-5">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Rich Indian cultural traditions, crafts and regional heritage celebrated across states. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                    <pre class="code-content" id="vid-5">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: The Mathematical Perfection and Architectural Acoustics of Chola Dynasty Temples (Deep Dive). Attire: Mustard Yellow raw silk elegant tussar silk kurta with woven border featuring delicate chalk pinstripes, complemented by minimalist rose-gold chain. Environment: Artisan Heritage Pavilion in Ornate terracotta pavilion with exposed timber beams, featuring Traditional brass oil lamps, hand-woven textile tapestries. Warm candlelit glow complemented by soft twilight exterior with Intricate traditional architectural corridors receding in background. Cinematic 9:16 vertical 60fps video.</pre>
                 </div>
 
                 <!-- YouTube Shorts / Reel Posting Section (Strictly <100 Chars) -->
@@ -885,7 +918,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span>Copy Title</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="yt-5">Rich Indian cultural traditions, crafts and regional heritage #Aminsa #Shorts #Culture</pre>
+                    <pre class="code-content" id="yt-5">The Mathematical Perfection and Architectural Acoustics of Chola #Aminsa #Shorts #Culture</pre>
                 </div>
 
                 <!-- Action Button Row -->
@@ -904,16 +937,11 @@ What are your thoughts on this? Drop your perspective in the comments!
                     </button>
                 </div>
 
-                <div style="display:none;" id="cap-5">✨ Rich Indian cultural traditions, crafts and regional heritage celebrated across states
-
-Aminsa brings you today's live update on Indian Culture, Art & Regional Heritage.
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #cultureheritage #DailyTrends #IndiaUpdates</div>
+                <div style="display:none;" id="cap-5">The Mathematical Perfection and Architectural Acoustics of Chola Dynasty Temples (Deep Dive). Aminsa brings you verified insights on Culture / Art / Regional Heritage. #Aminsa #Shorts #Culture</div>
             </div>
         </div>
         
-        <div class="chat-message" id="slot-card-6" data-search="cinema and ott entertainment buzz with audience excitement and new releases bollywood, ott & entertainment trends hello everyone! main hoon aminsa. aaj ki sabse badi update: cinema and ott entertainment buzz with audience excitement and new releases — social media par is viral trend aur nayi release ko lekar fans ka craze lagatar badhta ja raha hai!">
+        <div class="chat-message" id="slot-card-6" data-search="the cinematic art of color grading and visual storytelling in indian cinema (deep dive) bollywood, ott & entertainment trends hello everyone! main hoon aminsa. aaj ki sabse badi khabar: the cinematic art of color grading and visual storytelling in indian cinema (deep dive). foundational explainer topic on film aesthetics curated for evergreen engagement. is mudde par aapki kya raye hai? apne thoughts comments me batayein aur daily updates ke liye follow karein!">
             <div class="message-header">
                 <div class="avatar-badge">
                     <div class="avatar-icon">✨</div>
@@ -923,17 +951,20 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span class="slot-pill">SLOT 6 &bull; 08:00 PM</span>
                             <span class="category-pill">Bollywood, OTT & Entertainment Trends</span>
                             <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">HINGLISH</span>
+                            <span class="category-pill" style="background: rgba(148, 163, 184, 0.15); color: #94a3b8; font-weight: 700;">✓ EVERGREEN (100%)</span>
+                            <span class="category-pill" style="background: rgba(16, 163, 127, 0.12); color: #34d399;">30-Day Fresh ✓</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="message-body">
-                <h3 class="slot-title">Cinema and OTT entertainment buzz with audience excitement and new releases</h3>
+                <h3 class="slot-title">The Cinematic Art of Color Grading and Visual Storytelling in Indian Cinema (Deep Dive)</h3>
+                <div style="margin: 8px 0 12px 0; padding: 8px 12px; background: rgba(255,255,255,0.03); border-left: 3px solid #94a3b8; border-radius: 4px; font-size: 12px; color: var(--text-secondary);"><strong style="color: #94a3b8;">📌 Verified Source Context:</strong> Foundational explainer topic on Film Aesthetics curated for evergreen engagement.</div>
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
-                <div class="script-bubble" id="script-6">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: Cinema and OTT entertainment buzz with audience excitement and new releases — Social media par is viral trend aur nayi release ko lekar fans ka craze lagatar badhta ja raha hai!</div>
+                <div class="script-bubble" id="script-6">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi khabar: The Cinematic Art of Color Grading and Visual Storytelling in Indian Cinema (Deep Dive). Foundational explainer topic on Film Aesthetics curated for evergreen engagement. Is mudde par aapki kya raye hai? Apne thoughts comments me batayein aur daily updates ke liye follow karein!</div>
 
                 <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
                 <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
@@ -945,7 +976,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span>Copy code</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="vid-6">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Cinema and OTT entertainment buzz with audience excitement and new releases. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                    <pre class="code-content" id="vid-6">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: The Cinematic Art of Color Grading and Visual Storytelling in Indian Cinema (Deep Dive). Attire: Olive Green tussar silk asymmetrical tunic over tapered trousers featuring clean monochrome solid, complemented by minimalist rose-gold chain. Environment: Cinematic Studio Lounge in Art deco media lounge with velvet acoustics, featuring Vintage microphone stand, acoustic wood slat walls, golden fairy lights. Warm golden bokeh with dramatic shallow depth of field with Cozy cinematic lounge with diffused golden light spheres. Cinematic 9:16 vertical 60fps video.</pre>
                 </div>
 
                 <!-- YouTube Shorts / Reel Posting Section (Strictly <100 Chars) -->
@@ -958,7 +989,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span>Copy Title</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="yt-6">Cinema and OTT entertainment buzz with audience excitement and new #Aminsa #Shorts #Bollywood</pre>
+                    <pre class="code-content" id="yt-6">The Cinematic Art of Color Grading and Visual Storytelling in Indian #Aminsa #Shorts #Bollywood</pre>
                 </div>
 
                 <!-- Action Button Row -->
@@ -977,16 +1008,11 @@ What are your thoughts on this? Drop your perspective in the comments!
                     </button>
                 </div>
 
-                <div style="display:none;" id="cap-6">✨ Cinema and OTT entertainment buzz with audience excitement and new releases
-
-Aminsa brings you today's live update on Bollywood, OTT & Entertainment Trends.
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #bollywoodtrends #DailyTrends #IndiaUpdates</div>
+                <div style="display:none;" id="cap-6">The Cinematic Art of Color Grading and Visual Storytelling in Indian Cinema (Deep Dive). Aminsa brings you verified insights on Bollywood / OTT / Entertainment. #Aminsa #Shorts #Bollywood</div>
             </div>
         </div>
         
-        <div class="chat-message" id="slot-card-7" data-search="isro space missions and indigenous science innovations advancing national pride isro, space & indian innovations hello everyone! main hoon aminsa. aaj ki sabse badi update: isro space missions and indigenous science innovations advancing national pride — complex engineering challenges ko low-cost aur high-precision ke sath solve karna isro ki sabse badi pehchan hai!">
+        <div class="chat-message" id="slot-card-7" data-search="how isro's slingshot gravitational assist saves rocket fuel on deep space missions (deep dive) isro, space & indian innovations hello everyone! main hoon aminsa. aaj ki sabse badi khabar: how isros slingshot gravitational assist saves rocket fuel on deep space missions (deep dive). foundational explainer topic on space mechanics curated for evergreen engagement. is mudde par aapki kya raye hai? apne thoughts comments me batayein aur daily updates ke liye follow karein!">
             <div class="message-header">
                 <div class="avatar-badge">
                     <div class="avatar-icon">✨</div>
@@ -996,17 +1022,20 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span class="slot-pill">SLOT 7 &bull; 10:24 PM</span>
                             <span class="category-pill">ISRO, Space & Indian Innovations</span>
                             <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">HINGLISH</span>
+                            <span class="category-pill" style="background: rgba(148, 163, 184, 0.15); color: #94a3b8; font-weight: 700;">✓ EVERGREEN (100%)</span>
+                            <span class="category-pill" style="background: rgba(16, 163, 127, 0.12); color: #34d399;">30-Day Fresh ✓</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="message-body">
-                <h3 class="slot-title">ISRO space missions and indigenous science innovations advancing national pride</h3>
+                <h3 class="slot-title">How ISRO's Slingshot Gravitational Assist Saves Rocket Fuel on Deep Space Missions (Deep Dive)</h3>
+                <div style="margin: 8px 0 12px 0; padding: 8px 12px; background: rgba(255,255,255,0.03); border-left: 3px solid #94a3b8; border-radius: 4px; font-size: 12px; color: var(--text-secondary);"><strong style="color: #94a3b8;">📌 Verified Source Context:</strong> Foundational explainer topic on Space Mechanics curated for evergreen engagement.</div>
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
-                <div class="script-bubble" id="script-7">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: ISRO space missions and indigenous science innovations advancing national pride — Complex engineering challenges ko low-cost aur high-precision ke sath solve karna ISRO ki sabse badi pehchan hai!</div>
+                <div class="script-bubble" id="script-7">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi khabar: How ISROs Slingshot Gravitational Assist Saves Rocket Fuel on Deep Space Missions (Deep Dive). Foundational explainer topic on Space Mechanics curated for evergreen engagement. Is mudde par aapki kya raye hai? Apne thoughts comments me batayein aur daily updates ke liye follow karein!</div>
 
                 <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
                 <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
@@ -1018,7 +1047,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span>Copy code</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="vid-7">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: ISRO space missions and indigenous science innovations advancing national pride. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                    <pre class="code-content" id="vid-7">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: How ISRO s Slingshot Gravitational Assist Saves Rocket Fuel on Deep Space Missions (Deep Dive). Attire: Deep Wine matte satin linen collared shirt with rolled cuffs featuring delicate chalk pinstripes, complemented by delicate oxidized silver jhumkas. Environment: Space Flight Observatory in Dome observatory control center, featuring Astronomical star chart projections, satellite telemetry telemetry consoles. Starlight ambient illumination with gentle amber console backlights with Open observatory dome revealing deep twilight sky and constellations. Cinematic 9:16 vertical 60fps video.</pre>
                 </div>
 
                 <!-- YouTube Shorts / Reel Posting Section (Strictly <100 Chars) -->
@@ -1031,7 +1060,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span>Copy Title</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="yt-7">ISRO space missions and indigenous science innovations advancing #Aminsa #Shorts #ISRO</pre>
+                    <pre class="code-content" id="yt-7">How ISRO s Slingshot Gravitational Assist Saves Rocket Fuel on Deep Space #Aminsa #Shorts #ISRO</pre>
                 </div>
 
                 <!-- Action Button Row -->
@@ -1050,16 +1079,11 @@ What are your thoughts on this? Drop your perspective in the comments!
                     </button>
                 </div>
 
-                <div style="display:none;" id="cap-7">✨ ISRO space missions and indigenous science innovations advancing national pride
-
-Aminsa brings you today's live update on ISRO, Space & Indian Innovations.
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #scienceisro #DailyTrends #IndiaUpdates</div>
+                <div style="display:none;" id="cap-7">How ISRO's Slingshot Gravitational Assist Saves Rocket Fuel on Deep Space Missions (Deep Dive). Aminsa brings you verified insights on ISRO / Space / Innovation. #Aminsa #Shorts #ISRO</div>
             </div>
         </div>
         
-        <div class="chat-message" id="slot-card-8" data-search="next-generation developer frameworks and open-source breakthroughs gaining momentum future tech & developer ecosystem hello everyone! i'm aminsa. today's top tech breakthrough: next-generation developer frameworks and open-source breakthroughs gaining momentum — from hardware acceleration to seamless inference, this marks an exciting new chapter for innovation!">
+        <div class="chat-message" id="slot-card-8" data-search="why memory safety & ownership models make modern systems resilient against exploits (deep dive) future tech & developer ecosystem hello everyone! i'm aminsa. today's key development: why memory safety & ownership models make modern systems resilient against exploits (deep dive). foundational explainer topic on software architecture curated for evergreen engagement. how do you see this shaping our technology ecosystem? share your perspective below!">
             <div class="message-header">
                 <div class="avatar-badge">
                     <div class="avatar-icon">✨</div>
@@ -1069,17 +1093,20 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span class="slot-pill">SLOT 8 &bull; 12:48 AM</span>
                             <span class="category-pill">Future Tech & Developer Ecosystem</span>
                             <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">ENGLISH</span>
+                            <span class="category-pill" style="background: rgba(148, 163, 184, 0.15); color: #94a3b8; font-weight: 700;">✓ EVERGREEN (100%)</span>
+                            <span class="category-pill" style="background: rgba(16, 163, 127, 0.12); color: #34d399;">30-Day Fresh ✓</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="message-body">
-                <h3 class="slot-title">Next-generation developer frameworks and open-source breakthroughs gaining momentum</h3>
+                <h3 class="slot-title">Why Memory Safety & Ownership Models Make Modern Systems Resilient Against Exploits (Deep Dive)</h3>
+                <div style="margin: 8px 0 12px 0; padding: 8px 12px; background: rgba(255,255,255,0.03); border-left: 3px solid #94a3b8; border-radius: 4px; font-size: 12px; color: var(--text-secondary);"><strong style="color: #94a3b8;">📌 Verified Source Context:</strong> Foundational explainer topic on Software Architecture curated for evergreen engagement.</div>
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script (ENGLISH)</div>
-                <div class="script-bubble" id="script-8">Hello everyone! I'm Aminsa. Today's top tech breakthrough: Next-generation developer frameworks and open-source breakthroughs gaining momentum — From hardware acceleration to seamless inference, this marks an exciting new chapter for innovation!</div>
+                <div class="script-bubble" id="script-8">Hello everyone! I'm Aminsa. Today's key development: Why Memory Safety & Ownership Models Make Modern Systems Resilient Against Exploits (Deep Dive). Foundational explainer topic on Software Architecture curated for evergreen engagement. How do you see this shaping our technology ecosystem? Share your perspective below!</div>
 
                 <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
                 <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
@@ -1091,7 +1118,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span>Copy code</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="vid-8">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Next-generation developer frameworks and open-source breakthroughs gaining momentum. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                    <pre class="code-content" id="vid-8">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: Why Memory Safety & Ownership Models Make Modern Systems Resilient Against Exploits (Deep Dive). Attire: Slate Blue raw silk relaxed satin co-ord set with minimalist collar featuring woven zari border accents, complemented by minimalist rose-gold chain. Environment: AI Research Studio in Futuristic minimalist laboratory, featuring Transparent glowing holographic data displays, server rack indicator lights. Cool cyan and soft white edge lighting with subtle blue volumetric haze with Deep studio depth with softly blurred fiber-optic cables. Cinematic 9:16 vertical 60fps video.</pre>
                 </div>
 
                 <!-- YouTube Shorts / Reel Posting Section (Strictly <100 Chars) -->
@@ -1104,7 +1131,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span>Copy Title</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="yt-8">Next-generation developer frameworks and open-source breakthroughs #Aminsa #Shorts #Tech</pre>
+                    <pre class="code-content" id="yt-8">Why Memory Safety & Ownership Models Make Modern Systems Resilient Against #Aminsa #Shorts #Tech</pre>
                 </div>
 
                 <!-- Action Button Row -->
@@ -1123,16 +1150,11 @@ What are your thoughts on this? Drop your perspective in the comments!
                     </button>
                 </div>
 
-                <div style="display:none;" id="cap-8">✨ Next-generation developer frameworks and open-source breakthroughs gaining momentum
-
-Aminsa brings you today's live update on Future Tech & Developer Ecosystem.
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #futuretech #DailyTrends #IndiaUpdates</div>
+                <div style="display:none;" id="cap-8">Why Memory Safety & Ownership Models Make Modern Systems Resilient Against Exploits (Deep Dive). Aminsa brings you verified insights on Future Technology / Developer Ecosystem. #Aminsa #Shorts #Tech</div>
             </div>
         </div>
         
-        <div class="chat-message" id="slot-card-9" data-search="india's strategic global partnerships and international diplomacy at key forums global affairs (india's lens) hello everyone! main hoon aminsa. aaj ki sabse badi update: india's strategic global partnerships and international diplomacy at key forums — global stage par bharat ki strategic position aur impactful aawaz ko aaj poori duniya dhyan se sun rahi hai!">
+        <div class="chat-message" id="slot-card-9" data-search="the strategic geopolitics of global maritime chokepoints and india's maritime vision (deep dive) global affairs (india's lens) hello everyone! main hoon aminsa. aaj ki sabse badi khabar: the strategic geopolitics of global maritime chokepoints and indias maritime vision (deep dive). foundational explainer topic on strategic affairs curated for evergreen engagement. is mudde par aapki kya raye hai? apne thoughts comments me batayein aur daily updates ke liye follow karein!">
             <div class="message-header">
                 <div class="avatar-badge">
                     <div class="avatar-icon">✨</div>
@@ -1142,17 +1164,20 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span class="slot-pill">SLOT 9 &bull; 03:12 AM</span>
                             <span class="category-pill">Global Affairs (India's Lens)</span>
                             <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">HINGLISH</span>
+                            <span class="category-pill" style="background: rgba(148, 163, 184, 0.15); color: #94a3b8; font-weight: 700;">✓ EVERGREEN (100%)</span>
+                            <span class="category-pill" style="background: rgba(16, 163, 127, 0.12); color: #34d399;">30-Day Fresh ✓</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="message-body">
-                <h3 class="slot-title">India's strategic global partnerships and international diplomacy at key forums</h3>
+                <h3 class="slot-title">The Strategic Geopolitics of Global Maritime Chokepoints and India's Maritime Vision (Deep Dive)</h3>
+                <div style="margin: 8px 0 12px 0; padding: 8px 12px; background: rgba(255,255,255,0.03); border-left: 3px solid #94a3b8; border-radius: 4px; font-size: 12px; color: var(--text-secondary);"><strong style="color: #94a3b8;">📌 Verified Source Context:</strong> Foundational explainer topic on Strategic Affairs curated for evergreen engagement.</div>
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
-                <div class="script-bubble" id="script-9">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: India's strategic global partnerships and international diplomacy at key forums — Global stage par Bharat ki strategic position aur impactful aawaz ko aaj poori duniya dhyan se sun rahi hai!</div>
+                <div class="script-bubble" id="script-9">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi khabar: The Strategic Geopolitics of Global Maritime Chokepoints and Indias Maritime Vision (Deep Dive). Foundational explainer topic on Strategic Affairs curated for evergreen engagement. Is mudde par aapki kya raye hai? Apne thoughts comments me batayein aur daily updates ke liye follow karein!</div>
 
                 <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
                 <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
@@ -1164,7 +1189,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span>Copy code</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="vid-9">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Indias strategic global partnerships and international diplomacy at key forums. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                    <pre class="code-content" id="vid-9">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: The Strategic Geopolitics of Global Maritime Chokepoints and India s Maritime Vision (Deep Dive). Attire: Olive Green pure linen tailored blazer over silk shell blouse featuring clean monochrome solid, complemented by dainty freshwater pearl studs. Environment: Contemporary Newsroom Studio in High-ceiling broadcast auditorium, featuring Backlit topographic map of India on frosted glass panels. Balanced 5600K broadcast key light with soft warm backfill with Tiered broadcast newsroom desks softly out of focus. Cinematic 9:16 vertical 60fps video.</pre>
                 </div>
 
                 <!-- YouTube Shorts / Reel Posting Section (Strictly <100 Chars) -->
@@ -1177,7 +1202,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span>Copy Title</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="yt-9">India s strategic global partnerships and international diplomacy #Aminsa #Shorts #Geopolitics</pre>
+                    <pre class="code-content" id="yt-9">The Strategic Geopolitics of Global Maritime Chokepoints and India s #Aminsa #Shorts #Global</pre>
                 </div>
 
                 <!-- Action Button Row -->
@@ -1196,16 +1221,11 @@ What are your thoughts on this? Drop your perspective in the comments!
                     </button>
                 </div>
 
-                <div style="display:none;" id="cap-9">✨ India's strategic global partnerships and international diplomacy at key forums
-
-Aminsa brings you today's live update on Global Affairs (India's Lens).
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #globalaffairs #DailyTrends #IndiaUpdates</div>
+                <div style="display:none;" id="cap-9">The Strategic Geopolitics of Global Maritime Chokepoints and India's Maritime Vision (Deep Dive). Aminsa brings you verified insights on Global Affairs through India's Lens. #Aminsa #Shorts #Global</div>
             </div>
         </div>
         
-        <div class="chat-message" id="slot-card-10" data-search="holistic indian wellness routines, yoga and balanced lifestyle practices for daily energy morning health, yoga & wellness hello everyone! main hoon aminsa. aaj ki sabse badi update: holistic indian wellness routines, yoga and balanced lifestyle practices for daily energy — mindful breathing aur natural diet ka simple combination stress ko door rakhne ka sabse powerful tool hai!">
+        <div class="chat-message" id="slot-card-10" data-search="the neurobiology of deep rest and morning sunlight exposure on circadian rhythm (deep dive) morning health, yoga & wellness hello everyone! main hoon aminsa. aaj ki sabse badi khabar: the neurobiology of deep rest and morning sunlight exposure on circadian rhythm (deep dive). foundational explainer topic on circadian science curated for evergreen engagement. is mudde par aapki kya raye hai? apne thoughts comments me batayein aur daily updates ke liye follow karein!">
             <div class="message-header">
                 <div class="avatar-badge">
                     <div class="avatar-icon">✨</div>
@@ -1215,17 +1235,20 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span class="slot-pill">SLOT 10 &bull; 05:36 AM</span>
                             <span class="category-pill">Morning Health, Yoga & Wellness</span>
                             <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">HINGLISH</span>
+                            <span class="category-pill" style="background: rgba(148, 163, 184, 0.15); color: #94a3b8; font-weight: 700;">✓ EVERGREEN (100%)</span>
+                            <span class="category-pill" style="background: rgba(16, 163, 127, 0.12); color: #34d399;">30-Day Fresh ✓</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="message-body">
-                <h3 class="slot-title">Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy</h3>
+                <h3 class="slot-title">The Neurobiology of Deep Rest and Morning Sunlight Exposure on Circadian Rhythm (Deep Dive)</h3>
+                <div style="margin: 8px 0 12px 0; padding: 8px 12px; background: rgba(255,255,255,0.03); border-left: 3px solid #94a3b8; border-radius: 4px; font-size: 12px; color: var(--text-secondary);"><strong style="color: #94a3b8;">📌 Verified Source Context:</strong> Foundational explainer topic on Circadian Science curated for evergreen engagement.</div>
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script (HINGLISH)</div>
-                <div class="script-bubble" id="script-10">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi update: Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy — Mindful breathing aur natural diet ka simple combination stress ko door rakhne ka sabse powerful tool hai!</div>
+                <div class="script-bubble" id="script-10">Hello everyone! Main hoon Aminsa. Aaj ki sabse badi khabar: The Neurobiology of Deep Rest and Morning Sunlight Exposure on Circadian Rhythm (Deep Dive). Foundational explainer topic on Circadian Science curated for evergreen engagement. Is mudde par aapki kya raye hai? Apne thoughts comments me batayein aur daily updates ke liye follow karein!</div>
 
                 <!-- Video Motion Prompt Section (ChatGPT Code Block Style) -->
                 <div class="section-title">🎬 Video Motion Prompt (YouTube Create &bull; &lt;300 Chars)</div>
@@ -1237,7 +1260,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span>Copy code</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="vid-10">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy. Cinematic 9:16 vertical motion, fluid 60fps video.</pre>
+                    <pre class="code-content" id="vid-10">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: The Neurobiology of Deep Rest and Morning Sunlight Exposure on Circadian Rhythm (Deep Dive). Attire: Emerald Green raw silk asymmetrical tunic over tapered trousers featuring clean monochrome solid, complemented by matte silver cuff bracelet. Environment: Botanical Wellness Terrace in Minimalist wooden deck surrounded by bamboo groves, featuring Earthen planters, smooth river stones, trickling water fountain. Gentle dawn sunlight with crisp clean morning freshness with Lush verdant botanical foliage with soft natural morning mist. Cinematic 9:16 vertical 60fps video.</pre>
                 </div>
 
                 <!-- YouTube Shorts / Reel Posting Section (Strictly <100 Chars) -->
@@ -1250,7 +1273,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                             <span>Copy Title</span>
                         </button>
                     </div>
-                    <pre class="code-content" id="yt-10">Holistic Indian wellness routines, yoga and balanced lifestyle practices #Aminsa #Shorts #Yoga</pre>
+                    <pre class="code-content" id="yt-10">The Neurobiology of Deep Rest and Morning Sunlight Exposure on Circadian #Aminsa #Shorts #Yoga</pre>
                 </div>
 
                 <!-- Action Button Row -->
@@ -1269,12 +1292,7 @@ What are your thoughts on this? Drop your perspective in the comments!
                     </button>
                 </div>
 
-                <div style="display:none;" id="cap-10">✨ Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy
-
-Aminsa brings you today's live update on Morning Health, Yoga & Wellness.
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #wellnesshealth #DailyTrends #IndiaUpdates</div>
+                <div style="display:none;" id="cap-10">The Neurobiology of Deep Rest and Morning Sunlight Exposure on Circadian Rhythm (Deep Dive). Aminsa brings you verified insights on Health / Yoga / Wellness. #Aminsa #Shorts #Yoga</div>
             </div>
         </div>
         
@@ -1309,32 +1327,27 @@ What are your thoughts on this? Drop your perspective in the comments!
             <td class="cat-cell">India National Day & Morning Focus</td>
             <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">HINGLISH</span></td>
             <td class="title-cell">
-                <div id="table-title-1">India National developments and policy updates shaping youth opportunities today</div>
+                <div id="table-title-1">How India's Digital Public Infrastructure (UPI, Aadhaar, ONDC) Became a Global Benchmark (Deep Dive)</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-title-1', this)">Copy</button>
             </td>
             <td class="code-cell">
-                <div id="table-vid-1">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: India National developments and policy updates shaping youth opportunities today. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <div id="table-vid-1">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: How India s Digital Public Infrastructure (UPI, Aadhaar, ONDC) Became a Global Benchmark (Deep Dive). Attire: Emerald Green raw silk soft chikankari cotton kurta featuring tone-on-tone self-texture, complemented by matte silver cuff bracelet. Environment: Contemporary Newsroom Studio in High-ceiling broadcast auditorium, featuring Backlit topographic map of India on frosted glass panels. Balanced 5600K broadcast key light with soft warm backfill with Tiered broadcast newsroom desks softly out of focus. Cinematic 9:16 vertical 60fps video.</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-vid-1', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-yt-1" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">India National developments and policy updates shaping youth #Aminsa #Shorts #India</div>
+                <div id="table-yt-1" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">How India s Digital Public Infrastructure (UPI, Aadhaar, ONDC) Became a #Aminsa #Shorts #India</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-yt-1', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-cap-1" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ India National developments and policy updates shaping youth opportunities today
-
-Aminsa brings you today's live update on India National Day & Morning Focus.
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #specialdayorindiatop #DailyTrends #IndiaUpdates</div>
+                <div id="table-cap-1" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">How India's Digital Public Infrastructure (UPI, Aadhaar, ONDC) Became a Global Benchmark (Deep Dive). Aminsa brings you verified insights on India National / Morning Brief. #Aminsa #Shorts #India</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-1', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-1" style="font-size: 11px;">Pristine white handloom khadi shirt kurta with tricolor silk pocket square</div>
+                <div id="table-wardrobe-1" style="font-size: 11px;">Emerald Green raw silk soft chikankari cotton kurta featuring tone-on-tone self-texture, complemented by matte silver cuff bracelet</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-1', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-1" style="font-size: 11px;">Historic colonial Indian portico bathed in soft natural daylight</div>
+                <div id="table-loc-1" style="font-size: 11px;">Contemporary Newsroom Studio in High-ceiling broadcast auditorium, featuring Backlit topographic map of India on frosted glass panels. Balanced 5600K broadcast key light with soft warm backfill with Tiered broadcast newsroom desks softly out of focus</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-1', this)">Copy</button>
             </td>
         </tr>
@@ -1345,32 +1358,27 @@ What are your thoughts on this? Drop your perspective in the comments!
             <td class="cat-cell">Global & Indian Tech & AI Revolution</td>
             <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">ENGLISH</span></td>
             <td class="title-cell">
-                <div id="table-title-2">India AI compute mission and next-generation tech ecosystem momentum</div>
+                <div id="table-title-2">Understanding Transformer Neural Networks & Next-Gen Multi-Agent Systems in Plain English (Deep Dive)</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-title-2', this)">Copy</button>
             </td>
             <td class="code-cell">
-                <div id="table-vid-2">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: India AI compute mission and next-generation tech ecosystem momentum. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <div id="table-vid-2">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: Understanding Transformer Neural Networks & Next-Gen Multi-Agent Systems in Plain English (Deep Dive). Attire: Pearl White structured wool-blend tailored blazer over silk shell blouse featuring minimalist micro-check pattern, complemented by minimalist rose-gold chain. Environment: AI Research Studio in Futuristic minimalist laboratory, featuring Transparent glowing holographic data displays, server rack indicator lights. Cool cyan and soft white edge lighting with subtle blue volumetric haze with Deep studio depth with softly blurred fiber-optic cables. Cinematic 9:16 vertical 60fps video.</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-vid-2', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-yt-2" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">India AI compute mission and next-generation tech ecosystem momentum #Aminsa #Shorts #AI</div>
+                <div id="table-yt-2" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">Understanding Transformer Neural Networks & Next-Gen Multi-Agent Systems in #Aminsa #Shorts #AI</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-yt-2', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-cap-2" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ India AI compute mission and next-generation tech ecosystem momentum
-
-Aminsa brings you today's live update on Global & Indian Tech & AI Revolution.
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #techai #DailyTrends #IndiaUpdates</div>
+                <div id="table-cap-2" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">Understanding Transformer Neural Networks & Next-Gen Multi-Agent Systems in Plain English (Deep Dive). Aminsa brings you verified insights on Global & Indian Technology / AI. #Aminsa #Shorts #AI</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-2', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-2" style="font-size: 11px;">Modern cobalt blue structured blazer over minimalist dark grey top</div>
+                <div id="table-wardrobe-2" style="font-size: 11px;">Pearl White structured wool-blend tailored blazer over silk shell blouse featuring minimalist micro-check pattern, complemented by minimalist rose-gold chain</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-2', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-2" style="font-size: 11px;">Sleek neural network visualization lounge with holographic blue rings</div>
+                <div id="table-loc-2" style="font-size: 11px;">AI Research Studio in Futuristic minimalist laboratory, featuring Transparent glowing holographic data displays, server rack indicator lights. Cool cyan and soft white edge lighting with subtle blue volumetric haze with Deep studio depth with softly blurred fiber-optic cables</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-2', this)">Copy</button>
             </td>
         </tr>
@@ -1381,32 +1389,27 @@ What are your thoughts on this? Drop your perspective in the comments!
             <td class="cat-cell">Cricket & Sports Updates</td>
             <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">HINGLISH</span></td>
             <td class="title-cell">
-                <div id="table-title-3">Indian cricket squad intensive prep and domestic sports action</div>
+                <div id="table-title-3">The Science of Fast Bowling Biomechanics and Injury Prevention in Elite Cricket (Deep Dive)</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-title-3', this)">Copy</button>
             </td>
             <td class="code-cell">
-                <div id="table-vid-3">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Indian cricket squad intensive prep and domestic sports action. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <div id="table-vid-3">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: The Science of Fast Bowling Biomechanics and Injury Prevention in Elite Cricket (Deep Dive). Attire: Terracotta pure linen athletic zip-up technical jacket with contour piping featuring minimalist micro-check pattern, complemented by sleek titanium smart watch. Environment: Sports Broadcast Hub in Curved contemporary stadium broadcast booth, featuring Interactive digital scoreboard touchscreen, cricket gear displays. Dynamic high-CRI stadium spotlights with vibrant cobalt and amber rim lights with Illuminated cricket stadium pitch visible through expansive glass wall. Cinematic 9:16 vertical 60fps video.</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-vid-3', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-yt-3" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">Indian cricket squad intensive prep and domestic sports action #Aminsa #Shorts #Cricket</div>
+                <div id="table-yt-3" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">The Science of Fast Bowling Biomechanics and Injury Prevention in Elite #Aminsa #Shorts #Cricket</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-yt-3', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-cap-3" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ Indian cricket squad intensive prep and domestic sports action
-
-Aminsa brings you today's live update on Cricket & Sports Updates.
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #cricketsports #DailyTrends #IndiaUpdates</div>
+                <div id="table-cap-3" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">The Science of Fast Bowling Biomechanics and Injury Prevention in Elite Cricket (Deep Dive). Aminsa brings you verified insights on Cricket & Sports. #Aminsa #Shorts #Cricket</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-3', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-3" style="font-size: 11px;">Athletic black track jacket with electric blue sleeve stripes</div>
+                <div id="table-wardrobe-3" style="font-size: 11px;">Terracotta pure linen athletic zip-up technical jacket with contour piping featuring minimalist micro-check pattern, complemented by sleek titanium smart watch</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-3', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-3" style="font-size: 11px;">High-tech sports biomechanics testing pavilion with track view</div>
+                <div id="table-loc-3" style="font-size: 11px;">Sports Broadcast Hub in Curved contemporary stadium broadcast booth, featuring Interactive digital scoreboard touchscreen, cricket gear displays. Dynamic high-CRI stadium spotlights with vibrant cobalt and amber rim lights with Illuminated cricket stadium pitch visible through expansive glass wall</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-3', this)">Copy</button>
             </td>
         </tr>
@@ -1417,32 +1420,27 @@ What are your thoughts on this? Drop your perspective in the comments!
             <td class="cat-cell">Indian Economy, Startups & Market Trends</td>
             <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">HINGLISH</span></td>
             <td class="title-cell">
-                <div id="table-title-4">Indian startup ecosystem and domestic market trends driving economic growth</div>
+                <div id="table-title-4">Demystifying Venture Capital Term Sheets and Startup Valuation Metrics in India (Deep Dive)</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-title-4', this)">Copy</button>
             </td>
             <td class="code-cell">
-                <div id="table-vid-4">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Indian startup ecosystem and domestic market trends driving economic growth. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <div id="table-vid-4">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: Demystifying Venture Capital Term Sheets and Startup Valuation Metrics in India (Deep Dive). Attire: Ivory White chanderi silk linen collared shirt with rolled cuffs featuring geometric block motifs, complemented by matte silver cuff bracelet. Environment: Corporate High-Rise Boardroom in Sleek glass and brushed brass executive boardroom, featuring Polished granite conference table, subtle financial market tickers. Natural afternoon daylight through floor-to-ceiling panoramic glass with Bengaluru and Mumbai high-rise skyline visible in soft haze. Cinematic 9:16 vertical 60fps video.</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-vid-4', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-yt-4" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">Indian startup ecosystem and domestic market trends driving economic #Aminsa #Shorts #Startups</div>
+                <div id="table-yt-4" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">Demystifying Venture Capital Term Sheets and Startup Valuation Metrics #Aminsa #Shorts #Economy</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-yt-4', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-cap-4" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ Indian startup ecosystem and domestic market trends driving economic growth
-
-Aminsa brings you today's live update on Indian Economy, Startups & Market Trends.
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #economybusiness #DailyTrends #IndiaUpdates</div>
+                <div id="table-cap-4" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">Demystifying Venture Capital Term Sheets and Startup Valuation Metrics in India (Deep Dive). Aminsa brings you verified insights on Indian Economy / Startups / Markets. #Aminsa #Shorts #Economy</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-4', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-4" style="font-size: 11px;">Warm camel-tan tailored blazer paired with a crisp cream silk shirt</div>
+                <div id="table-wardrobe-4" style="font-size: 11px;">Ivory White chanderi silk linen collared shirt with rolled cuffs featuring geometric block motifs, complemented by matte silver cuff bracelet</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-4', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-4" style="font-size: 11px;">Venture capital investor lounge with panoramic city skyline windows</div>
+                <div id="table-loc-4" style="font-size: 11px;">Corporate High-Rise Boardroom in Sleek glass and brushed brass executive boardroom, featuring Polished granite conference table, subtle financial market tickers. Natural afternoon daylight through floor-to-ceiling panoramic glass with Bengaluru and Mumbai high-rise skyline visible in soft haze</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-4', this)">Copy</button>
             </td>
         </tr>
@@ -1453,32 +1451,27 @@ What are your thoughts on this? Drop your perspective in the comments!
             <td class="cat-cell">Indian Culture, Art & Regional Heritage</td>
             <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">HINGLISH</span></td>
             <td class="title-cell">
-                <div id="table-title-5">Rich Indian cultural traditions, crafts and regional heritage celebrated across states</div>
+                <div id="table-title-5">The Mathematical Perfection and Architectural Acoustics of Chola Dynasty Temples (Deep Dive)</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-title-5', this)">Copy</button>
             </td>
             <td class="code-cell">
-                <div id="table-vid-5">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Rich Indian cultural traditions, crafts and regional heritage celebrated across states. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <div id="table-vid-5">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: The Mathematical Perfection and Architectural Acoustics of Chola Dynasty Temples (Deep Dive). Attire: Mustard Yellow raw silk elegant tussar silk kurta with woven border featuring delicate chalk pinstripes, complemented by minimalist rose-gold chain. Environment: Artisan Heritage Pavilion in Ornate terracotta pavilion with exposed timber beams, featuring Traditional brass oil lamps, hand-woven textile tapestries. Warm candlelit glow complemented by soft twilight exterior with Intricate traditional architectural corridors receding in background. Cinematic 9:16 vertical 60fps video.</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-vid-5', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-yt-5" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">Rich Indian cultural traditions, crafts and regional heritage #Aminsa #Shorts #Culture</div>
+                <div id="table-yt-5" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">The Mathematical Perfection and Architectural Acoustics of Chola #Aminsa #Shorts #Culture</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-yt-5', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-cap-5" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ Rich Indian cultural traditions, crafts and regional heritage celebrated across states
-
-Aminsa brings you today's live update on Indian Culture, Art & Regional Heritage.
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #cultureheritage #DailyTrends #IndiaUpdates</div>
+                <div id="table-cap-5" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">The Mathematical Perfection and Architectural Acoustics of Chola Dynasty Temples (Deep Dive). Aminsa brings you verified insights on Culture / Art / Regional Heritage. #Aminsa #Shorts #Culture</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-5', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-5" style="font-size: 11px;">Graceful maroon and gold Bagru printed kurti with delicate silver cuffs</div>
+                <div id="table-wardrobe-5" style="font-size: 11px;">Mustard Yellow raw silk elegant tussar silk kurta with woven border featuring delicate chalk pinstripes, complemented by minimalist rose-gold chain</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-5', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-5" style="font-size: 11px;">Traditional Indian courtyard with carved jharokha window balconies</div>
+                <div id="table-loc-5" style="font-size: 11px;">Artisan Heritage Pavilion in Ornate terracotta pavilion with exposed timber beams, featuring Traditional brass oil lamps, hand-woven textile tapestries. Warm candlelit glow complemented by soft twilight exterior with Intricate traditional architectural corridors receding in background</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-5', this)">Copy</button>
             </td>
         </tr>
@@ -1489,32 +1482,27 @@ What are your thoughts on this? Drop your perspective in the comments!
             <td class="cat-cell">Bollywood, OTT & Entertainment Trends</td>
             <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">HINGLISH</span></td>
             <td class="title-cell">
-                <div id="table-title-6">Cinema and OTT entertainment buzz with audience excitement and new releases</div>
+                <div id="table-title-6">The Cinematic Art of Color Grading and Visual Storytelling in Indian Cinema (Deep Dive)</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-title-6', this)">Copy</button>
             </td>
             <td class="code-cell">
-                <div id="table-vid-6">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Cinema and OTT entertainment buzz with audience excitement and new releases. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <div id="table-vid-6">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: The Cinematic Art of Color Grading and Visual Storytelling in Indian Cinema (Deep Dive). Attire: Olive Green tussar silk asymmetrical tunic over tapered trousers featuring clean monochrome solid, complemented by minimalist rose-gold chain. Environment: Cinematic Studio Lounge in Art deco media lounge with velvet acoustics, featuring Vintage microphone stand, acoustic wood slat walls, golden fairy lights. Warm golden bokeh with dramatic shallow depth of field with Cozy cinematic lounge with diffused golden light spheres. Cinematic 9:16 vertical 60fps video.</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-vid-6', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-yt-6" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">Cinema and OTT entertainment buzz with audience excitement and new #Aminsa #Shorts #Bollywood</div>
+                <div id="table-yt-6" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">The Cinematic Art of Color Grading and Visual Storytelling in Indian #Aminsa #Shorts #Bollywood</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-yt-6', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-cap-6" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ Cinema and OTT entertainment buzz with audience excitement and new releases
-
-Aminsa brings you today's live update on Bollywood, OTT & Entertainment Trends.
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #bollywoodtrends #DailyTrends #IndiaUpdates</div>
+                <div id="table-cap-6" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">The Cinematic Art of Color Grading and Visual Storytelling in Indian Cinema (Deep Dive). Aminsa brings you verified insights on Bollywood / OTT / Entertainment. #Aminsa #Shorts #Bollywood</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-6', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-6" style="font-size: 11px;">Sleek emerald green contemporary trouser suit with dainty gold layered chain</div>
+                <div id="table-wardrobe-6" style="font-size: 11px;">Olive Green tussar silk asymmetrical tunic over tapered trousers featuring clean monochrome solid, complemented by minimalist rose-gold chain</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-6', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-6" style="font-size: 11px;">Modern cinema studio set with warm ambient spotlights and directors chair</div>
+                <div id="table-loc-6" style="font-size: 11px;">Cinematic Studio Lounge in Art deco media lounge with velvet acoustics, featuring Vintage microphone stand, acoustic wood slat walls, golden fairy lights. Warm golden bokeh with dramatic shallow depth of field with Cozy cinematic lounge with diffused golden light spheres</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-6', this)">Copy</button>
             </td>
         </tr>
@@ -1525,32 +1513,27 @@ What are your thoughts on this? Drop your perspective in the comments!
             <td class="cat-cell">ISRO, Space & Indian Innovations</td>
             <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">HINGLISH</span></td>
             <td class="title-cell">
-                <div id="table-title-7">ISRO space missions and indigenous science innovations advancing national pride</div>
+                <div id="table-title-7">How ISRO's Slingshot Gravitational Assist Saves Rocket Fuel on Deep Space Missions (Deep Dive)</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-title-7', this)">Copy</button>
             </td>
             <td class="code-cell">
-                <div id="table-vid-7">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: ISRO space missions and indigenous science innovations advancing national pride. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <div id="table-vid-7">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: How ISRO s Slingshot Gravitational Assist Saves Rocket Fuel on Deep Space Missions (Deep Dive). Attire: Deep Wine matte satin linen collared shirt with rolled cuffs featuring delicate chalk pinstripes, complemented by delicate oxidized silver jhumkas. Environment: Space Flight Observatory in Dome observatory control center, featuring Astronomical star chart projections, satellite telemetry telemetry consoles. Starlight ambient illumination with gentle amber console backlights with Open observatory dome revealing deep twilight sky and constellations. Cinematic 9:16 vertical 60fps video.</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-vid-7', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-yt-7" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">ISRO space missions and indigenous science innovations advancing #Aminsa #Shorts #ISRO</div>
+                <div id="table-yt-7" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">How ISRO s Slingshot Gravitational Assist Saves Rocket Fuel on Deep Space #Aminsa #Shorts #ISRO</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-yt-7', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-cap-7" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ ISRO space missions and indigenous science innovations advancing national pride
-
-Aminsa brings you today's live update on ISRO, Space & Indian Innovations.
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #scienceisro #DailyTrends #IndiaUpdates</div>
+                <div id="table-cap-7" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">How ISRO's Slingshot Gravitational Assist Saves Rocket Fuel on Deep Space Missions (Deep Dive). Aminsa brings you verified insights on ISRO / Space / Innovation. #Aminsa #Shorts #ISRO</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-7', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-7" style="font-size: 11px;">Astronomy-inspired deep navy tailored blazer with silver stellar badge</div>
+                <div id="table-wardrobe-7" style="font-size: 11px;">Deep Wine matte satin linen collared shirt with rolled cuffs featuring delicate chalk pinstripes, complemented by delicate oxidized silver jhumkas</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-7', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-7" style="font-size: 11px;">Astronomical telescope dome facility looking out at star field</div>
+                <div id="table-loc-7" style="font-size: 11px;">Space Flight Observatory in Dome observatory control center, featuring Astronomical star chart projections, satellite telemetry telemetry consoles. Starlight ambient illumination with gentle amber console backlights with Open observatory dome revealing deep twilight sky and constellations</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-7', this)">Copy</button>
             </td>
         </tr>
@@ -1561,32 +1544,27 @@ What are your thoughts on this? Drop your perspective in the comments!
             <td class="cat-cell">Future Tech & Developer Ecosystem</td>
             <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">ENGLISH</span></td>
             <td class="title-cell">
-                <div id="table-title-8">Next-generation developer frameworks and open-source breakthroughs gaining momentum</div>
+                <div id="table-title-8">Why Memory Safety & Ownership Models Make Modern Systems Resilient Against Exploits (Deep Dive)</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-title-8', this)">Copy</button>
             </td>
             <td class="code-cell">
-                <div id="table-vid-8">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Next-generation developer frameworks and open-source breakthroughs gaining momentum. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <div id="table-vid-8">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: Why Memory Safety & Ownership Models Make Modern Systems Resilient Against Exploits (Deep Dive). Attire: Slate Blue raw silk relaxed satin co-ord set with minimalist collar featuring woven zari border accents, complemented by minimalist rose-gold chain. Environment: AI Research Studio in Futuristic minimalist laboratory, featuring Transparent glowing holographic data displays, server rack indicator lights. Cool cyan and soft white edge lighting with subtle blue volumetric haze with Deep studio depth with softly blurred fiber-optic cables. Cinematic 9:16 vertical 60fps video.</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-vid-8', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-yt-8" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">Next-generation developer frameworks and open-source breakthroughs #Aminsa #Shorts #Tech</div>
+                <div id="table-yt-8" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">Why Memory Safety & Ownership Models Make Modern Systems Resilient Against #Aminsa #Shorts #Tech</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-yt-8', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-cap-8" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ Next-generation developer frameworks and open-source breakthroughs gaining momentum
-
-Aminsa brings you today's live update on Future Tech & Developer Ecosystem.
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #futuretech #DailyTrends #IndiaUpdates</div>
+                <div id="table-cap-8" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">Why Memory Safety & Ownership Models Make Modern Systems Resilient Against Exploits (Deep Dive). Aminsa brings you verified insights on Future Technology / Developer Ecosystem. #Aminsa #Shorts #Tech</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-8', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-8" style="font-size: 11px;">Futuristic matte obsidian cyber-jacket with clean mandarin collar</div>
+                <div id="table-wardrobe-8" style="font-size: 11px;">Slate Blue raw silk relaxed satin co-ord set with minimalist collar featuring woven zari border accents, complemented by minimalist rose-gold chain</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-8', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-8" style="font-size: 11px;">Quantum computing server hall with ambient purple luminescence</div>
+                <div id="table-loc-8" style="font-size: 11px;">AI Research Studio in Futuristic minimalist laboratory, featuring Transparent glowing holographic data displays, server rack indicator lights. Cool cyan and soft white edge lighting with subtle blue volumetric haze with Deep studio depth with softly blurred fiber-optic cables</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-8', this)">Copy</button>
             </td>
         </tr>
@@ -1597,32 +1575,27 @@ What are your thoughts on this? Drop your perspective in the comments!
             <td class="cat-cell">Global Affairs (India's Lens)</td>
             <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">HINGLISH</span></td>
             <td class="title-cell">
-                <div id="table-title-9">India's strategic global partnerships and international diplomacy at key forums</div>
+                <div id="table-title-9">The Strategic Geopolitics of Global Maritime Chokepoints and India's Maritime Vision (Deep Dive)</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-title-9', this)">Copy</button>
             </td>
             <td class="code-cell">
-                <div id="table-vid-9">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Indias strategic global partnerships and international diplomacy at key forums. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <div id="table-vid-9">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: The Strategic Geopolitics of Global Maritime Chokepoints and India s Maritime Vision (Deep Dive). Attire: Olive Green pure linen tailored blazer over silk shell blouse featuring clean monochrome solid, complemented by dainty freshwater pearl studs. Environment: Contemporary Newsroom Studio in High-ceiling broadcast auditorium, featuring Backlit topographic map of India on frosted glass panels. Balanced 5600K broadcast key light with soft warm backfill with Tiered broadcast newsroom desks softly out of focus. Cinematic 9:16 vertical 60fps video.</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-vid-9', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-yt-9" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">India s strategic global partnerships and international diplomacy #Aminsa #Shorts #Geopolitics</div>
+                <div id="table-yt-9" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">The Strategic Geopolitics of Global Maritime Chokepoints and India s #Aminsa #Shorts #Global</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-yt-9', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-cap-9" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ India's strategic global partnerships and international diplomacy at key forums
-
-Aminsa brings you today's live update on Global Affairs (India's Lens).
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #globalaffairs #DailyTrends #IndiaUpdates</div>
+                <div id="table-cap-9" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">The Strategic Geopolitics of Global Maritime Chokepoints and India's Maritime Vision (Deep Dive). Aminsa brings you verified insights on Global Affairs through India's Lens. #Aminsa #Shorts #Global</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-9', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-9" style="font-size: 11px;">Deep olive-grey formal blazer over an off-white silk shell top</div>
+                <div id="table-wardrobe-9" style="font-size: 11px;">Olive Green pure linen tailored blazer over silk shell blouse featuring clean monochrome solid, complemented by dainty freshwater pearl studs</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-9', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-9" style="font-size: 11px;">Global multilateral conference hall with polished mahogany desk</div>
+                <div id="table-loc-9" style="font-size: 11px;">Contemporary Newsroom Studio in High-ceiling broadcast auditorium, featuring Backlit topographic map of India on frosted glass panels. Balanced 5600K broadcast key light with soft warm backfill with Tiered broadcast newsroom desks softly out of focus</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-9', this)">Copy</button>
             </td>
         </tr>
@@ -1633,32 +1606,27 @@ What are your thoughts on this? Drop your perspective in the comments!
             <td class="cat-cell">Morning Health, Yoga & Wellness</td>
             <td class="center nowrap"><span class="category-pill" style="font-size:10px; padding:2px 6px;">HINGLISH</span></td>
             <td class="title-cell">
-                <div id="table-title-10">Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy</div>
+                <div id="table-title-10">The Neurobiology of Deep Rest and Morning Sunlight Exposure on Circadian Rhythm (Deep Dive)</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-title-10', this)">Copy</button>
             </td>
             <td class="code-cell">
-                <div id="table-vid-10">Aminsa speaking expressively to camera with confident smile, lively eye contact and natural hand gestures discussing: Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy. Cinematic 9:16 vertical motion, fluid 60fps video.</div>
+                <div id="table-vid-10">Fictional virtual presenter Aminsa (Reference: character/aminsa_face_master_4k.png, photorealistic natural Indian female anchor, warm porcelain wheatish complexion, confident expressive smile, lively direct eye contact, natural hand gestures). She is presenting: The Neurobiology of Deep Rest and Morning Sunlight Exposure on Circadian Rhythm (Deep Dive). Attire: Emerald Green raw silk asymmetrical tunic over tapered trousers featuring clean monochrome solid, complemented by matte silver cuff bracelet. Environment: Botanical Wellness Terrace in Minimalist wooden deck surrounded by bamboo groves, featuring Earthen planters, smooth river stones, trickling water fountain. Gentle dawn sunlight with crisp clean morning freshness with Lush verdant botanical foliage with soft natural morning mist. Cinematic 9:16 vertical 60fps video.</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-vid-10', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-yt-10" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">Holistic Indian wellness routines, yoga and balanced lifestyle practices #Aminsa #Shorts #Yoga</div>
+                <div id="table-yt-10" style="font-size: 11.5px; color: #fbbf24; font-weight: 500;">The Neurobiology of Deep Rest and Morning Sunlight Exposure on Circadian #Aminsa #Shorts #Yoga</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-yt-10', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-cap-10" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">✨ Holistic Indian wellness routines, yoga and balanced lifestyle practices for daily energy
-
-Aminsa brings you today's live update on Morning Health, Yoga & Wellness.
-What are your thoughts on this? Drop your perspective in the comments!
-
-#Aminsa #IndiaFirst #wellnesshealth #DailyTrends #IndiaUpdates</div>
+                <div id="table-cap-10" style="max-height: 100px; overflow-y: auto; white-space: pre-line; font-size: 11px;">The Neurobiology of Deep Rest and Morning Sunlight Exposure on Circadian Rhythm (Deep Dive). Aminsa brings you verified insights on Health / Yoga / Wellness. #Aminsa #Shorts #Yoga</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-cap-10', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-wardrobe-10" style="font-size: 11px;">Pure white breathable organic cotton kurta with pale lavender piping</div>
+                <div id="table-wardrobe-10" style="font-size: 11px;">Emerald Green raw silk asymmetrical tunic over tapered trousers featuring clean monochrome solid, complemented by matte silver cuff bracelet</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-wardrobe-10', this)">Copy</button>
             </td>
             <td class="text-cell">
-                <div id="table-loc-10" style="font-size: 11px;">Sunlit meditation deck surrounded by calming water lilies and greenery</div>
+                <div id="table-loc-10" style="font-size: 11px;">Botanical Wellness Terrace in Minimalist wooden deck surrounded by bamboo groves, featuring Earthen planters, smooth river stones, trickling water fountain. Gentle dawn sunlight with crisp clean morning freshness with Lush verdant botanical foliage with soft natural morning mist</div>
                 <button class="table-copy-btn" onclick="copyFromId('table-loc-10', this)">Copy</button>
             </td>
         </tr>
@@ -1740,6 +1708,54 @@ What are your thoughts on this? Drop your perspective in the comments!
         </div>
     </div>
 
+    <!-- TAB 4: ECOSYSTEM HEALTH & SYNC -->
+    <div id="tab-health" class="tab-content">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; margin-bottom: 20px;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 18px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="font-size: 14px; font-weight: 700; color: #fff;">💻 Laptop Orchestrator</span>
+                    <span style="background: rgba(16, 163, 127, 0.2); color: #6ee7b7; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700;">ACTIVE</span>
+                </div>
+                <div style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.7;">
+                    <div>• <strong>Role:</strong> Primary Intelligence &amp; Master Scheduler</div>
+                    <div>• <strong>Engines:</strong> Google News RSS &bull; 30-Day Anti-Repetition &bull; Openpyxl</div>
+                    <div>• <strong>Ledger DB:</strong> SQLite (18 production tables active)</div>
+                    <div>• <strong>Timezone:</strong> Asia/Kolkata (IST 08:00 AM Cycle)</div>
+                </div>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 18px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="font-size: 14px; font-weight: 700; color: #fff;">📱 OPPO A78 5G Mobile Worker</span>
+                    <span style="background: rgba(56, 189, 248, 0.2); color: #7dd3fc; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700;">STANDALONE OK</span>
+                </div>
+                <div style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.7;">
+                    <div>• <strong>Node ID:</strong> oppo_a78_5g_termux</div>
+                    <div>• <strong>Environment:</strong> Android 15 &bull; Termux &bull; Google AI Edge</div>
+                    <div>• <strong>Services:</strong> Web Hub Port 8765 &bull; Wake-Lock Persistent</div>
+                    <div>• <strong>Offline Queue:</strong> Self-sufficient local production fallback</div>
+                </div>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 18px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="font-size: 14px; font-weight: 700; color: #fff;">🛡️ Safety &amp; Production Guardrails</span>
+                    <a href="/kill_switch/toggle" style="text-decoration:none;" title="Click to Emergency Pause"><span style="background: rgba(16, 163, 127, 0.2); border: 1px solid #10a37f; color: #6ee7b7; padding: 5px 12px; border-radius: 14px; font-size: 11px; font-weight: 700; cursor: pointer;">🟢 PROD ACTIVE</span></a>
+                </div>
+                <div style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.7;">
+                    <div>• <strong>Auto-Publishing:</strong> STRICTLY DISABLED (Drafts Only)</div>
+                    <div>• <strong>Face Anchor:</strong> aminsa_face_master_4k.png (Locked 4K Master)</div>
+                    <div>• <strong>Shorts Title Limit:</strong> Enforced &le; 100 characters</div>
+                    <div style="margin-top: 10px;">
+                        <a href="/kill_switch/toggle" style="display: inline-block; padding: 8px 14px; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); color: #fca5a5; text-decoration: none; border-radius: 8px; font-size: 12px; font-weight: 600;">
+                            ⚡ Toggle Emergency Software Kill Switch
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- FLOATING BOTTOM BAR -->
     <div class="bottom-action-bar">
         <button class="bottom-btn all" onclick="copyAll10Slots()">
@@ -1761,6 +1777,7 @@ What are your thoughts on this? Drop your perspective in the comments!
             document.getElementById(tabId).classList.add('active');
             if (tabId === 'tab-chat') document.getElementById('btn-tab-chat').classList.add('active');
             if (tabId === 'tab-table') document.getElementById('btn-tab-table').classList.add('active');
+            if (tabId === 'tab-health') document.getElementById('btn-tab-health').classList.add('active');
             if (tabId === 'tab-dna') document.getElementById('btn-tab-dna').classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -1814,7 +1831,7 @@ What are your thoughts on this? Drop your perspective in the comments!
         }
 
         function copyAll10Slots() {
-            let allText = "🌟 AMINSA DAILY MASTER PRODUCTION SCHEDULE\nDate: Wednesday, 18 November 2026\n\n";
+            let allText = "🌟 AMINSA DAILY MASTER PRODUCTION SCHEDULE\nDate: Tuesday, 24 November 2026\n\n";
             for (let i = 1; i <= 10; i++) {
                 const s = document.getElementById("script-" + i);
                 const v = document.getElementById("vid-" + i);

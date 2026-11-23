@@ -277,6 +277,26 @@ def build_chatgpt_html(date_str, mobile_slots, dna_rows=None):
             background: rgba(16, 163, 127, 0.4);
         }}
 
+        .next-pill {{
+            background: rgba(56, 189, 248, 0.2);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #7dd3fc;
+            padding: 4px 10px;
+            border-radius: 14px;
+            font-size: 11px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.15s;
+        }}
+
+        .next-pill:active {{
+            transform: scale(0.95);
+            background: rgba(56, 189, 248, 0.4);
+        }}
+
         .status-dot {{
             width: 8px;
             height: 8px;
@@ -714,12 +734,28 @@ def build_chatgpt_html(date_str, mobile_slots, dna_rows=None):
         </div>
         <div style="display: flex; align-items: center; gap: 8px;">
             {kill_badge}
+            <a href="/next" class="next-pill" onclick="this.innerHTML='&#x23F3; Advancing...';">
+                <span>&#x23ED;</span> NEXT Cycle
+            </a>
             <a href="/refresh" class="refresh-pill" onclick="this.innerHTML='&#x23F3; Harvesting...';">
                 <span>&#x1F504;</span> Refresh Live
             </a>
             <div style="font-size: 11px; color: var(--accent-cyan); font-weight: 600;">
                 10 Slots &bull; 2.4h Loop
             </div>
+        </div>
+    </div>
+
+    <!-- DUAL-AI & ECOSYSTEM METADATA STATUS BANNER -->
+    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 8px 12px; margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; font-size: 11.5px; color: var(--text-secondary);">
+        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <span>💻 <strong>Laptop AI:</strong> <span style="color:#6ee7b7; font-weight:600;">MSA_AI_AGENT_LAPTOP</span></span>
+            <span>📱 <strong>Mobile AI:</strong> <span style="color:#7dd3fc; font-weight:600;">GOOGLE_AI_EDGE_MOBILE</span></span>
+            <span>📊 <strong>Status:</strong> <span style="color:#fcd34d; font-weight:600;">10/10 Slots [DRAFT]</span></span>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <span style="color: #a7f3d0; background: rgba(16,163,127,0.15); padding: 2px 8px; border-radius: 6px; font-weight:600;">✓ 30-Day Anti-Repetition</span>
+            <span style="color: #94a3b8; background: rgba(148,163,184,0.12); padding: 2px 8px; border-radius: 6px; font-weight:600;">🔒 Zero Auto-Publish</span>
         </div>
     </div>
 

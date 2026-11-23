@@ -29,6 +29,10 @@ scratch_test/
 
 # 4. Heavy Video Outputs & Media Temporary Renders (Prevents GitHub 100MB limit)
 exports/reels/*
+exports/reels_1min/*
+exports/instagram_feed/*
+exports/daily_packs/*
+daily_generated_images/
 exports/films_10min/*
 exports/epics_1hr/*
 exports/temp/*
@@ -38,6 +42,7 @@ exports/temp/*
 *.mkv
 *.wav
 *.mp3
+*.ass
 
 # 5. Root Diagnostics & Temporary UI Screenshots
 /*.png

@@ -129,6 +129,64 @@ def ensure_fresh_catalog(force_refresh=False):
     return _CACHED_HTML
 
 
+def advance_to_next_cycle():
+    """
+    Safely advances the active production cycle to the next calendar date.
+    Performs fresh Google News harvesting, historical anti-repetition check,
+    and updates both HTML catalog and Excel workbook in DRAFT status.
+    """
+    global _CACHED_HTML, _CACHED_EXCEL_BYTES, _CACHED_DATE, _CACHED_SLOT_INDEX, _LAST_HARVEST_TIME
+    from datetime import timedelta
+    
+    now = datetime.now()
+    if _CACHED_DATE:
+        try:
+            curr = datetime.strptime(_CACHED_DATE, "%Y-%m-%d")
+            next_date = curr + timedelta(days=1)
+        except Exception:
+            next_date = now + timedelta(days=1)
+    else:
+        next_date = now + timedelta(days=1)
+        
+    date_key = next_date.strftime("%Y-%m-%d")
+    print(f"[*] [Aminsa NEXT] Triggering Next Daily Cycle for: {date_key}...")
+    
+    try:
+        date_str, slots, dna = get_current_day_data(next_date)
+        html_str = build_chatgpt_html(date_str, slots, dna)
+        _CACHED_HTML = html_str.encode("utf-8")
+        _CACHED_DATE = date_key
+        _CACHED_SLOT_INDEX = 0
+        _LAST_HARVEST_TIME = time.time()
+        
+        primary_excel = os.path.join(SCRIPT_DIR, "Aminsa_Master_Production_Catalog.xlsx")
+        primary_html = os.path.join(SCRIPT_DIR, "Aminsa_Master_Production_Catalog.html")
+        generate_master_excel(primary_excel, next_date)
+        with open(primary_html, "wb") as f:
+            f.write(_CACHED_HTML)
+        if os.path.exists(primary_excel):
+            with open(primary_excel, "rb") as f:
+                _CACHED_EXCEL_BYTES = f.read()
+                
+        # Mirror updated files across search directories
+        for d in SEARCH_DIRS:
+            if os.path.exists(d) and d != SCRIPT_DIR:
+                try:
+                    dst_x = os.path.join(d, "Aminsa_Master_Production_Catalog.xlsx")
+                    dst_h = os.path.join(d, "Aminsa_Master_Production_Catalog.html")
+                    if _CACHED_EXCEL_BYTES:
+                        with open(dst_x, "wb") as f:
+                            f.write(_CACHED_EXCEL_BYTES)
+                    with open(dst_h, "wb") as f:
+                        f.write(_CACHED_HTML)
+                except Exception:
+                    pass
+        print(f"[✓] [Aminsa NEXT] Successfully generated cycle {date_key} (10 slots in DRAFT state).")
+    except Exception as e:
+        print(f"[-] [Aminsa NEXT] Error advancing cycle: {e}")
+    return _CACHED_HTML
+
+
 class AminsaWebHandler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         # Silent logging to prevent console flood
@@ -192,6 +250,15 @@ class AminsaWebHandler(BaseHTTPRequestHandler):
         # 5. 1-Tap Manual Force Refresh Endpoint
         if self.path in ["/refresh", "/api/refresh"]:
             ensure_fresh_catalog(force_refresh=True)
+            self.send_response(302)
+            self.send_header("Location", "/")
+            self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+            self.end_headers()
+            return
+
+        # 6. NEXT — Generate Next Daily Production Cycle Endpoint
+        if self.path in ["/next", "/api/next"]:
+            advance_to_next_cycle()
             self.send_response(302)
             self.send_header("Location", "/")
             self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
