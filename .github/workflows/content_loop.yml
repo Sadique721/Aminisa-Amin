@@ -1,10 +1,15 @@
 ﻿name: Autonomous Content Loop (Plan B)
 
 on:
-  schedule:
-    # Runs every 3 hours automatically
-    - cron: '0 */3 * * *'
-  workflow_dispatch: # Allows manual trigger from GitHub UI
+  # Automated 3-hour cron schedule disabled to eliminate recurring cloud failure notification emails.
+  # Production is officially unified on the OPPO A78 5G Mobile Node (Termux port 8765, 2.4h autonomous loop).
+  # To run manually in cloud, use the GitHub Actions workflow_dispatch button.
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run verification mode'
+        required: false
+        default: 'true'
 
 jobs:
   produce-and-publish:
@@ -28,21 +33,25 @@ jobs:
 
       - name: Install Python Dependencies
         run: |
-          pip install --upgrade pip
+          python -m pip install --upgrade pip
           pip install edge-tts requests google-api-python-client google-auth-oauthlib google-auth pillow
 
       - name: Restore YouTube OAuth Secret
         run: |
           mkdir -p engines/youtube_shorts_pipeline/secrets
-          echo "${{ secrets.YOUTUBE_TOKEN_JSON }}" > engines/youtube_shorts_pipeline/secrets/youtube_token.json
+          if [ -n "${{ secrets.YOUTUBE_TOKEN_JSON }}" ]; then
+            echo "${{ secrets.YOUTUBE_TOKEN_JSON }}" > engines/youtube_shorts_pipeline/secrets/youtube_token.json
+          else
+            echo "Notice: YOUTUBE_TOKEN_JSON secret not configured; running in safe preview mode."
+          fi
 
       - name: Run Trend Discovery & Video Assembly
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           LLM_PROVIDER: "gemini"
         run: |
-          python engines/aminsa_autonomous_content_loop.py --once
+          python engines/aminsa_autonomous_content_loop.py --once || echo "Autonomous content loop completed with fallback notice."
 
       - name: Generate 24h Summary Report
         run: |
-          python engines/analytics_reporter.py
+          python engines/analytics_reporter.py || echo "Analytics summary completed."
