@@ -75,6 +75,29 @@ def ensure_fresh_catalog(force_refresh=False):
     curr_slot = get_current_slot_index()
     elapsed = time.time() - _LAST_HARVEST_TIME
 
+    # Fast bootstrap from existing disk cache on startup
+    if _CACHED_HTML is None and not force_refresh:
+        for d in [SCRIPT_DIR, ROOT_DIR] + SEARCH_DIRS:
+            candidate_h = os.path.join(d, "Aminsa_Master_Production_Catalog.html")
+            candidate_x = os.path.join(d, "Aminsa_Master_Production_Catalog.xlsx")
+            if os.path.exists(candidate_h) and _CACHED_HTML is None:
+                try:
+                    with open(candidate_h, "rb") as f:
+                        _CACHED_HTML = f.read()
+                        _CACHED_DATE = date_key
+                        _CACHED_SLOT_INDEX = curr_slot
+                        _LAST_HARVEST_TIME = time.time()
+                except Exception:
+                    pass
+            if os.path.exists(candidate_x) and _CACHED_EXCEL_BYTES is None:
+                try:
+                    with open(candidate_x, "rb") as f:
+                        _CACHED_EXCEL_BYTES = f.read()
+                except Exception:
+                    pass
+        if _CACHED_HTML:
+            return _CACHED_HTML
+
     needs_refresh = (
         force_refresh or
         _CACHED_HTML is None or
