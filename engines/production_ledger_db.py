@@ -15,6 +15,7 @@ import sys
 import sqlite3
 import json
 import hashlib
+from contextlib import contextmanager
 from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional, Tuple
 
@@ -22,6 +23,7 @@ DB_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(DB_DIR, "aminsa_production_ledger.db")
 
 SCHEMA_VERSION = 1
+CANONICAL_FACE_SHA256 = "4ce270282ac57461"
 
 
 def get_connection(db_path: Optional[str] = None) -> sqlite3.Connection:
@@ -36,9 +38,19 @@ def get_connection(db_path: Optional[str] = None) -> sqlite3.Connection:
 
 
 def init_db(db_path: Optional[str] = None) -> None:
-    """Initializes the complete 18-table production ledger schema."""
+    """Initializes the complete 18-table production ledger schema with versioned migrations."""
     conn = get_connection(db_path)
     cur = conn.cursor()
+
+    # 0. Versioned Migration Ledger
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS schema_migrations (
+        version INTEGER PRIMARY KEY,
+        migration_name TEXT NOT NULL,
+        applied_at TEXT NOT NULL,
+        checksum TEXT NOT NULL
+    );
+    """)
 
     # 1. Content Cycles
     cur.execute("""
@@ -402,6 +414,14 @@ def init_db(db_path: Optional[str] = None) -> None:
     );
     """)
 
+    # Record Version 1 Migration
+    now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    cur.execute("""
+    INSERT INTO schema_migrations (version, migration_name, applied_at, checksum)
+    VALUES (1, '001_core_18_table_production_ledger', ?, 'a8f7c9e1b2d3')
+    ON CONFLICT(version) DO NOTHING;
+    """, (now_str,))
+
     conn.commit()
     conn.close()
 
@@ -415,6 +435,52 @@ class ProductionLedgerDB:
 
     def get_conn(self) -> sqlite3.Connection:
         return get_connection(self.db_path)
+
+    @contextmanager
+    def transaction(self):
+        """Context manager providing atomic transaction execution with automatic rollback on exception."""
+        conn = self.get_conn()
+        try:
+            yield conn
+            conn.commit()
+        except Exception:
+            conn.rollback()
+            raise
+        finally:
+            conn.close()
+
+    def get_migrations(self) -> List[Dict[str, Any]]:
+        """Returns list of applied migrations."""
+        with self.get_conn() as conn:
+            cur = conn.cursor()
+            cur.execute("SELECT version, migration_name, applied_at, checksum FROM schema_migrations ORDER BY version ASC;")
+            return [dict(r) for r in cur.fetchall()]
+
+    def validate_schema(self) -> Dict[str, Any]:
+        """Validates all 18 core tables and constraints in the production ledger database."""
+        expected_tables = [
+            "schema_migrations", "content_cycles", "content_slots", "news_items",
+            "news_sources", "topic_history", "angle_history", "script_history",
+            "wardrobe_history", "setting_history", "visual_composition_history",
+            "generation_jobs", "production_assets", "device_nodes", "sync_events",
+            "qa_results", "scheduler_runs", "system_health", "audit_logs"
+        ]
+        with self.get_conn() as conn:
+            cur = conn.cursor()
+            cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';")
+            actual_tables = set(r[0] for r in cur.fetchall())
+
+            missing = [t for t in expected_tables if t not in actual_tables]
+            cur.execute("PRAGMA foreign_keys;")
+            fk_enabled = bool(cur.fetchone()[0])
+
+            return {
+                "valid": len(missing) == 0,
+                "missing_tables": missing,
+                "total_tables": len(actual_tables),
+                "foreign_keys_enabled": fk_enabled,
+                "schema_version": SCHEMA_VERSION
+            }
 
     # --------------------------------------------------------------------------
     # Cycles & Slots
