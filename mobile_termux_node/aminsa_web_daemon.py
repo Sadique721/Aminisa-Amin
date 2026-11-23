@@ -12,6 +12,7 @@ Strict Rules:
 
 import os
 import sys
+import json
 import time
 import socket
 from datetime import datetime
@@ -20,9 +21,24 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if SCRIPT_DIR not in sys.path:
     sys.path.insert(0, SCRIPT_DIR)
+ROOT_DIR = os.path.dirname(SCRIPT_DIR)
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
 
 from aminsa_catalog_engine import generate_master_excel, get_current_day_data
 from build_chatgpt_style_html import build_chatgpt_html
+
+try:
+    from engines.kill_switch import is_production_enabled, set_kill_switch, get_status as get_kill_status
+    HAS_KILL_SWITCH = True
+except Exception:
+    HAS_KILL_SWITCH = False
+
+try:
+    from engines.sync_manager import sync_manager
+    HAS_SYNC_MANAGER = True
+except Exception:
+    HAS_SYNC_MANAGER = False
 
 PORT = 8765
 
@@ -119,7 +135,61 @@ class AminsaWebHandler(BaseHTTPRequestHandler):
         pass
 
     def do_GET(self):
-        # 1. 1-Tap Manual Force Refresh Endpoint
+        # 1. Emergency Kill Switch Toggle Endpoint
+        if self.path in ["/kill_switch/toggle", "/api/kill_switch/toggle"]:
+            if HAS_KILL_SWITCH:
+                curr = is_production_enabled()
+                set_kill_switch(not curr, reason="Toggled via Web UI", actor="WEB_DASHBOARD")
+                ensure_fresh_catalog(force_refresh=True)
+            self.send_response(302)
+            self.send_header("Location", "/")
+            self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+            self.end_headers()
+            return
+
+        # 2. Kill Switch JSON Status Endpoint
+        if self.path in ["/kill_switch", "/api/kill_switch"]:
+            st = get_kill_status() if HAS_KILL_SWITCH else {"production_enabled": True}
+            data_bytes = json.dumps(st, indent=2).encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(data_bytes)))
+            self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+            self.end_headers()
+            self.wfile.write(data_bytes)
+            return
+
+        # 3. Ecosystem Sync Status Endpoint
+        if self.path in ["/sync/status", "/api/sync/status"]:
+            if HAS_SYNC_MANAGER:
+                st = sync_manager.get_ecosystem_status()
+            else:
+                st = {"status": "UNAVAILABLE", "message": "Sync manager not initialized"}
+            data_bytes = json.dumps(st, indent=2).encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(data_bytes)))
+            self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+            self.end_headers()
+            self.wfile.write(data_bytes)
+            return
+
+        # 4. Daily Production Pack JSON Endpoint (for ChatGPT or Mobile sync)
+        if self.path in ["/api/pack/today", "/pack/today"]:
+            if HAS_SYNC_MANAGER:
+                pack = sync_manager.export_sync_package()
+            else:
+                pack = {"status": "UNAVAILABLE"}
+            data_bytes = json.dumps(pack, indent=2).encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(data_bytes)))
+            self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+            self.end_headers()
+            self.wfile.write(data_bytes)
+            return
+
+        # 5. 1-Tap Manual Force Refresh Endpoint
         if self.path in ["/refresh", "/api/refresh"]:
             ensure_fresh_catalog(force_refresh=True)
             self.send_response(302)

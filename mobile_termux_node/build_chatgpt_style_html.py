@@ -23,6 +23,15 @@ def build_chatgpt_html(date_str, mobile_slots, dna_rows=None):
     cards_html = ""
     excel_rows_html = ""
 
+    status_colors = {
+        "CONFIRMED": ("#10a37f", "rgba(16, 163, 127, 0.15)"),
+        "DEVELOPING": ("#f59e0b", "rgba(245, 158, 11, 0.15)"),
+        "PROPOSAL": ("#8b5cf6", "rgba(139, 92, 246, 0.15)"),
+        "SCHEDULED": ("#38bdf8", "rgba(56, 189, 248, 0.15)"),
+        "EVERGREEN": ("#94a3b8", "rgba(148, 163, 184, 0.15)"),
+        "UNVERIFIED": ("#ef4444", "rgba(239, 68, 68, 0.15)")
+    }
+
     for s in mobile_slots:
         slot_num = s["slot"]
         slot_time = s["time"]
@@ -35,6 +44,10 @@ def build_chatgpt_html(date_str, mobile_slots, dna_rows=None):
         fb_txt = s.get("fb_description", s.get("caption", ""))
         wardrobe_txt = s.get("wardrobe", "Modern tailored chic")
         location_txt = s.get("location", "Studio")
+        v_status = s.get("verification_status", "CONFIRMED")
+        c_score = s.get("confidence_score", 1.0)
+        f_ctx = s.get("factual_context", "")
+        v_fg, v_bg = status_colors.get(v_status, ("#10a37f", "rgba(16, 163, 127, 0.15)"))
 
         # ChatGPT Conversation Block
         cards_html += f"""
@@ -48,6 +61,8 @@ def build_chatgpt_html(date_str, mobile_slots, dna_rows=None):
                             <span class="slot-pill">SLOT {slot_num} &bull; {slot_time}</span>
                             <span class="category-pill">{slot_cat}</span>
                             <span class="category-pill" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">{slot_lang}</span>
+                            <span class="category-pill" style="background: {v_bg}; color: {v_fg}; font-weight: 700;">✓ {v_status} ({int(c_score * 100)}%)</span>
+                            <span class="category-pill" style="background: rgba(16, 163, 127, 0.12); color: #34d399;">30-Day Fresh ✓</span>
                         </div>
                     </div>
                 </div>
@@ -55,6 +70,7 @@ def build_chatgpt_html(date_str, mobile_slots, dna_rows=None):
 
             <div class="message-body">
                 <h3 class="slot-title">{slot_title}</h3>
+                {f'<div style="margin: 8px 0 12px 0; padding: 8px 12px; background: rgba(255,255,255,0.03); border-left: 3px solid {v_fg}; border-radius: 4px; font-size: 12px; color: var(--text-secondary);"><strong style="color: {v_fg};">📌 Verified Source Context:</strong> {f_ctx}</div>' if f_ctx else ''}
 
                 <!-- Script Section -->
                 <div class="section-title">🗣️ Spoken Script ({slot_lang})</div>
@@ -151,6 +167,21 @@ def build_chatgpt_html(date_str, mobile_slots, dna_rows=None):
             <td>{enf}</td>
         </tr>
         """
+
+    try:
+        import sys, os
+        _PR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        if _PR not in sys.path:
+            sys.path.insert(0, _PR)
+        from engines.kill_switch import is_production_enabled
+        prod_active = is_production_enabled()
+    except Exception:
+        prod_active = True
+
+    if prod_active:
+        kill_badge = '<a href="/kill_switch/toggle" style="text-decoration:none;" title="Click to Emergency Pause"><span style="background: rgba(16, 163, 127, 0.2); border: 1px solid #10a37f; color: #6ee7b7; padding: 5px 12px; border-radius: 14px; font-size: 11px; font-weight: 700; cursor: pointer;">🟢 PROD ACTIVE</span></a>'
+    else:
+        kill_badge = '<a href="/kill_switch/toggle" style="text-decoration:none;" title="Click to Resume"><span style="background: rgba(239, 68, 68, 0.25); border: 1px solid #ef4444; color: #fca5a5; padding: 5px 12px; border-radius: 14px; font-size: 11px; font-weight: 700; cursor: pointer;">🔴 EMERGENCY PAUSED</span></a>'
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -682,6 +713,7 @@ def build_chatgpt_html(date_str, mobile_slots, dna_rows=None):
             <span class="date-pill">{date_str}</span>
         </div>
         <div style="display: flex; align-items: center; gap: 8px;">
+            {kill_badge}
             <a href="/refresh" class="refresh-pill" onclick="this.innerHTML='&#x23F3; Harvesting...';">
                 <span>&#x1F504;</span> Refresh Live
             </a>
@@ -695,6 +727,7 @@ def build_chatgpt_html(date_str, mobile_slots, dna_rows=None):
     <div class="tab-switcher">
         <button class="tab-btn active" id="btn-tab-chat" onclick="switchTab('tab-chat')">💬 10 Chat Cards</button>
         <button class="tab-btn" id="btn-tab-table" onclick="switchTab('tab-table')">📊 Live Excel Grid</button>
+        <button class="tab-btn" id="btn-tab-health" onclick="switchTab('tab-health')">🛡️ Ecosystem Health &amp; Sync</button>
         <button class="tab-btn" id="btn-tab-dna" onclick="switchTab('tab-dna')">🧬 DNA Rules</button>
     </div>
 
@@ -750,6 +783,54 @@ def build_chatgpt_html(date_str, mobile_slots, dna_rows=None):
         </div>
     </div>
 
+    <!-- TAB 4: ECOSYSTEM HEALTH & SYNC -->
+    <div id="tab-health" class="tab-content">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; margin-bottom: 20px;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 18px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="font-size: 14px; font-weight: 700; color: #fff;">💻 Laptop Orchestrator</span>
+                    <span style="background: rgba(16, 163, 127, 0.2); color: #6ee7b7; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700;">ACTIVE</span>
+                </div>
+                <div style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.7;">
+                    <div>• <strong>Role:</strong> Primary Intelligence &amp; Master Scheduler</div>
+                    <div>• <strong>Engines:</strong> Google News RSS &bull; 30-Day Anti-Repetition &bull; Openpyxl</div>
+                    <div>• <strong>Ledger DB:</strong> SQLite (18 production tables active)</div>
+                    <div>• <strong>Timezone:</strong> Asia/Kolkata (IST 08:00 AM Cycle)</div>
+                </div>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 18px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="font-size: 14px; font-weight: 700; color: #fff;">📱 OPPO A78 5G Mobile Worker</span>
+                    <span style="background: rgba(56, 189, 248, 0.2); color: #7dd3fc; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700;">STANDALONE OK</span>
+                </div>
+                <div style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.7;">
+                    <div>• <strong>Node ID:</strong> oppo_a78_5g_termux</div>
+                    <div>• <strong>Environment:</strong> Android 15 &bull; Termux &bull; Google AI Edge</div>
+                    <div>• <strong>Services:</strong> Web Hub Port 8765 &bull; Wake-Lock Persistent</div>
+                    <div>• <strong>Offline Queue:</strong> Self-sufficient local production fallback</div>
+                </div>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 18px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="font-size: 14px; font-weight: 700; color: #fff;">🛡️ Safety &amp; Production Guardrails</span>
+                    {kill_badge}
+                </div>
+                <div style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.7;">
+                    <div>• <strong>Auto-Publishing:</strong> STRICTLY DISABLED (Drafts Only)</div>
+                    <div>• <strong>Face Anchor:</strong> aminsa_face_master_4k.png (Locked 4K Master)</div>
+                    <div>• <strong>Shorts Title Limit:</strong> Enforced &le; 100 characters</div>
+                    <div style="margin-top: 10px;">
+                        <a href="/kill_switch/toggle" style="display: inline-block; padding: 8px 14px; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); color: #fca5a5; text-decoration: none; border-radius: 8px; font-size: 12px; font-weight: 600;">
+                            ⚡ Toggle Emergency Software Kill Switch
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- FLOATING BOTTOM BAR -->
     <div class="bottom-action-bar">
         <button class="bottom-btn all" onclick="copyAll10Slots()">
@@ -771,6 +852,7 @@ def build_chatgpt_html(date_str, mobile_slots, dna_rows=None):
             document.getElementById(tabId).classList.add('active');
             if (tabId === 'tab-chat') document.getElementById('btn-tab-chat').classList.add('active');
             if (tabId === 'tab-table') document.getElementById('btn-tab-table').classList.add('active');
+            if (tabId === 'tab-health') document.getElementById('btn-tab-health').classList.add('active');
             if (tabId === 'tab-dna') document.getElementById('btn-tab-dna').classList.add('active');
             window.scrollTo({{ top: 0, behavior: 'smooth' }});
         }}

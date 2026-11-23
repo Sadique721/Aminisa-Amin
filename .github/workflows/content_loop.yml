@@ -1,4 +1,4 @@
-﻿name: Autonomous Content Loop (Plan B)
+name: Autonomous Content Loop (Plan B)
 
 on:
   # Automated 3-hour cron schedule disabled to eliminate recurring cloud failure notification emails.

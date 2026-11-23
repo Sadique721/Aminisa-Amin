@@ -12,6 +12,16 @@ Strict Rules:
 6. Video Prompts ONLY (YouTube Create <300 chars, YouTube Shorts Title <100 chars).
 """
 
+import os
+import sys
+
+_DIR = os.path.dirname(os.path.abspath(__file__))
+if _DIR not in sys.path:
+    sys.path.insert(0, _DIR)
+_PR = os.path.dirname(_DIR)
+if _PR not in sys.path:
+    sys.path.insert(0, _PR)
+
 import random
 import re
 from datetime import datetime
@@ -19,6 +29,13 @@ from config import CATEGORIES, PERSONA_NAME, GREETING
 from special_days import get_special_day_for_date
 from dynamic_news_pipeline import fetch_live_headline
 from wardrobe_engine import get_dynamic_wardrobe_and_setting
+
+# Try importing Phase 1-4 Production Packager
+try:
+    from engines.daily_production_packager import packager
+    HAS_PACKAGER = True
+except Exception:
+    HAS_PACKAGER = False
 
 def make_yt_shorts_posting_text(headline: str, category_key: str) -> str:
     """
@@ -204,6 +221,43 @@ def generate_single_slot(slot_idx: int, target_dt=None) -> dict:
     category_key = slot_meta["category"]
     cat_name = slot_meta["name"]
     lang = slot_meta["language"]
+    cycle_date = target_dt.strftime("%Y-%m-%d")
+
+    # If modern 32-field packager available, use verified RSS & anti-repetition engine
+    if HAS_PACKAGER:
+        try:
+            pkg = packager.generate_slot_package(slot_num, cycle_date)
+            w_desc = pkg["wardrobe"].get("full_description", "Tailored attire")
+            s_desc = pkg["background"].get("full_description", "Modern studio")
+            return {
+                "slot": slot_num,
+                "slot_id": slot_id,
+                "time": slot_time,
+                "category": cat_name,
+                "category_key": category_key,
+                "language": lang,
+                "title": pkg["topic"],
+                "headline": pkg["topic"],
+                "topic": pkg["topic"],
+                "script": pkg["spoken_script"],
+                "speech_script": pkg["spoken_script"],
+                "video_prompt": pkg["image_to_video_prompt"],
+                "yt_video_prompt": pkg["image_to_video_prompt"],
+                "prompt": pkg["image_to_video_prompt"],
+                "yt_shorts_posting": pkg["youtube_title"],
+                "yt_title": pkg["youtube_title"],
+                "caption": pkg["caption"],
+                "fb_description": pkg["caption"],
+                "wardrobe": w_desc,
+                "location": s_desc,
+                "verification_status": pkg["verification_status"],
+                "confidence_score": pkg.get("confidence_score", 1.0),
+                "factual_context": pkg["factual_context"],
+                "title_character_count": pkg["title_character_count"],
+                "video_prompt_character_count": pkg["video_prompt_character_count"]
+            }
+        except Exception as e:
+            print(f"[Packager Bridge Notice] Falling back to local pipeline: {e}")
 
     # Dynamic 7-Day Wardrobe & Setting (Rotates with Day of Week and Category)
     look = get_dynamic_wardrobe_and_setting(category_key, target_dt)
@@ -265,9 +319,14 @@ def generate_single_slot(slot_idx: int, target_dt=None) -> dict:
         "language": lang,
         "title": title,
         "headline": headline,
+        "topic": headline,
         "script": script,
+        "speech_script": script,
         "video_prompt": video_prompt,
+        "yt_video_prompt": video_prompt,
+        "prompt": video_prompt,
         "yt_shorts_posting": yt_shorts_posting,
+        "yt_title": yt_shorts_posting,
         "caption": caption,
         "fb_description": caption,
         "wardrobe": look["attire"],
